@@ -173,17 +173,17 @@ USBD_ClassTypeDef  USBD_CDC =
 #ifndef USE_USBD_COMPOSITE
 //---------------CHANGE WT---------------
 /* USB CDC device Configuration Descriptor */
-	#define WINUSB_CONFIG_DESC_SIZE 32
+	#define WINUSB_CONFIG_DESC_SIZE 53  // TAG: 这里是不是也要改
 //新的库这里数组名可能有点变化，不再区分FS和HS，变成了USBD_CDC_CfgDesc，只需要将下面名称中的HS去掉即可：
 
-__ALIGN_BEGIN static uint8_t USBD_CDC_CfgDesc[USB_CDC_CONFIG_DESC_SIZ] __ALIGN_END =
+__ALIGN_BEGIN static uint8_t USBD_CDC_CfgDesc[USB_CDC_CONFIG_DESC_SIZ] __ALIGN_END =  // TAG: 这个变量里应该还有不少要改嘟
 {
   /*Configuration Descriptor*/
   0x09,   /* bLength: Configuration Descriptor size */
   USB_DESC_TYPE_CONFIGURATION,      /* bDescriptorType: Configuration */
   WINUSB_CONFIG_DESC_SIZE,                /* wTotalLength:no of returned bytes */
   0x00,
-  0x01,   /* bNumInterfaces: 1 interface for WINUSB */
+  0x01,   /* bNumInterfaces: 1 interface for WINUSB */  // TAG: 端点数要改的吧？
   0x01,   /* bConfigurationValue: Configuration value */
   USBD_IDX_CONFIG_STR,   /* iConfiguration: Index of string descriptor describing the configuration */
   0xC0,   /* bmAttributes: self powered */
@@ -196,7 +196,7 @@ __ALIGN_BEGIN static uint8_t USBD_CDC_CfgDesc[USB_CDC_CONFIG_DESC_SIZ] __ALIGN_E
   USB_DESC_TYPE_INTERFACE,  /* bDescriptorType: */
   0x00,   /* bInterfaceNumber: Number of Interface, zero based index of this interface */
   0x00,   /* bAlternateSetting: Alternate setting */
-  0x02,   /* bNumEndpoints: Two endpoints used */
+  0x05,   /* bNumEndpoints: Five endpoints used */  //CHANGE
   0xff,   /* bInterfaceClass: vendor */
   0x00,   /* bInterfaceSubClass: */
   0x00,   /* bInterfaceProtocol: */
