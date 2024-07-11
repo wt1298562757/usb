@@ -50,6 +50,7 @@ extern "C" {
 #define CDC_CMD_EP                                  0x82U  /* EP2 for CDC commands */
 #endif /* CDC_CMD_EP  */
 // ----------------ADD WT-------------
+// TAG: 你居然写英文注释我透
 #ifndef CDCUSER_OUT_EP
 #define CDCUSER_OUT_EP                              0x03U  /* EP3 for The host computer issues instructions and scripts */
 #endif /* CDCUSER_OUT_EP  */

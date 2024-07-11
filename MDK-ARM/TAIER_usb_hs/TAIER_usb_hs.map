@@ -3261,40 +3261,40 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       408         38          0          4       1720      64425   cmsis_os2.o
-         0          0          0          0          0      19448   event_groups.o
-       210         50         48          8     129024       4736   freertos.o
-       132          6          0          0          0        883   gpio.o
-       724         74          0         32      15360       4855   heap_4.o
-       148          0          0          0          0       3554   list.o
-       218         10          0          0          0     723472   main.o
-      1014         92          0         12          0      11661   port.o
-      1922         20          0          0         64      17356   queue.o
-        64         26        428          0       8192        840   startup_stm32f429xx.o
-       212         36          0          9          0       9521   stm32f4xx_hal.o
-       312         22          0          0          0      34319   stm32f4xx_hal_cortex.o
-       528         54          0          0          0       1468   stm32f4xx_hal_gpio.o
-        84          6          0          0          0        854   stm32f4xx_hal_msp.o
-      3560         16          0          0          0      13740   stm32f4xx_hal_pcd.o
-        90          0          0          0          0       2421   stm32f4xx_hal_pcd_ex.o
-      1756         64          0          0          0       4442   stm32f4xx_hal_rcc.o
-        90         18          0          0          0       4806   stm32f4xx_it.o
-      3882         82          0          0          0      22752   stm32f4xx_ll_usb.o
-         0          0          0          0          0        392   stream_buffer.o
-        20          6         24          4          0       1123   system_stm32f4xx.o
-      2808        346          0         60       1220      27366   tasks.o
-      1318        124          0         20        280      32819   timers.o
-        76         16          0          0        732        772   usb_device.o
-      1870         46          0        142          0      14489   usbd_cdc.o
-       328         44          0         20       4096       4688   usbd_cdc_if.o
-      1024         32          0          0       1796      17564   usbd_conf.o
-      1354          0          0          0          0      16485   usbd_core.o
-      2476         24          0          1          0      18756   usbd_ctlreq.o
-       422        132          8        270        512       8889   usbd_desc.o
-       174          0          0          0          0       4696   usbd_ioreq.o
+       408         38          0          4       1720      64257   cmsis_os2.o
+         0          0          0          0          0      19416   event_groups.o
+       210         50         48          8     129024       4664   freertos.o
+       132          6          0          0          0        859   gpio.o
+       724         74          0         32      15360       4783   heap_4.o
+       148          0          0          0          0       3482   list.o
+       218         10          0          0          0     723316   main.o
+      1014         92          0         12          0      11497   port.o
+      1922         20          0          0         64      17164   queue.o
+        64         26        428          0       8192        828   startup_stm32f429xx.o
+       212         36          0          9          0       9425   stm32f4xx_hal.o
+       312         22          0          0          0      34239   stm32f4xx_hal_cortex.o
+       528         54          0          0          0       1436   stm32f4xx_hal_gpio.o
+        84          6          0          0          0        830   stm32f4xx_hal_msp.o
+      3560         16          0          0          0      13544   stm32f4xx_hal_pcd.o
+        90          0          0          0          0       2373   stm32f4xx_hal_pcd_ex.o
+      1756         64          0          0          0       4382   stm32f4xx_hal_rcc.o
+        90         18          0          0          0       4678   stm32f4xx_it.o
+      3882         82          0          0          0      22348   stm32f4xx_ll_usb.o
+         0          0          0          0          0        416   stream_buffer.o
+        20          6         24          4          0       1079   system_stm32f4xx.o
+      2808        346          0         60       1220      27022   tasks.o
+      1318        124          0         20        280      32595   timers.o
+        76         16          0          0        732        748   usb_device.o
+      1870         46          0        142          0      14237   usbd_cdc.o
+       328         44          0         20       4096       4584   usbd_cdc_if.o
+      1024         32          0          0       1796      17204   usbd_conf.o
+      1354          0          0          0          0      16193   usbd_core.o
+      2476         24          0          1          0      18520   usbd_ctlreq.o
+       422        132          8        270        512       8709   usbd_desc.o
+       174          0          0          0          0       4608   usbd_ioreq.o
 
     ----------------------------------------------------------------------
-     27246       1384        572        592     162996    1093592   Object Totals
+     27246       1384        572        592     162996    1089436   Object Totals
          0          0         64          0          0          0   (incl. Generated)
         22          0          0         10          0          0   (incl. Padding)
 
@@ -3352,8 +3352,8 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     28268       1400        572        592     163096    1068956   Grand Totals
-     28268       1400        572        456     163096    1068956   ELF Image Totals (compressed)
+     28268       1400        572        592     163096    1064800   Grand Totals
+     28268       1400        572        456     163096    1064800   ELF Image Totals (compressed)
      28268       1400        572        456          0          0   ROM Totals
 
 ==============================================================================
