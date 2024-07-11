@@ -36,6 +36,16 @@
 	extern uint8_t usb_rx[2048]; 
 	//---------------------------------------------------
 
+
+  //-----------------ADD WT-----------------------
+extern volatile int8_t usb_ep1_rxne;
+extern uint8_t usb_ep1_rx[2048]; 
+extern volatile int8_t usb_ep3_rxne;
+extern uint8_t usb_ep3_rx[2048]; 
+extern volatile int8_t usb_ep4_rxne;
+extern uint8_t usb_ep4_rx[2048]; 
+//---------------------------------------------------
+
 /* USER CODE END PV */
 
 /** @addtogroup STM32_USB_OTG_DEVICE_LIBRARY
@@ -129,7 +139,7 @@ extern USBD_HandleTypeDef hUsbDeviceHS;
 static int8_t CDC_Init_HS(void);
 static int8_t CDC_DeInit_HS(void);
 static int8_t CDC_Control_HS(uint8_t cmd, uint8_t* pbuf, uint16_t length);
-static int8_t CDC_Receive_HS(uint8_t* pbuf, uint32_t *Len);
+static int8_t CDC_Receive_HS(uint8_t* pbuf, uint32_t *Len, uint8_t ep); //CHANGE
 static int8_t CDC_TransmitCplt_HS(uint8_t *pbuf, uint32_t *Len, uint8_t epnum);
 
 /* USER CODE BEGIN PRIVATE_FUNCTIONS_DECLARATION */
@@ -265,16 +275,35 @@ static int8_t CDC_Control_HS(uint8_t cmd, uint8_t* pbuf, uint16_t length)
   * @param  Len: Number of data received (in bytes)
   * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAILL
   */
-static int8_t CDC_Receive_HS(uint8_t* Buf, uint32_t *Len)
+static int8_t CDC_Receive_HS(uint8_t* Buf, uint32_t *Len, uint8_t ep) //CHANGE
 {
   /* USER CODE BEGIN 11 */
 	//-------------ADD WT--------------------
-  memcpy(usb_rx, Buf, *Len); 
-	usb_rxne = SET;
+  switch(ep)
+	{
+		case CDC_OUT_EP:
+			memcpy(usb_ep1_rx, Buf, *Len); 
+			usb_ep1_rxne = SET;
+			break;
+		case CDCUSER_OUT_EP:
+			memcpy(usb_ep3_rx, Buf, *Len); 
+			usb_ep3_rxne = SET;
+			break;
+    case CDCUSER_STATUS_IN_EP:
+			memcpy(usb_ep3_rx, Buf, *Len); 
+			usb_ep3_rxne = SET;
+			break;
+    case CDCUSER_ADC_IN_EP:
+			memcpy(usb_ep4_rx, Buf, *Len); 
+			usb_ep3_rxne = SET;
+			break;
+		default:
+			break;
+	}
 	//--------------------------------------------
 
   USBD_CDC_SetRxBuffer(&hUsbDeviceHS, &Buf[0]);
-  USBD_CDC_ReceivePacket(&hUsbDeviceHS);
+  USBD_CDC_ReceivePacket(&hUsbDeviceHS, ep); //CHANGE
   return (USBD_OK);
   /* USER CODE END 11 */
 }
@@ -286,7 +315,7 @@ static int8_t CDC_Receive_HS(uint8_t* Buf, uint32_t *Len)
   * @param  Len: Number of data to be sent (in bytes)
   * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL or USBD_BUSY
   */
-uint8_t CDC_Transmit_HS(uint8_t* Buf, uint16_t Len)
+uint8_t CDC_Transmit_HS(uint8_t* Buf, uint16_t Len, uint8_t ep) //CHANGE
 {
   uint8_t result = USBD_OK;
   /* USER CODE BEGIN 12 */
@@ -295,7 +324,7 @@ uint8_t CDC_Transmit_HS(uint8_t* Buf, uint16_t Len)
     return USBD_BUSY;
   }
   USBD_CDC_SetTxBuffer(&hUsbDeviceHS, Buf, Len);
-  result = USBD_CDC_TransmitPacket(&hUsbDeviceHS);
+  result = USBD_CDC_TransmitPacket(&hUsbDeviceHS, ep); //CHANGE
   /* USER CODE END 12 */
   return result;
 }

@@ -49,7 +49,17 @@ extern "C" {
 #ifndef CDC_CMD_EP
 #define CDC_CMD_EP                                  0x82U  /* EP2 for CDC commands */
 #endif /* CDC_CMD_EP  */
-
+// ----------------ADD WT-------------
+#ifndef CDCUSER_OUT_EP
+#define CDCUSER_OUT_EP                              0x03U  /* EP3 for The host computer issues instructions and scripts */
+#endif /* CDCUSER_OUT_EP  */
+#ifndef CDCUSER_STATUS_IN_EP
+#define CDCUSER_STATUS_IN_EP                        0x83U  /* EP3 for Upload real-time test status and text information */
+#endif /* CDCUSER_STATUS_IN_EP  */
+#ifndef CDCUSER_ADC_IN_EP
+#define CDCUSER_ADC_IN_EP                           0x84U  /* EP4 for Upload multiplex ADC data */
+#endif /* CDCUSER_STATUS_IN_EP  */
+//-----------------------------------
 #ifndef CDC_HS_BINTERVAL
 #define CDC_HS_BINTERVAL                            0x10U
 #endif /* CDC_HS_BINTERVAL */
@@ -109,7 +119,7 @@ typedef struct _USBD_CDC_Itf
   int8_t (* Init)(void);
   int8_t (* DeInit)(void);
   int8_t (* Control)(uint8_t cmd, uint8_t *pbuf, uint16_t length);
-  int8_t (* Receive)(uint8_t *Buf, uint32_t *Len);
+  int8_t (* Receive)(uint8_t *Buf, uint32_t *Len, uint8_t ep); //CHANGE
   int8_t (* TransmitCplt)(uint8_t *Buf, uint32_t *Len, uint8_t epnum);
 } USBD_CDC_ItfTypeDef;
 
@@ -161,10 +171,10 @@ uint8_t USBD_CDC_TransmitPacket(USBD_HandleTypeDef *pdev, uint8_t ClassId);
 #else
 uint8_t USBD_CDC_SetTxBuffer(USBD_HandleTypeDef *pdev, uint8_t *pbuff,
                              uint32_t length);
-uint8_t USBD_CDC_TransmitPacket(USBD_HandleTypeDef *pdev);
+uint8_t USBD_CDC_TransmitPacket(USBD_HandleTypeDef *pdev, uint8_t ep); //CHANGE
 #endif /* USE_USBD_COMPOSITE */
 uint8_t USBD_CDC_SetRxBuffer(USBD_HandleTypeDef *pdev, uint8_t *pbuff);
-uint8_t USBD_CDC_ReceivePacket(USBD_HandleTypeDef *pdev);
+uint8_t USBD_CDC_ReceivePacket(USBD_HandleTypeDef *pdev, uint8_t e); //CHANGE
 /**
   * @}
   */

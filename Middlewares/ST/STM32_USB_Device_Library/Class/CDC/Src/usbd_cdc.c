@@ -218,7 +218,39 @@ __ALIGN_BEGIN static uint8_t USBD_CDC_CfgDesc[USB_CDC_CONFIG_DESC_SIZ] __ALIGN_E
   0x02,                                       /* bmAttributes: Bulk */
   LOBYTE(CDC_DATA_HS_MAX_PACKET_SIZE),        /* wMaxPacketSize: */
   HIBYTE(CDC_DATA_HS_MAX_PACKET_SIZE),
-  0x00                                        /* bInterval: ignore for Bulk transfer */
+  0x00,                                        /* bInterval: ignore for Bulk transfer */
+
+  //----------------------ADD WT---------------------------
+  /*Endpoint USER OUT Descriptor*/
+  0x07,   /* bLength: Endpoint Descriptor size */
+  USB_DESC_TYPE_ENDPOINT,      /* bDescriptorType: Endpoint */
+  CDCUSER_OUT_EP,                        /* bEndpointAddress */
+  0x02,                              /* bmAttributes: Bulk */
+  LOBYTE(CDC_DATA_HS_MAX_PACKET_SIZE),  /* wMaxPacketSize: */
+  HIBYTE(CDC_DATA_HS_MAX_PACKET_SIZE),
+  0x00,                                       /* bInterval: ignore for Bulk transfer */
+
+  /*Endpoint USER STATUS IN Descriptor*/
+  0x07,   /* bLength: Endpoint Descriptor size */
+  USB_DESC_TYPE_ENDPOINT,      /* bDescriptorType: Endpoint */
+  CDCUSER_STATUS_IN_EP,                        /* bEndpointAddress */
+  0x02,                              /* bmAttributes: Bulk */
+  LOBYTE(CDC_DATA_HS_MAX_PACKET_SIZE),  /* wMaxPacketSize: */
+  HIBYTE(CDC_DATA_HS_MAX_PACKET_SIZE),
+  0x00,                                       /* bInterval: ignore for Bulk transfer */
+
+  /*Endpoint USER STATUS IN Descriptor*/
+  0x07,   /* bLength: Endpoint Descriptor size */
+  USB_DESC_TYPE_ENDPOINT,      /* bDescriptorType: Endpoint */
+  CDCUSER_ADC_IN_EP,                        /* bEndpointAddress */
+  0x02,                              /* bmAttributes: Bulk */
+  LOBYTE(CDC_DATA_HS_MAX_PACKET_SIZE),  /* wMaxPacketSize: */
+  HIBYTE(CDC_DATA_HS_MAX_PACKET_SIZE),
+  0x00,                                       /* bInterval: ignore for Bulk transfer */
+
+
+  //---------------------------------------------------------
+
 
 };
 #endif /* USE_USBD_COMPOSITE  */
@@ -281,8 +313,31 @@ static uint8_t USBD_CDC_Init(USBD_HandleTypeDef *pdev, uint8_t cfgidx)
 
     pdev->ep_out[CDCOutEpAdd & 0xFU].is_used = 1U;
 
+    //--------------------ADD--------------------------------
+	/* Open USER EP OUT */
+    (void)USBD_LL_OpenEP(pdev, CDCUSER_OUT_EP, USBD_EP_TYPE_BULK,
+                         CDC_DATA_HS_IN_PACKET_SIZE);
+
+    pdev->ep_in[CDCUSER_OUT_EP & 0xFU].is_used = 1U;
+
+    /* Open USER EP STATUS IN */
+    (void)USBD_LL_OpenEP(pdev, CDCUSER_STATUS_IN_EP, USBD_EP_TYPE_BULK,
+                         CDC_DATA_HS_OUT_PACKET_SIZE);
+
+    pdev->ep_out[CDCUSER_STATUS_IN_EP & 0xFU].is_used = 1U;
+
+    /* Open USER EP ADC IN */
+    (void)USBD_LL_OpenEP(pdev, CDCUSER_ADC_IN_EP, USBD_EP_TYPE_BULK,
+                         CDC_DATA_HS_OUT_PACKET_SIZE);
+
+    pdev->ep_out[CDCUSER_ADC_IN_EP & 0xFU].is_used = 1U;
+
+    //-----------------------------------------------------------------
+
     /* Set bInterval for CDC CMD Endpoint */
     pdev->ep_in[CDCCmdEpAdd & 0xFU].bInterval = CDC_HS_BINTERVAL;
+
+
   }
   else
   {
@@ -362,6 +417,20 @@ static uint8_t USBD_CDC_DeInit(USBD_HandleTypeDef *pdev, uint8_t cfgidx)
   /* Close EP OUT */
   (void)USBD_LL_CloseEP(pdev, CDCOutEpAdd);
   pdev->ep_out[CDCOutEpAdd & 0xFU].is_used = 0U;
+
+  //----------------------ADD----------------------
+	/* Close EP OUT */
+  (void)USBD_LL_CloseEP(pdev, CDCUSER_OUT_EP);
+  pdev->ep_in[CDCUSER_OUT_EP & 0xFU].is_used = 0U;
+
+  /* Close EP STATUS IN */
+  (void)USBD_LL_CloseEP(pdev, CDCUSER_STATUS_IN_EP);
+  pdev->ep_out[CDCUSER_STATUS_IN_EP & 0xFU].is_used = 0U;
+  /* Close EP ADC IN */
+  (void)USBD_LL_CloseEP(pdev, CDCUSER_ADC_IN_EP);
+  pdev->ep_out[CDCUSER_ADC_IN_EP & 0xFU].is_used = 0U;
+  //--------------------------------------------------
+
 
   /* Close Command IN EP */
   (void)USBD_LL_CloseEP(pdev, CDCCmdEpAdd);
@@ -547,7 +616,7 @@ static uint8_t USBD_CDC_DataOut(USBD_HandleTypeDef *pdev, uint8_t epnum)
   /* USB data will be immediately processed, this allow next USB traffic being
   NAKed till the end of the application Xfer */
 
-  ((USBD_CDC_ItfTypeDef *)pdev->pUserData[pdev->classId])->Receive(hcdc->RxBuffer, &hcdc->RxLength);
+  ((USBD_CDC_ItfTypeDef *)pdev->pUserData[pdev->classId])->Receive(hcdc->RxBuffer, &hcdc->RxLength, epnum); //CHANGE
 
   return (uint8_t)USBD_OK;
 }
@@ -768,7 +837,7 @@ uint8_t USBD_CDC_TransmitPacket(USBD_HandleTypeDef *pdev, uint8_t ClassId)
 {
   USBD_CDC_HandleTypeDef *hcdc = (USBD_CDC_HandleTypeDef *)pdev->pClassDataCmsit[ClassId];
 #else
-uint8_t USBD_CDC_TransmitPacket(USBD_HandleTypeDef *pdev)
+uint8_t USBD_CDC_TransmitPacket(USBD_HandleTypeDef *pdev, uint8_t ep) //CHANGE
 {
   USBD_CDC_HandleTypeDef *hcdc = (USBD_CDC_HandleTypeDef *)pdev->pClassDataCmsit[pdev->classId];
 #endif  /* USE_USBD_COMPOSITE */
@@ -791,10 +860,10 @@ uint8_t USBD_CDC_TransmitPacket(USBD_HandleTypeDef *pdev)
     hcdc->TxState = 1U;
 
     /* Update the packet total length */
-    pdev->ep_in[CDCInEpAdd & 0xFU].total_length = hcdc->TxLength;
+    pdev->ep_in[ep & 0xFU].total_length = hcdc->TxLength; //CHANGE
 
     /* Transmit next packet */
-    (void)USBD_LL_Transmit(pdev, CDCInEpAdd, hcdc->TxBuffer, hcdc->TxLength);
+    (void)USBD_LL_Transmit(pdev, ep, hcdc->TxBuffer, hcdc->TxLength); //CHANGE
 
     ret = USBD_OK;
   }
@@ -808,7 +877,7 @@ uint8_t USBD_CDC_TransmitPacket(USBD_HandleTypeDef *pdev)
   * @param  pdev: device instance
   * @retval status
   */
-uint8_t USBD_CDC_ReceivePacket(USBD_HandleTypeDef *pdev)
+uint8_t USBD_CDC_ReceivePacket(USBD_HandleTypeDef *pdev, uint8_t ep) //CHANGE
 {
   USBD_CDC_HandleTypeDef *hcdc = (USBD_CDC_HandleTypeDef *)pdev->pClassDataCmsit[pdev->classId];
 
@@ -825,13 +894,13 @@ uint8_t USBD_CDC_ReceivePacket(USBD_HandleTypeDef *pdev)
   if (pdev->dev_speed == USBD_SPEED_HIGH)
   {
     /* Prepare Out endpoint to receive next packet */
-    (void)USBD_LL_PrepareReceive(pdev, CDCOutEpAdd, hcdc->RxBuffer,
+    (void)USBD_LL_PrepareReceive(pdev, ep, hcdc->RxBuffer,  //CHANGE
                                  CDC_DATA_HS_OUT_PACKET_SIZE);
   }
   else
   {
     /* Prepare Out endpoint to receive next packet */
-    (void)USBD_LL_PrepareReceive(pdev, CDCOutEpAdd, hcdc->RxBuffer,
+    (void)USBD_LL_PrepareReceive(pdev, ep, hcdc->RxBuffer,  //CHANGE
                                  CDC_DATA_FS_OUT_PACKET_SIZE);
   }
 

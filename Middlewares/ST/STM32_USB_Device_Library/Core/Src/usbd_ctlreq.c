@@ -574,6 +574,7 @@ static void USBD_GetDescriptor(USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef *r
           }
           break;
 
+
         default:
 #if (USBD_SUPPORT_USER_STRING_DESC == 1U)
           pbuf = NULL;

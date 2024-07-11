@@ -48,12 +48,22 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
-	//--------------ADD GUOXUAN-----------------------
-	uint8_t usb_rx[2048];
-	uint8_t usb_tx[81920];
-	volatile int8_t usb_rxne = RESET;
-	extern USBD_HandleTypeDef hUsbDeviceHS;
-	//-----------------------------------------------
+//--------------ADD WT-----------------------
+uint8_t usb_ep1_rx[2048];
+uint8_t usb_ep1_tx[40960];
+
+uint8_t usb_ep3_rx[2048];
+uint8_t usb_ep3_tx[40960];
+
+uint8_t usb_ep4_rx[2048];
+uint8_t usb_ep4_tx[40960];
+
+volatile int8_t usb_ep1_rxne = RESET;
+volatile int8_t usb_ep3_rxne = RESET;
+volatile int8_t usb_ep4_rxne = RESET;
+
+extern USBD_HandleTypeDef hUsbDeviceHS;
+//-----------------------------------------------
 
 /* USER CODE END Variables */
 /* Definitions for defaultTask */
@@ -66,15 +76,29 @@ const osThreadAttr_t defaultTask_attributes = {
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
-//------------ADD WT-------------------
-	void WinUSB_Receive_HS()
+void WinUSB_Receive_HS()
+{
+	uint16_t i = 0;
+	if (usb_ep1_rxne == SET)
 	{
-		uint16_t i = 0;
-		if (usb_rxne != SET) return;
-		i = usb_rx[0] + (usb_rx[1]<<8);
-		CDC_Transmit_HS(usb_tx, i);
-		usb_rxne = RESET;
+		i = usb_ep1_rx[0] + (usb_ep1_rx[1]<<8);
+		CDC_Transmit_HS(usb_ep1_tx, i, CDC_IN_EP);
+		usb_ep1_rxne = RESET;
 	}
+	else if(usb_ep3_rxne == SET)
+	{
+		i = usb_ep3_rx[0] + (usb_ep3_rx[1]<<8);
+		CDC_Transmit_HS(usb_ep3_tx, i, CDCUSER_STATUS_IN_EP);
+		usb_ep3_rxne = RESET;
+	}
+  else if(usb_ep4_rxne == SET)
+	{
+		i = usb_ep4_rx[0] + (usb_ep4_rx[1]<<8);
+		CDC_Transmit_HS(usb_ep4_tx, i, CDCUSER_ADC_IN_EP);
+		usb_ep4_rxne = RESET;
+	}
+	
+}
 //------------------------------------------
 
 /* USER CODE END FunctionPrototypes */
