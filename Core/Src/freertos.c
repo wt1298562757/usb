@@ -88,13 +88,13 @@ void WinUSB_Receive_HS()
 	else if(usb_ep3_rxne == SET)
 	{
 		i = usb_ep3_rx[0] + (usb_ep3_rx[1]<<8);
-		CDC_Transmit_HS(usb_ep3_tx, i, CDCUSER_STATUS_IN_EP);
+		CDC_Transmit_HS(usb_ep3_tx, i, FS_LINK_IN_EP);
 		usb_ep3_rxne = RESET;
 	}
   else if(usb_ep4_rxne == SET)
 	{
 		i = usb_ep4_rx[0] + (usb_ep4_rx[1]<<8);
-		CDC_Transmit_HS(usb_ep4_tx, i, CDCUSER_ADC_IN_EP);
+		CDC_Transmit_HS(usb_ep4_tx, i, EP_ADC_IN);
 		usb_ep4_rxne = RESET;
 	}
 	

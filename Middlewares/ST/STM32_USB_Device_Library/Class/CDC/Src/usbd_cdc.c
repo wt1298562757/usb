@@ -224,7 +224,7 @@ __ALIGN_BEGIN static uint8_t USBD_CDC_CfgDesc[USB_CDC_CONFIG_DESC_SIZ] __ALIGN_E
   /*Endpoint USER OUT Descriptor*/
   0x07,   /* bLength: Endpoint Descriptor size */
   USB_DESC_TYPE_ENDPOINT,      /* bDescriptorType: Endpoint */
-  CDCUSER_OUT_EP,                        /* bEndpointAddress */
+  FS_LINK_OUT_EP,                        /* bEndpointAddress */
   0x02,                              /* bmAttributes: Bulk */
   LOBYTE(CDC_DATA_HS_MAX_PACKET_SIZE),  /* wMaxPacketSize: */
   HIBYTE(CDC_DATA_HS_MAX_PACKET_SIZE),
@@ -233,7 +233,7 @@ __ALIGN_BEGIN static uint8_t USBD_CDC_CfgDesc[USB_CDC_CONFIG_DESC_SIZ] __ALIGN_E
   /*Endpoint USER STATUS IN Descriptor*/
   0x07,   /* bLength: Endpoint Descriptor size */
   USB_DESC_TYPE_ENDPOINT,      /* bDescriptorType: Endpoint */
-  CDCUSER_STATUS_IN_EP,                        /* bEndpointAddress */
+  FS_LINK_IN_EP,                        /* bEndpointAddress */
   0x02,                              /* bmAttributes: Bulk */
   LOBYTE(CDC_DATA_HS_MAX_PACKET_SIZE),  /* wMaxPacketSize: */
   HIBYTE(CDC_DATA_HS_MAX_PACKET_SIZE),
@@ -242,7 +242,7 @@ __ALIGN_BEGIN static uint8_t USBD_CDC_CfgDesc[USB_CDC_CONFIG_DESC_SIZ] __ALIGN_E
   /*Endpoint USER STATUS IN Descriptor*/
   0x07,   /* bLength: Endpoint Descriptor size */
   USB_DESC_TYPE_ENDPOINT,      /* bDescriptorType: Endpoint */
-  CDCUSER_ADC_IN_EP,                        /* bEndpointAddress */
+  EP_ADC_IN,                        /* bEndpointAddress */
   0x02,                              /* bmAttributes: Bulk */
   LOBYTE(CDC_DATA_HS_MAX_PACKET_SIZE),  /* wMaxPacketSize: */
   HIBYTE(CDC_DATA_HS_MAX_PACKET_SIZE),
@@ -315,22 +315,22 @@ static uint8_t USBD_CDC_Init(USBD_HandleTypeDef *pdev, uint8_t cfgidx)
 
     //--------------------ADD--------------------------------
 	/* Open USER EP OUT */
-    (void)USBD_LL_OpenEP(pdev, CDCUSER_OUT_EP, USBD_EP_TYPE_BULK,
+    (void)USBD_LL_OpenEP(pdev, FS_LINK_OUT_EP, USBD_EP_TYPE_BULK,
                          CDC_DATA_HS_IN_PACKET_SIZE);
 
-    pdev->ep_in[CDCUSER_OUT_EP & 0xFU].is_used = 1U;
+    pdev->ep_in[FS_LINK_OUT_EP & 0xFU].is_used = 1U;
 
     /* Open USER EP STATUS IN */
-    (void)USBD_LL_OpenEP(pdev, CDCUSER_STATUS_IN_EP, USBD_EP_TYPE_BULK,
+    (void)USBD_LL_OpenEP(pdev, FS_LINK_IN_EP, USBD_EP_TYPE_BULK,
                          CDC_DATA_HS_OUT_PACKET_SIZE);
 
-    pdev->ep_out[CDCUSER_STATUS_IN_EP & 0xFU].is_used = 1U;
+    pdev->ep_out[FS_LINK_IN_EP & 0xFU].is_used = 1U;
 
     /* Open USER EP ADC IN */
-    (void)USBD_LL_OpenEP(pdev, CDCUSER_ADC_IN_EP, USBD_EP_TYPE_BULK,
+    (void)USBD_LL_OpenEP(pdev, EP_ADC_IN, USBD_EP_TYPE_BULK,
                          CDC_DATA_HS_OUT_PACKET_SIZE);
 
-    pdev->ep_out[CDCUSER_ADC_IN_EP & 0xFU].is_used = 1U;
+    pdev->ep_out[EP_ADC_IN & 0xFU].is_used = 1U;
 
     //-----------------------------------------------------------------
 
@@ -420,15 +420,15 @@ static uint8_t USBD_CDC_DeInit(USBD_HandleTypeDef *pdev, uint8_t cfgidx)
 
   //----------------------ADD----------------------
 	/* Close EP OUT */
-  (void)USBD_LL_CloseEP(pdev, CDCUSER_OUT_EP);
-  pdev->ep_in[CDCUSER_OUT_EP & 0xFU].is_used = 0U;
+  (void)USBD_LL_CloseEP(pdev, FS_LINK_OUT_EP);
+  pdev->ep_in[FS_LINK_OUT_EP & 0xFU].is_used = 0U;
 
   /* Close EP STATUS IN */
-  (void)USBD_LL_CloseEP(pdev, CDCUSER_STATUS_IN_EP);
-  pdev->ep_out[CDCUSER_STATUS_IN_EP & 0xFU].is_used = 0U;
+  (void)USBD_LL_CloseEP(pdev, FS_LINK_IN_EP);
+  pdev->ep_out[FS_LINK_IN_EP & 0xFU].is_used = 0U;
   /* Close EP ADC IN */
-  (void)USBD_LL_CloseEP(pdev, CDCUSER_ADC_IN_EP);
-  pdev->ep_out[CDCUSER_ADC_IN_EP & 0xFU].is_used = 0U;
+  (void)USBD_LL_CloseEP(pdev, EP_ADC_IN);
+  pdev->ep_out[EP_ADC_IN & 0xFU].is_used = 0U;
   //--------------------------------------------------
 
 
@@ -835,7 +835,7 @@ uint8_t USBD_CDC_SetRxBuffer(USBD_HandleTypeDef *pdev, uint8_t *pbuff)
 #ifdef USE_USBD_COMPOSITE
 uint8_t USBD_CDC_TransmitPacket(USBD_HandleTypeDef *pdev, uint8_t ClassId)
 {
-  USBD_CDC_HandleTypeDef *hcdc = (USBD_CDC_HandleTypeDef *)pdev->pClassDataCmsit[ClassId];
+  USBD_CDC_HandleTypeDef *hcdc = (USBD_CDC_HandleTypeDef *)pdev->pClassDataCmsit[ClassId];}
 #else
 uint8_t USBD_CDC_TransmitPacket(USBD_HandleTypeDef *pdev, uint8_t ep) //CHANGE
 {

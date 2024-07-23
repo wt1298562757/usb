@@ -51,15 +51,15 @@ extern "C" {
 #endif /* CDC_CMD_EP  */
 // ----------------ADD WT-------------
 // TAG: 你居然写英文注释我透
-#ifndef CDCUSER_OUT_EP
-#define CDCUSER_OUT_EP                              0x03U  /* EP3 for The host computer issues instructions and scripts */
-#endif /* CDCUSER_OUT_EP  */
-#ifndef CDCUSER_STATUS_IN_EP
-#define CDCUSER_STATUS_IN_EP                        0x83U  /* EP3 for Upload real-time test status and text information */
-#endif /* CDCUSER_STATUS_IN_EP  */
-#ifndef CDCUSER_ADC_IN_EP
-#define CDCUSER_ADC_IN_EP                           0x84U  /* EP4 for Upload multiplex ADC data */
-#endif /* CDCUSER_STATUS_IN_EP  */
+#ifndef FS_LINK_OUT_EP
+#define FS_LINK_OUT_EP                              0x03U  /* EP3 for The host computer issues instructions and scripts */
+#endif /* FS_LINK_OUT_EP  */
+#ifndef FS_LINK_IN_EP
+#define FS_LINK_IN_EP                        0x83U  /* EP3 for Upload real-time test status and text information */
+#endif /* FS_LINK_IN_EP  */
+#ifndef EP_ADC_IN
+#define EP_ADC_IN                           0x84U  /* EP4 for Upload multiplex ADC data */
+#endif /* EP_ADC_IN  */
 //-----------------------------------
 #ifndef CDC_HS_BINTERVAL
 #define CDC_HS_BINTERVAL                            0x10U

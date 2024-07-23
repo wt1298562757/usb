@@ -41,6 +41,18 @@
                   },
                   {
                     "path": "Core/Src/stm32f4xx_hal_msp.c"
+                  },
+                  {
+                    "path": "Core/Src/adc.c"
+                  },
+                  {
+                    "path": "Core/Src/dma.c"
+                  },
+                  {
+                    "path": "Core/Src/system_stm32f4xx.c"
+                  },
+                  {
+                    "path": "Core/Src/spi.c"
                   }
                 ],
                 "folders": []
@@ -76,6 +88,36 @@
                 ]
               }
             ]
+          },
+          {
+            "name": "User_files",
+            "files": [
+              {
+                "path": "User_files/eeprom.c"
+              },
+              {
+                "path": "User_files/LinkUsbProcess.c"
+              },
+              {
+                "path": "User_files/PET_CMD.c"
+              },
+              {
+                "path": "User_files/TestScriptProcess.c"
+              },
+              {
+                "path": "User_files/UCPET_bsp.c"
+              },
+              {
+                "path": "User_files/ScriptPool.c"
+              },
+              {
+                "path": "User_files/usbh_msc_usr.c"
+              },
+              {
+                "path": "User_files/DAC7568.c"
+              }
+            ],
+            "folders": []
           }
         ]
       },
@@ -139,6 +181,15 @@
               },
               {
                 "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c"
               }
             ],
             "folders": []
@@ -229,7 +280,13 @@
   },
   "targets": {
     "TAIER_usb_hs": {
-      "excludeList": [],
+      "excludeList": [
+        "<virtual_root>/Application/User_files/usbh_msc_usr.c",
+        "<virtual_root>/Application/User_files/UCPET_bsp.c",
+        "<virtual_root>/Application/User_files/PET_CMD.c",
+        "<virtual_root>/Application/User_files/ScriptPool.c",
+        "<virtual_root>/Application/User_files/TestScriptProcess.c"
+      ],
       "toolchain": "AC5",
       "compileConfig": {
         "cpuType": "Cortex-M4",
@@ -402,12 +459,18 @@
           "Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F",
           "Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2",
           ".cmsis/include",
-          "MDK-ARM/RTE/_TAIER_usb_hs"
+          "MDK-ARM/RTE/_TAIER_usb_hs",
+          "STM32_USB_OTG_Driver/inc",
+          "User_files"
         ],
         "libList": [],
         "defineList": [
           "USE_HAL_DRIVER",
-          "STM32F429xx"
+          "STM32F429xx",
+          "USE_STDPERIPH_DRIVER",
+          "USE_USB_OTG_FS",
+          "USE_ULPI_PHY",
+          "USE_USB_OTG_HS"
         ]
       }
     }

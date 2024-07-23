@@ -2,6 +2,22 @@
     "cortex-debug.armToolchainPath": "D:\\TOOL\\VS_STM32_TOOL\\GCC-ARM-NONE-EABI\\2021.10\\BIN",
     "files.associations": {
         "usbd_desc.h": "c",
-        "usbd_conf.h": "c"
+        "usbd_conf.h": "c",
+        "testscriptprocess.h": "c",
+        "ucpet_bsp.h": "c",
+        "usbd_ctlreq.h": "c",
+        "usbd_cdc.h": "c",
+        "usb_core.h": "c",
+        "usbd_core.h": "c",
+        "usb_dcd.h": "c",
+        "usb_conf.h": "c",
+        "eeprom.h": "c",
+        "stdbool.h": "c",
+        "stdio.h": "c",
+        "stm32f4xx_ll_usb.h": "c",
+        "linkusbprocess.h": "c",
+        "freertos.h": "c",
+        "main.h": "c",
+        "stm32f4xx.h": "c"
     }
 }

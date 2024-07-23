@@ -285,15 +285,15 @@ static int8_t CDC_Receive_HS(uint8_t* Buf, uint32_t *Len, uint8_t ep) //CHANGE
 			memcpy(usb_ep1_rx, Buf, *Len); 
 			usb_ep1_rxne = SET;
 			break;
-		case CDCUSER_OUT_EP:
+		case FS_LINK_OUT_EP:
 			memcpy(usb_ep3_rx, Buf, *Len); 
 			usb_ep3_rxne = SET;
 			break;
-    case CDCUSER_STATUS_IN_EP:
+    case FS_LINK_IN_EP:
 			memcpy(usb_ep3_rx, Buf, *Len); 
 			usb_ep3_rxne = SET;
 			break;
-    case CDCUSER_ADC_IN_EP:
+    case EP_ADC_IN:
 			memcpy(usb_ep4_rx, Buf, *Len); 
 			usb_ep3_rxne = SET;
 			break;
