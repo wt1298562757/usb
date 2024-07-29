@@ -1,7 +1,7 @@
-//´¦ÀíFS LINK ÊÂ¼þ£¬°üÀ¨½ÓÊÕCMD´¦ÀíºÍÊý¾Ý·¢ËÍ´¦Àí
+//ï¿½ï¿½ï¿½ï¿½FS LINK ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½CMDï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý·ï¿½ï¿½Í´ï¿½ï¿½ï¿½
 
 
-/* °üº¬Í·ÎÄ¼þ *****************************************************************/
+/* ï¿½ï¿½ï¿½ï¿½Í·ï¿½Ä¼ï¿½ *****************************************************************/
 #include <string.h>
 #include <stdio.h>
 
@@ -23,13 +23,14 @@
 #include <stdbool.h>
 #include "usbd_cdc.h"
 #include "usbd_cdc_if.h"
+#include "gpio_control.h"
 
 
 
-#define MSG_BUFF_SIZE 2560	   // ÉÏ´«¸øHOSTµÄMSGÊý¾Ý»º³åÇø
+#define MSG_BUFF_SIZE 2560	   // ï¿½Ï´ï¿½ï¿½ï¿½HOSTï¿½ï¿½MSGï¿½ï¿½ï¿½Ý»ï¿½ï¿½ï¿½ï¿½ï¿½
 #define MSG_BUFF_WRITE_TIMEOUT 5000
-#define MSG_SEND_PERIOD 100 * portTICK_RATE_MS		  //EP1_IN ·¢ËÍÆµÂÊ=100ms
-#define ADC_BUFF_SIZE 	 28000 //ÉÏ´«¸øHOSTµÄADCÊý¾Ý»º³åÇø(8ch x 2byte + 12byte head) x 1000 =28000 byte
+#define MSG_SEND_PERIOD 100 * portTICK_RATE_MS		  //EP1_IN ï¿½ï¿½ï¿½ï¿½Æµï¿½ï¿½=100ms
+#define ADC_BUFF_SIZE 	 28000 //ï¿½Ï´ï¿½ï¿½ï¿½HOSTï¿½ï¿½ADCï¿½ï¿½ï¿½Ý»ï¿½ï¿½ï¿½ï¿½ï¿½(8ch x 2byte + 12byte head) x 1000 =28000 byte
 
 #define SCRIPT_RUNNER_PRIO   (tskIDLE_PRIORITY  + 1 )
 
@@ -48,13 +49,13 @@
 
 
 
-/* ±äÁ¿ ----------------------------------------------------------------------*/
+/* ï¿½ï¿½ï¿½ï¿½ ----------------------------------------------------------------------*/
 
 
 
-xQueueHandle xQueueLinkUsbRecvCmd; //FS LINK CMD¶ÓÁÐ
-xQueueHandle xQueueUsb3300Event;   //test dev or test host µÄÊÂ¼þ¶ÓÁÐ
-xSemaphoreHandle xMutexMsgBuff; //FS LINK ·¢ËÍ»º³åmutex
+xQueueHandle xQueueLinkUsbRecvCmd; //FS LINK CMDï¿½ï¿½ï¿½ï¿½
+xQueueHandle xQueueUsb3300Event;   //test dev or test host ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½
+xSemaphoreHandle xMutexMsgBuff; //FS LINK ï¿½ï¿½ï¿½Í»ï¿½ï¿½ï¿½mutex
 xTaskHandle vHandleTaskRunOneScript;
 
 char charBuf[MAX_MSG_LENTH];
@@ -85,20 +86,20 @@ static RUN_SCRIPT_CMD_FMT RunScriptCmd;
 PreDefinedPara_t PreDefinedPara;
 extern uint16_t VirtAddVarTab[NB_OF_VAR];
 
-//ÒýÓÃADC È«¾Ö±äÁ¿
+//ï¿½ï¿½ï¿½ï¿½ADC È«ï¿½Ö±ï¿½ï¿½ï¿½
 //extern __IO uint16_t ADC_ConvertedBuff0[ADC_Buf_Size];
 //extern __IO uint16_t ADC_ConvertedBuff1[ADC_Buf_Size];
 //extern uint16_t* pCurADC_ConvertedBuff;
 extern __IO uint16_t ADC_ProcessBuff[8]; 
 
 
-/* º¯ÊýÉùÃ÷ ------------------------------------------------------------------*/
+/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ------------------------------------------------------------------*/
 void ReportPreDefinedPara(void);
 extern void vTaskRunOneScript(void *pvParameters)  ;
 extern void ReportDutInfo(void);
 /**
   AddHostCmdtoQueue 
-  ´¦Àífs link usb»º³åÇøÖÐµÄÊý¾Ý£¬×éºÏ³ÉÏûÏ¢·¢ËÍµ½xQueueLinkUsbRecvCmd¶ÓÁÐ* @}
+  ï¿½ï¿½ï¿½ï¿½fs link usbï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½Ï³ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Íµï¿½xQueueLinkUsbRecvCmdï¿½ï¿½ï¿½ï¿½* @}
   */ 
 
 
@@ -120,14 +121,14 @@ uint8_t AddHostCmdtoQueue(uint8_t* pRecvBuff, uint16_t count)
 			break;
 		}
 
-		//µ½´Ë£¬Êý¾ÝÓÐÐ§£¬½«ÏòxQueueLinkUsbRecvCmd·¢ËÍÒ»ÌõÏûÏ¢
+		//ï¿½ï¿½ï¿½Ë£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½xQueueLinkUsbRecvCmdï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ï¢
 		LinkCmd.cmd =  rxBuffPtr->cmd;
 		LinkCmd.target = rxBuffPtr->target;
 		LinkCmd.para = 	rxBuffPtr->para;
 
 		if(xQueueSend(xQueueLinkUsbRecvCmd,&LinkCmd,10) !=pdPASS)
 		{
-		   //xQueueLinkUsbRecvCmd¶ÓÁÐÒÑÂú
+		   //xQueueLinkUsbRecvCmdï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		  GPIO_Toggle(SW_LED2_R) ;	 ;
 		}
 
@@ -137,7 +138,7 @@ uint8_t AddHostCmdtoQueue(uint8_t* pRecvBuff, uint16_t count)
    return success;
 }
 
-//ADC_DATA_UPLOAD±äÁ¿´¦Àí
+//ADC_DATA_UPLOADï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 void SetAdcDataUploadState(uint8_t i)
 {
@@ -160,11 +161,11 @@ void LoadPreDefinedPara(void)
 
 
 /*******************************************************************************
-  * @º¯ÊýÃû³Æ	vTaskLinkUsbCmdProcess
-  * @º¯ÊýËµÃ÷   ´¦ÀíHOST·¢À´µÄCMD£¬ÓÉxQueueLinkUsbRecvCmd¶ÓÁÐ´¥·¢
-  * @ÊäÈë²ÎÊý   ÎÞ
-  * @Êä³ö²ÎÊý   ÎÞ
-  * @·µ»Ø²ÎÊý   ÎÞ
+  * @ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	vTaskLinkUsbCmdProcess
+  * @ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½   ï¿½ï¿½ï¿½ï¿½HOSTï¿½ï¿½ï¿½ï¿½ï¿½ï¿½CMDï¿½ï¿½ï¿½ï¿½xQueueLinkUsbRecvCmdï¿½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½
+  * @ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½   ï¿½ï¿½
+  * @ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½   ï¿½ï¿½
+  * @ï¿½ï¿½ï¿½Ø²ï¿½ï¿½ï¿½   ï¿½ï¿½
 *******************************************************************************/
 void vTaskLinkUsbCmdProcess(void *pvParameters)
 {
@@ -179,11 +180,11 @@ FS_LINK_CMD_FMT RecvCmd;
    {
 	 if(xQueueReceive(xQueueLinkUsbRecvCmd,&RecvCmd,portMAX_DELAY)  == pdPASS)
 	 {
-	   //´¦ÀíÊÕµ½µÄÓÐÐ§ÏûÏ¢
+	   //ï¿½ï¿½ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½Ï¢
 		// Report_MSG(">>>>>>>>>>>>>>>>>>>  for debug  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 	   	// sprintf(charBuf,"INFO: cmd = 0x%X,target= 0x%X, para = 0x%X",RecvCmd.cmd,RecvCmd.target,RecvCmd.para) ;
 
-		//	GetRunTimeStats();  //run time stat only ÐëÊ¹ÄÜTIM3
+		//	GetRunTimeStats();  //run time stat only ï¿½ï¿½Ê¹ï¿½ï¿½TIM3
 	   switch(RecvCmd.cmd)
 	   {
 		 case  SYSTEM_RESET:
@@ -272,7 +273,7 @@ FS_LINK_CMD_FMT RecvCmd;
 				  
 				  vTaskDelete(vHandleTaskRunOneScript);
 
-				  //report, ½á¹ûÖµÎª250, 
+				  //report, ï¿½ï¿½ï¿½ÖµÎª250, 
 			  	  Report_Test_Result(RunScriptCmd.id,250)  ;
 				  				
 			     // reset val
@@ -296,11 +297,11 @@ FS_LINK_CMD_FMT RecvCmd;
 				break;
 
 		 case SET_PRE_DEFINED_SETTING_Y:
-		 		//ÉèÖÃÈ±Ê¡µÄÏµÍ³²ÎÊý£¬cable_a_res, cable_b_res
+		 		//ï¿½ï¿½ï¿½ï¿½È±Ê¡ï¿½ï¿½ÏµÍ³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½cable_a_res, cable_b_res
 				//sprintf(charBuf,"INFO:cmd = 0x%X,target= 0x%X, para = 0x%X",RecvCmd.cmd,RecvCmd.target,RecvCmd.para) ;
 	            //Report_MSG(charBuf)	 ;
 
-				//  ×¢Òâ£¬²ÎÊý±àºÅ´Ó1¿ªÊ¼£º1£ºcable_res_a, 2:cable_res_b
+				//  ×¢ï¿½â£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å´ï¿½1ï¿½ï¿½Ê¼ï¿½ï¿½1ï¿½ï¿½cable_res_a, 2:cable_res_b
 				if(RecvCmd.target == 1 && RecvCmd.para <2000)
 				{
 				 PreDefinedPara.cable_res_a =   RecvCmd.para;
@@ -370,17 +371,17 @@ static void AddMsgToBuff(uint8_t infoCategory, uint8_t src, uint8_t msgLen,  uin
   if(xSemaphoreTake(xMutexMsgBuff,MSG_BUFF_WRITE_TIMEOUT)== pdPASS  )
 	{
 	//copy the message header to CurBuff
-  	memcpy(pCurBuffer + MsgSendBuffOffset, &onePkt, 12);	//ÏûÏ¢Í·³¤12 byte
+  	memcpy(pCurBuffer + MsgSendBuffOffset, &onePkt, 12);	//ï¿½ï¿½Ï¢Í·ï¿½ï¿½12 byte
 	MsgSendBuffOffset = MsgSendBuffOffset + 12 ;	
 	//copy the current
-	memcpy(pCurBuffer + MsgSendBuffOffset, content, msgLen);	//ÏûÏ¢Í·³¤12 byte
+	memcpy(pCurBuffer + MsgSendBuffOffset, content, msgLen);	//ï¿½ï¿½Ï¢Í·ï¿½ï¿½12 byte
 	MsgSendBuffOffset = MsgSendBuffOffset + msgLen ;
 
 	xSemaphoreGive(xMutexMsgBuff) ;
 	}
    else
    {
-	 //Ð´buffÊ§°Ü£¬ÆäËû³ÌÐòÃ»ÓÐGive xMutexMsgBuff
+	 //Ð´buffÊ§ï¿½Ü£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Give xMutexMsgBuff
 	 ;
 	 GPIO_Toggle(SW_LED1_R) ;
    }
@@ -425,19 +426,19 @@ void ReportPreDefinedPara(void)
   if(xSemaphoreTake(xMutexMsgBuff,MSG_BUFF_WRITE_TIMEOUT)== pdPASS  )
 	{
 	//copy the message header to CurBuff
-  	memcpy(pCurBuffer + MsgSendBuffOffset, &onePkt, 12);	//ÏûÏ¢Í·³¤12 byte
+  	memcpy(pCurBuffer + MsgSendBuffOffset, &onePkt, 12);	//ï¿½ï¿½Ï¢Í·ï¿½ï¿½12 byte
 	MsgSendBuffOffset = MsgSendBuffOffset + 12 ;	
 	//copy the current
 	
 
-	memcpy(pCurBuffer + MsgSendBuffOffset, &PreDefinedPara, onePkt.msgLenth);	//ÏûÏ¢Í·³¤12 byte
+	memcpy(pCurBuffer + MsgSendBuffOffset, &PreDefinedPara, onePkt.msgLenth);	//ï¿½ï¿½Ï¢Í·ï¿½ï¿½12 byte
 	MsgSendBuffOffset = MsgSendBuffOffset + onePkt.msgLenth ;
 
 	xSemaphoreGive(xMutexMsgBuff) ;
 	}
    else
    {
-	 //Ð´buffÊ§°Ü£¬ÆäËû³ÌÐòÃ»ÓÐGive xMutexMsgBuff
+	 //Ð´buffÊ§ï¿½Ü£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Give xMutexMsgBuff
 	 ;
 	 GPIO_Toggle(SW_LED1_R) ;
    }
@@ -462,11 +463,11 @@ void WaitHostToContinue(const char* p)
 
 
 /*******************************************************************************
-  * @º¯ÊýÃû³Æ	SendMsgToHost
-  * @º¯ÊýËµÃ÷   ½«µ±Ç°»º³åÇøÖÐµÄÊý¾ÝÍ¨¹ýEP1_IN ·¢ËÍ¸øHOST ,Ã¿  MSG_SEND_PERIOD MS´¥·¢Ò»´Î
-  * @ÊäÈë²ÎÊý   ÎÞ
-  * @Êä³ö²ÎÊý   ÎÞ
-  * @·µ»Ø²ÎÊý   ÎÞ
+  * @ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	SendMsgToHost
+  * @ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½   ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½EP1_IN ï¿½ï¿½ï¿½Í¸ï¿½HOST ,Ã¿  MSG_SEND_PERIOD MSï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
+  * @ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½   ï¿½ï¿½
+  * @ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½   ï¿½ï¿½
+  * @ï¿½ï¿½ï¿½Ø²ï¿½ï¿½ï¿½   ï¿½ï¿½
 *******************************************************************************/
 void vTaskSendMsgToHost(void * pvParameters)
 {
@@ -483,7 +484,7 @@ void vTaskSendMsgToHost(void * pvParameters)
  {
    		//sprintf(charBuf,"SendMsgTask Running ,T = %d",xTaskGetTickCount()) ;
 	   // Report_MSG(charBuf)	 ;
-   if( MsgSendBuffOffset > 0 )	//Èç¹ûµ±Ç°Ö¸Õë²»ÎªÁã£¬¾Í·¢ËÍ
+   if( MsgSendBuffOffset > 0 )	//ï¿½ï¿½ï¿½ï¿½ï¿½Ç°Ö¸ï¿½ë²»Îªï¿½ã£¬ï¿½Í·ï¿½ï¿½ï¿½
    {
 		// if(DCD_GetEPStatus(&g_USB_link_dev,FS_LINK_IN_EP) == USB_OTG_EP_TX_VALID )
 
@@ -523,11 +524,11 @@ void vTaskSendMsgToHost(void * pvParameters)
 
 
 /*******************************************************************************
-  * @º¯ÊýÃû³Æ	SendAdcDataToHost
-  * @º¯ÊýËµÃ÷   ½«µ±Ç°»º³åÇøÖÐµÄADCÊý¾ÝÍ¨¹ýEP2_IN ·¢ËÍ¸øHOST 
-  * @ÊäÈë²ÎÊý   ÎÞ
-  * @Êä³ö²ÎÊý   ÎÞ
-  * @·µ»Ø²ÎÊý   ÎÞ
+  * @ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	SendAdcDataToHost
+  * @ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½   ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ADCï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½EP2_IN ï¿½ï¿½ï¿½Í¸ï¿½HOST 
+  * @ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½   ï¿½ï¿½
+  * @ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½   ï¿½ï¿½
+  * @ï¿½ï¿½ï¿½Ø²ï¿½ï¿½ï¿½   ï¿½ï¿½
 *******************************************************************************/
 void SendAdcDataToHost(void)
 {
@@ -558,11 +559,11 @@ void SendAdcDataToHost(void)
 
 
 /*******************************************************************************
-  * @º¯ÊýÃû³Æ	AddDATAToAdcBuff
-  * @º¯ÊýËµÃ÷   ½«ADC×ª»»½á¹ûÊý¾Ý·¢ËÍµ½AdcBuff,
-  * @ÊäÈë²ÎÊý   ÎÞ
-  * @Êä³ö²ÎÊý   ÎÞ
-  * @·µ»Ø²ÎÊý   ÎÞ
+  * @ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	AddDATAToAdcBuff
+  * @ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½   ï¿½ï¿½ADC×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý·ï¿½ï¿½Íµï¿½AdcBuff,
+  * @ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½   ï¿½ï¿½
+  * @ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½   ï¿½ï¿½
+  * @ï¿½ï¿½ï¿½Ø²ï¿½ï¿½ï¿½   ï¿½ï¿½
 *******************************************************************************/
 
 void AddDataToAdcSendBuff(void)
@@ -581,22 +582,22 @@ void AddDataToAdcSendBuff(void)
 	onePkt.msgLenth = 	16;
 
 
-  //ADCÊý¾ÝÖ»ÓÐÒ»¸öwriter,Ò»¸öreader£¬ÇÒ²»»áÍ¬Ê±·ÃÎÊbuff£¬Òò´Ë²»ÓÃMutex
+  //ADCï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½Ò»ï¿½ï¿½writer,Ò»ï¿½ï¿½readerï¿½ï¿½ï¿½Ò²ï¿½ï¿½ï¿½Í¬Ê±ï¿½ï¿½ï¿½ï¿½buffï¿½ï¿½ï¿½ï¿½Ë²ï¿½ï¿½ï¿½Mutex
   //	{
 	//copy the message header to CurBuff
-  	memcpy(pCurAdcSendBuffer + AdcSendBuffOffset, &onePkt, 12);	//ÏûÏ¢Í·³¤12 byte
+  	memcpy(pCurAdcSendBuffer + AdcSendBuffOffset, &onePkt, 12);	//ï¿½ï¿½Ï¢Í·ï¿½ï¿½12 byte
 	AdcSendBuffOffset = AdcSendBuffOffset + 12 ;	
 
-	//ADCÊý¾ÝÖ±½Ó´Óµ±Ç°µÄADC_ConvertedBuff¿½±´µ½pCurAdcSendBuffer, ³¤¶ÈÎª8CH x 2B = 16B
+	//ADCï¿½ï¿½ï¿½ï¿½Ö±ï¿½Ó´Óµï¿½Ç°ï¿½ï¿½ADC_ConvertedBuffï¿½ï¿½ï¿½ï¿½ï¿½ï¿½pCurAdcSendBuffer, ï¿½ï¿½ï¿½ï¿½Îª8CH x 2B = 16B
 
   /*  for(p=0;p<8;p++)
 	{	
 		temp = ADC_ProcessBuff[p];
-		*(pCurAdcSendBuffer + AdcSendBuffOffset+2*p) =temp & 0x00ff;   //µÍ8bit
-		*(pCurAdcSendBuffer + AdcSendBuffOffset+2*p+1) =temp>>8;		//¸ß8bit		
+		*(pCurAdcSendBuffer + AdcSendBuffOffset+2*p) =temp & 0x00ff;   //ï¿½ï¿½8bit
+		*(pCurAdcSendBuffer + AdcSendBuffOffset+2*p+1) =temp>>8;		//ï¿½ï¿½8bit		
 	}
    */
-	 	memcpy(pCurAdcSendBuffer + AdcSendBuffOffset, (uint8_t *)ADC_ProcessBuff, 16);	//ADCÊý¾Ý³¤16 byte
+	 	memcpy(pCurAdcSendBuffer + AdcSendBuffOffset, (uint8_t *)ADC_ProcessBuff, 16);	//ADCï¿½ï¿½ï¿½Ý³ï¿½16 byte
 		
 		//swich ADC_DP and ADC_DM DATA
 		dp_data_l = *(pCurAdcSendBuffer + AdcSendBuffOffset + 6);
@@ -612,7 +613,7 @@ void AddDataToAdcSendBuff(void)
 	AdcSendBuffOffset = AdcSendBuffOffset + 16 ;
 	
 	
-   //Èç¹û»º³åÇøÂú£¬Ôò·¢ËÍÊý¾Ý
+   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
    	if( AdcSendBuffOffset >= ADC_BUFF_SIZE )
 	{
 	 
@@ -622,11 +623,11 @@ void AddDataToAdcSendBuff(void)
 }
 
 /*******************************************************************************
-  * @º¯ÊýÃû³Æ	vTaskUsb3300EventProcess
-  * @º¯ÊýËµÃ÷   ´¦ÀíHS USB OTG core ·¢À´µÄ×´Ì¬ÐÅÏ¢£¬Ä¿Ç°Ö÷ÒªÊÇ½«USBD or USBH ×´Ì¬ÐÅÏ¢×ª»»³ÉMSG·¢³ö
-  * @ÊäÈë²ÎÊý   ÎÞ
-  * @Êä³ö²ÎÊý   ÎÞ
-  * @·µ»Ø²ÎÊý   ÎÞ
+  * @ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	vTaskUsb3300EventProcess
+  * @ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½   ï¿½ï¿½ï¿½ï¿½HS USB OTG core ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½Ï¢ï¿½ï¿½Ä¿Ç°ï¿½ï¿½Òªï¿½Ç½ï¿½USBD or USBH ×´Ì¬ï¿½ï¿½Ï¢×ªï¿½ï¿½ï¿½ï¿½MSGï¿½ï¿½ï¿½ï¿½
+  * @ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½   ï¿½ï¿½
+  * @ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½   ï¿½ï¿½
+  * @ï¿½ï¿½ï¿½Ø²ï¿½ï¿½ï¿½   ï¿½ï¿½
   * NOTE event:
         DevInit,DevRst,DevCfg,DevSus,DevResum,DevCon,DevDiscon,
 		HostInit,HostDeInit,HostDevAttach,HostDevRst,HostDevDiscon,HostDevOC,HostDevSpd,HostDevDesc,
@@ -641,7 +642,7 @@ void vTaskUsb3300EventProcess(void *pvParameters)
    {
 	 if(xQueueReceive(xQueueUsb3300Event,&OneQueue,portMAX_DELAY)  == pdPASS)
 	 {
-	   //´¦ÀíÊÕµ½µÄÓÐÐ§ÏûÏ¢
+	   //ï¿½ï¿½ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½Ï¢
 
 	   switch(OneQueue.event)
 	   {
@@ -720,8 +721,8 @@ void vTaskUsb3300EventProcess(void *pvParameters)
 		 /////////////////////LINK DEV EVENT///////////////
 		 case  LinkDevSus:
 		       StopCurrentTest();
-			  // ResetUsbLink(); 	   //²»ÄÜ¼ÓÕâ¸ö¡£
-               // USB_LINK_Init();	  //¼ÓÉÏÕâ¸ö£¬ÔÚÔËÐÐÒ»¸ötestÒÔºó£¬°Î³öÉè±¸£¬Éè±¸»áËÀµô
+			  // ResetUsbLink(); 	   //ï¿½ï¿½ï¿½Ü¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+               // USB_LINK_Init();	  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½testï¿½Ôºó£¬°Î³ï¿½ï¿½è±¸ï¿½ï¿½ï¿½è±¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		 	   break;
 		    	
 

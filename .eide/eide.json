@@ -115,6 +115,9 @@
               },
               {
                 "path": "User_files/DAC7568.c"
+              },
+              {
+                "path": "User_files/gpio_control.c"
               }
             ],
             "folders": []
