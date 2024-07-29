@@ -23,6 +23,7 @@
 #include <stdbool.h>
 #include "usbd_cdc.h"
 #include "usbd_cdc_if.h"
+#include "DAC7568.h"
 #include "gpio_control.h"
 
 
