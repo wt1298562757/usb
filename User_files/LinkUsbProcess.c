@@ -1,7 +1,7 @@
-//����FS LINK �¼�����������CMD���������ݷ��ʹ���
+//处理FS LINK 事件，包括接收CMD处理和数据发送处理
 
 
-/* ����ͷ�ļ� *****************************************************************/
+/* 包含头文件 *****************************************************************/
 #include <string.h>
 #include <stdio.h>
 
@@ -28,10 +28,10 @@
 
 
 
-#define MSG_BUFF_SIZE 2560	   // �ϴ���HOST��MSG���ݻ�����
+#define MSG_BUFF_SIZE 2560	   // 上传给HOST的MSG数据缓冲区
 #define MSG_BUFF_WRITE_TIMEOUT 5000
-#define MSG_SEND_PERIOD 100 * portTICK_RATE_MS		  //EP1_IN ����Ƶ��=100ms
-#define ADC_BUFF_SIZE 	 28000 //�ϴ���HOST��ADC���ݻ�����(8ch x 2byte + 12byte head) x 1000 =28000 byte
+#define MSG_SEND_PERIOD 100 * portTICK_RATE_MS		  //EP1_IN 发送频率=100ms
+#define ADC_BUFF_SIZE 	 28000 //上传给HOST的ADC数据缓冲区(8ch x 2byte + 12byte head) x 1000 =28000 byte
 
 #define SCRIPT_RUNNER_PRIO   (tskIDLE_PRIORITY  + 1 )
 
@@ -50,13 +50,13 @@
 
 
 
-/* ���� ----------------------------------------------------------------------*/
+/* 变量 ----------------------------------------------------------------------*/
 
 
 
-xQueueHandle xQueueLinkUsbRecvCmd; //FS LINK CMD����
-xQueueHandle xQueueUsb3300Event;   //test dev or test host ���¼�����
-xSemaphoreHandle xMutexMsgBuff; //FS LINK ���ͻ���mutex
+xQueueHandle xQueueLinkUsbRecvCmd; //FS LINK CMD队列
+xQueueHandle xQueueUsb3300Event;   //test dev or test host 的事件队列
+xSemaphoreHandle xMutexMsgBuff; //FS LINK 发送缓冲mutex
 xTaskHandle vHandleTaskRunOneScript;
 
 char charBuf[MAX_MSG_LENTH];
@@ -87,20 +87,20 @@ static RUN_SCRIPT_CMD_FMT RunScriptCmd;
 PreDefinedPara_t PreDefinedPara;
 extern uint16_t VirtAddVarTab[NB_OF_VAR];
 
-//����ADC ȫ�ֱ���
+//引用ADC 全局变量
 //extern __IO uint16_t ADC_ConvertedBuff0[ADC_Buf_Size];
 //extern __IO uint16_t ADC_ConvertedBuff1[ADC_Buf_Size];
 //extern uint16_t* pCurADC_ConvertedBuff;
 extern __IO uint16_t ADC_ProcessBuff[8]; 
 
 
-/* �������� ------------------------------------------------------------------*/
+/* 函数声明 ------------------------------------------------------------------*/
 void ReportPreDefinedPara(void);
 extern void vTaskRunOneScript(void *pvParameters)  ;
 extern void ReportDutInfo(void);
 /**
   AddHostCmdtoQueue 
-  ����fs link usb�������е����ݣ���ϳ���Ϣ���͵�xQueueLinkUsbRecvCmd����* @}
+  处理fs link usb缓冲区中的数据，组合成消息发送到xQueueLinkUsbRecvCmd队列* @}
   */ 
 
 
@@ -122,14 +122,14 @@ uint8_t AddHostCmdtoQueue(uint8_t* pRecvBuff, uint16_t count)
 			break;
 		}
 
-		//���ˣ�������Ч������xQueueLinkUsbRecvCmd����һ����Ϣ
+		//到此，数据有效，将向xQueueLinkUsbRecvCmd发送一条消息
 		LinkCmd.cmd =  rxBuffPtr->cmd;
 		LinkCmd.target = rxBuffPtr->target;
 		LinkCmd.para = 	rxBuffPtr->para;
 
 		if(xQueueSend(xQueueLinkUsbRecvCmd,&LinkCmd,10) !=pdPASS)
 		{
-		   //xQueueLinkUsbRecvCmd��������
+		   //xQueueLinkUsbRecvCmd队列已满
 		  GPIO_Toggle(SW_LED2_R) ;	 ;
 		}
 
@@ -139,7 +139,7 @@ uint8_t AddHostCmdtoQueue(uint8_t* pRecvBuff, uint16_t count)
    return success;
 }
 
-//ADC_DATA_UPLOAD��������
+//ADC_DATA_UPLOAD变量处理
 
 void SetAdcDataUploadState(uint8_t i)
 {
@@ -162,11 +162,11 @@ void LoadPreDefinedPara(void)
 
 
 /*******************************************************************************
-  * @��������	vTaskLinkUsbCmdProcess
-  * @����˵��   ����HOST������CMD����xQueueLinkUsbRecvCmd���д���
-  * @�������   ��
-  * @�������   ��
-  * @���ز���   ��
+  * @函数名称	vTaskLinkUsbCmdProcess
+  * @函数说明   处理HOST发来的CMD，由xQueueLinkUsbRecvCmd队列触发
+  * @输入参数   无
+  * @输出参数   无
+  * @返回参数   无
 *******************************************************************************/
 void vTaskLinkUsbCmdProcess(void *pvParameters)
 {
@@ -181,11 +181,11 @@ FS_LINK_CMD_FMT RecvCmd;
    {
 	 if(xQueueReceive(xQueueLinkUsbRecvCmd,&RecvCmd,portMAX_DELAY)  == pdPASS)
 	 {
-	   //�����յ�����Ч��Ϣ
+	   //处理收到的有效消息
 		// Report_MSG(">>>>>>>>>>>>>>>>>>>  for debug  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 	   	// sprintf(charBuf,"INFO: cmd = 0x%X,target= 0x%X, para = 0x%X",RecvCmd.cmd,RecvCmd.target,RecvCmd.para) ;
 
-		//	GetRunTimeStats();  //run time stat only ��ʹ��TIM3
+		//	GetRunTimeStats();  //run time stat only 须使能TIM3
 	   switch(RecvCmd.cmd)
 	   {
 		 case  SYSTEM_RESET:
@@ -274,7 +274,7 @@ FS_LINK_CMD_FMT RecvCmd;
 				  
 				  vTaskDelete(vHandleTaskRunOneScript);
 
-				  //report, ���ֵΪ250, 
+				  //report, 结果值为250,
 			  	  Report_Test_Result(RunScriptCmd.id,250)  ;
 				  				
 			     // reset val
@@ -298,11 +298,11 @@ FS_LINK_CMD_FMT RecvCmd;
 				break;
 
 		 case SET_PRE_DEFINED_SETTING_Y:
-		 		//����ȱʡ��ϵͳ������cable_a_res, cable_b_res
+		 		//设置缺省的系统参数，cable_a_res, cable_b_res
 				//sprintf(charBuf,"INFO:cmd = 0x%X,target= 0x%X, para = 0x%X",RecvCmd.cmd,RecvCmd.target,RecvCmd.para) ;
 	            //Report_MSG(charBuf)	 ;
 
-				//  ע�⣬������Ŵ�1��ʼ��1��cable_res_a, 2:cable_res_b
+				//  注意，参数编号从1开始：1：cable_res_a, 2:cable_res_b
 				if(RecvCmd.target == 1 && RecvCmd.para <2000)
 				{
 				 PreDefinedPara.cable_res_a =   RecvCmd.para;
@@ -372,17 +372,17 @@ static void AddMsgToBuff(uint8_t infoCategory, uint8_t src, uint8_t msgLen,  uin
   if(xSemaphoreTake(xMutexMsgBuff,MSG_BUFF_WRITE_TIMEOUT)== pdPASS  )
 	{
 	//copy the message header to CurBuff
-  	memcpy(pCurBuffer + MsgSendBuffOffset, &onePkt, 12);	//��Ϣͷ��12 byte
+  	memcpy(pCurBuffer + MsgSendBuffOffset, &onePkt, 12);	//消息头长12 byte
 	MsgSendBuffOffset = MsgSendBuffOffset + 12 ;	
 	//copy the current
-	memcpy(pCurBuffer + MsgSendBuffOffset, content, msgLen);	//��Ϣͷ��12 byte
+	memcpy(pCurBuffer + MsgSendBuffOffset, content, msgLen);	//消息头长12 byte
 	MsgSendBuffOffset = MsgSendBuffOffset + msgLen ;
 
 	xSemaphoreGive(xMutexMsgBuff) ;
 	}
    else
    {
-	 //дbuffʧ�ܣ���������û��Give xMutexMsgBuff
+	 //写buff失败，其他程序没有Give xMutexMsgBuff
 	 ;
 	 GPIO_Toggle(SW_LED1_R) ;
    }
@@ -427,19 +427,19 @@ void ReportPreDefinedPara(void)
   if(xSemaphoreTake(xMutexMsgBuff,MSG_BUFF_WRITE_TIMEOUT)== pdPASS  )
 	{
 	//copy the message header to CurBuff
-  	memcpy(pCurBuffer + MsgSendBuffOffset, &onePkt, 12);	//��Ϣͷ��12 byte
+  	memcpy(pCurBuffer + MsgSendBuffOffset, &onePkt, 12);	//消息头长12 byte
 	MsgSendBuffOffset = MsgSendBuffOffset + 12 ;	
 	//copy the current
 	
 
-	memcpy(pCurBuffer + MsgSendBuffOffset, &PreDefinedPara, onePkt.msgLenth);	//��Ϣͷ��12 byte
+	memcpy(pCurBuffer + MsgSendBuffOffset, &PreDefinedPara, onePkt.msgLenth);	//消息头长12 byte
 	MsgSendBuffOffset = MsgSendBuffOffset + onePkt.msgLenth ;
 
 	xSemaphoreGive(xMutexMsgBuff) ;
 	}
    else
    {
-	 //дbuffʧ�ܣ���������û��Give xMutexMsgBuff
+	 //写buff失败，其他程序没有Give xMutexMsgBuff
 	 ;
 	 GPIO_Toggle(SW_LED1_R) ;
    }
@@ -464,11 +464,11 @@ void WaitHostToContinue(const char* p)
 
 
 /*******************************************************************************
-  * @��������	SendMsgToHost
-  * @����˵��   ����ǰ�������е�����ͨ��EP1_IN ���͸�HOST ,ÿ  MSG_SEND_PERIOD MS����һ��
-  * @�������   ��
-  * @�������   ��
-  * @���ز���   ��
+  * @函数名称	SendMsgToHost
+  * @函数说明   将当前缓冲区中的数据通过EP1_IN 发送给HOST ,每  MSG_SEND_PERIOD MS触发一次
+  * @输入参数   无
+  * @输出参数   无
+  * @返回参数   无
 *******************************************************************************/
 void vTaskSendMsgToHost(void * pvParameters)
 {
@@ -485,7 +485,7 @@ void vTaskSendMsgToHost(void * pvParameters)
  {
    		//sprintf(charBuf,"SendMsgTask Running ,T = %d",xTaskGetTickCount()) ;
 	   // Report_MSG(charBuf)	 ;
-   if( MsgSendBuffOffset > 0 )	//�����ǰָ�벻Ϊ�㣬�ͷ���
+   if( MsgSendBuffOffset > 0 )	//如果当前指针不为零，就发送
    {
 		// if(DCD_GetEPStatus(&g_USB_link_dev,FS_LINK_IN_EP) == USB_OTG_EP_TX_VALID )
 
@@ -525,11 +525,11 @@ void vTaskSendMsgToHost(void * pvParameters)
 
 
 /*******************************************************************************
-  * @��������	SendAdcDataToHost
-  * @����˵��   ����ǰ�������е�ADC����ͨ��EP2_IN ���͸�HOST 
-  * @�������   ��
-  * @�������   ��
-  * @���ز���   ��
+  * @函数名称	SendAdcDataToHost
+  * @函数说明   将当前缓冲区中的ADC数据通过EP2_IN 发送给HOST 
+  * @输入参数   无
+  * @输出参数   无
+  * @返回参数   无
 *******************************************************************************/
 void SendAdcDataToHost(void)
 {
@@ -560,11 +560,11 @@ void SendAdcDataToHost(void)
 
 
 /*******************************************************************************
-  * @��������	AddDATAToAdcBuff
-  * @����˵��   ��ADCת��������ݷ��͵�AdcBuff,
-  * @�������   ��
-  * @�������   ��
-  * @���ز���   ��
+  * @函数名称	AddDATAToAdcBuff
+  * @函数说明   将ADC转换结果数据发送到AdcBuff,
+  * @输入参数   无
+  * @输出参数   无
+  * @返回参数   无
 *******************************************************************************/
 
 void AddDataToAdcSendBuff(void)
@@ -583,22 +583,22 @@ void AddDataToAdcSendBuff(void)
 	onePkt.msgLenth = 	16;
 
 
-  //ADC����ֻ��һ��writer,һ��reader���Ҳ���ͬʱ����buff����˲���Mutex
+  //ADC数据只有一个writer,一个reader，且不会同时访问buff，因此不用Mutex
   //	{
 	//copy the message header to CurBuff
-  	memcpy(pCurAdcSendBuffer + AdcSendBuffOffset, &onePkt, 12);	//��Ϣͷ��12 byte
+  	memcpy(pCurAdcSendBuffer + AdcSendBuffOffset, &onePkt, 12);	//消息头长12 byte
 	AdcSendBuffOffset = AdcSendBuffOffset + 12 ;	
 
-	//ADC����ֱ�Ӵӵ�ǰ��ADC_ConvertedBuff������pCurAdcSendBuffer, ����Ϊ8CH x 2B = 16B
+	//ADC数据直接从当前的ADC_ConvertedBuff拷贝到pCurAdcSendBuffer, 长度为8CH x 2B = 16B
 
   /*  for(p=0;p<8;p++)
 	{	
 		temp = ADC_ProcessBuff[p];
-		*(pCurAdcSendBuffer + AdcSendBuffOffset+2*p) =temp & 0x00ff;   //��8bit
-		*(pCurAdcSendBuffer + AdcSendBuffOffset+2*p+1) =temp>>8;		//��8bit		
+		*(pCurAdcSendBuffer + AdcSendBuffOffset+2*p) =temp & 0x00ff;   //低8bit
+		*(pCurAdcSendBuffer + AdcSendBuffOffset+2*p+1) =temp>>8;		//高8bit			
 	}
    */
-	 	memcpy(pCurAdcSendBuffer + AdcSendBuffOffset, (uint8_t *)ADC_ProcessBuff, 16);	//ADC���ݳ�16 byte
+	 	memcpy(pCurAdcSendBuffer + AdcSendBuffOffset, (uint8_t *)ADC_ProcessBuff, 16);	//ADC数据长16 byte
 		
 		//swich ADC_DP and ADC_DM DATA
 		dp_data_l = *(pCurAdcSendBuffer + AdcSendBuffOffset + 6);
@@ -614,7 +614,7 @@ void AddDataToAdcSendBuff(void)
 	AdcSendBuffOffset = AdcSendBuffOffset + 16 ;
 	
 	
-   //���������������������
+   //如果缓冲区满，则发送数据
    	if( AdcSendBuffOffset >= ADC_BUFF_SIZE )
 	{
 	 
@@ -624,11 +624,11 @@ void AddDataToAdcSendBuff(void)
 }
 
 /*******************************************************************************
-  * @��������	vTaskUsb3300EventProcess
-  * @����˵��   ����HS USB OTG core ������״̬��Ϣ��Ŀǰ��Ҫ�ǽ�USBD or USBH ״̬��Ϣת����MSG����
-  * @�������   ��
-  * @�������   ��
-  * @���ز���   ��
+  * @函数名称	vTaskUsb3300EventProcess
+  * @函数说明   处理HS USB OTG core 发来的状态信息，目前主要是将USBD or USBH 状态信息转换成MSG发出
+  * @输入参数   无
+  * @输出参数   无
+  * @返回参数   无
   * NOTE event:
         DevInit,DevRst,DevCfg,DevSus,DevResum,DevCon,DevDiscon,
 		HostInit,HostDeInit,HostDevAttach,HostDevRst,HostDevDiscon,HostDevOC,HostDevSpd,HostDevDesc,
@@ -643,7 +643,7 @@ void vTaskUsb3300EventProcess(void *pvParameters)
    {
 	 if(xQueueReceive(xQueueUsb3300Event,&OneQueue,portMAX_DELAY)  == pdPASS)
 	 {
-	   //�����յ�����Ч��Ϣ
+	   //处理收到的有效消息
 
 	   switch(OneQueue.event)
 	   {
@@ -722,8 +722,8 @@ void vTaskUsb3300EventProcess(void *pvParameters)
 		 /////////////////////LINK DEV EVENT///////////////
 		 case  LinkDevSus:
 		       StopCurrentTest();
-			  // ResetUsbLink(); 	   //���ܼ������
-               // USB_LINK_Init();	  //���������������һ��test�Ժ󣬰γ��豸���豸������
+			  // ResetUsbLink(); 	   //不能加这个。
+               // USB_LINK_Init();	  //加上这个，在运行一个test以后，拔出设备，设备会死掉
 		 	   break;
 		    	
 
