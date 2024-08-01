@@ -118,6 +118,15 @@
               },
               {
                 "path": "User_files/gpio_control.c"
+              },
+              {
+                "path": "User_files/MeasureProcess.c"
+              },
+              {
+                "path": "User_files/AdcProcess.c"
+              },
+              {
+                "path": "User_files/flash_if.c"
               }
             ],
             "folders": []
@@ -287,8 +296,10 @@
         "<virtual_root>/Application/User_files/usbh_msc_usr.c",
         "<virtual_root>/Application/User_files/UCPET_bsp.c",
         "<virtual_root>/Application/User_files/PET_CMD.c",
+        "<virtual_root>/Application/User_files/TestScriptProcess.c",
+        "<virtual_root>/Application/User_files/flash_if.c",
         "<virtual_root>/Application/User_files/ScriptPool.c",
-        "<virtual_root>/Application/User_files/TestScriptProcess.c"
+        "<virtual_root>/Application/User_files/AdcProcess.c"
       ],
       "toolchain": "AC5",
       "compileConfig": {

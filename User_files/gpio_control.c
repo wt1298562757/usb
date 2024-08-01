@@ -309,4 +309,29 @@ void MEAS_HW_RST(void)
 	SetCurrentRangeMode(ADC_LOAD_I,AUTO_RANGE);		
 }
 
+uint8_t GetCurrentRangeMode(uint8_t name)
+{
+	 uint8_t mode = AUTO_RANGE;
+     if(name == ADC_LOAD_I)
+	 {
+	 mode = LoadCurrentRangeMode;
+	 }
+	 else if (name == ADC_VBUS_I)
+	 {
+	 mode = VbusCurrentRangeMode;
+	 }
+	 return  mode;
+
+}
+
+uint8_t GetLoadCurrentRange()
+{
+	 return   LoadCurrentRange;
+}
+
+uint8_t GetVbusCurrentRange()
+{
+	  return VbusCurrentRange;
+}
+
 

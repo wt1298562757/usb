@@ -96,8 +96,8 @@ extern __IO uint16_t ADC_ProcessBuff[8];
 
 /* 函数声明 ------------------------------------------------------------------*/
 void ReportPreDefinedPara(void);
-extern void vTaskRunOneScript(void *pvParameters)  ;
-extern void ReportDutInfo(void);
+// extern void vTaskRunOneScript(void *pvParameters)  ;
+// extern void ReportDutInfo(void);
 /**
   AddHostCmdtoQueue 
   处理fs link usb缓冲区中的数据，组合成消息发送到xQueueLinkUsbRecvCmd队列* @}
@@ -258,7 +258,7 @@ FS_LINK_CMD_FMT RecvCmd;
                    RunScriptCmd.id = RecvCmd.target;
 				   RunScriptCmd.para = RecvCmd.para;
 
-				  xTaskCreate(vTaskRunOneScript,"Run One Script",240,&RunScriptCmd,SCRIPT_RUNNER_PRIO,&vHandleTaskRunOneScript);
+				//   xTaskCreate(vTaskRunOneScript,"Run One Script",240,&RunScriptCmd,SCRIPT_RUNNER_PRIO,&vHandleTaskRunOneScript);
 				 }
 				 else
 				 {
@@ -714,10 +714,10 @@ void vTaskUsb3300EventProcess(void *pvParameters)
 		 case  HostDevCfgDesc:
 			   Report_MSG("> DUT Configure Desc Available") ;
 		 	   break;
-		 case  HostDevEnumDone:
-			   Report_MSG("> Enumeration completed") ;
-			   ReportDutInfo();
-		 	   break;
+		//  case  HostDevEnumDone:
+		// 	   Report_MSG("> Enumeration completed") ;
+		// 	   ReportDutInfo();
+		//  	   break;
 
 		 /////////////////////LINK DEV EVENT///////////////
 		 case  LinkDevSus:

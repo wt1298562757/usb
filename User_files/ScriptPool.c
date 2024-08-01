@@ -1,13 +1,14 @@
 
-#include "stm32f2xx.h"
+#include "stm32f4xx.h"
 #include "LinkUsbProcess.h"
 #include "TestScriptProcess.h"
 #include "PET_CMD.h"
 #include "FreeRTOS.h"
 #include "task.h"
+#include "stdbool.h"
 
 #include "MeasureProcess.h"
-#include "UCPET_bsp.h"
+// #include "UCPET_bsp.h"
 #include "AdcProcess.h"
 
 
@@ -17,7 +18,7 @@
 
 /* ±äÁ¿ ----------------------------------------------------------------------*/
 
-extern uint8_t Enum_Done;
+// extern uint8_t Enum_Done;
 extern xTaskHandle vHandleTaskRunOneScript;
 
 
@@ -1046,7 +1047,7 @@ uint16_t PD_UUTInitialPowerUpTest(void *p)
 		Report_MSG("9. Now ready for any other B_UUT test.");
 
 		 }
- }while(FALSE);
+ }while(false);
 
 TASK_CLEAN_UP()
 
@@ -1368,7 +1369,7 @@ uint16_t PD_DataContactDetectWithCurrentSource(void *p)				   //Data Contact Det
 
 	Delay(TO_STM_TIME_UNIT(8000));	 
 	   //if run to last, test pass
-	}while(FALSE);
+	}while(false);
 	Report_MSG("END of PD DCD with Current Source test");
 
 	TASK_CLEAN_UP()
@@ -1512,7 +1513,7 @@ Report_MSG("----DCD using Timeout----------------------------------------")  ;
 
 	Delay(TO_STM_TIME_UNIT(8000));	
 	 
-   }while(FALSE);
+   }while(false);
    Report_MSG("END OF PD-DCD No Current Source Test");
    TASK_CLEAN_UP()
 }
@@ -2003,7 +2004,7 @@ PD_DCP_CHECKING_CURRENT_DRAW:
 
 	  	  Report_MSG("End of PD DCP TEST")  ;
   
-}while(FALSE);
+}while(false);
    TASK_CLEAN_UP()
 
 }
@@ -2679,13 +2680,13 @@ PD_CDP_STEP_26:
 
 	Report_MSG("46.Wait 8 seconds, ignoring SRP pulse, for detachment to be detected.")  ;
 	Delay(TO_STM_TIME_UNIT(8000));
-	DeInit_Test_Host();
+	// DeInit_Test_Host();
 
  	 //  end of test
  	 Report_MSG("END OF CDP Detection Test")  ;
- 	}while(FALSE);
+ 	}while(false);
 		
-    DeInit_Test_Host();
+    // DeInit_Test_Host();
 	GPIO_Setting(RSW_VCC_PHY,OFF);   //power off the usb phy
   	GPIO_Setting(RSW_DMDP_TEST,OFF);
 	TASK_CLEAN_UP()
@@ -2952,23 +2953,23 @@ PD_SDP_CHECKING_CURRENT_DRAW:
 //17. Maintain session for 30 seconds from configuration.
 
 
-   if(Enum_Done ==1)
-   {
-   // sprintf(charBuf,"INFO:PD Conneted,TSVLD_CON_PWD = %d ms",(PD_Connect_Ts - ts0)/10) ;	
-//	Report_MSG(charBuf)	 ;  
-  Report_MSG("17. Maintain session for 30 seconds from configuration.");
+//    if(Enum_Done ==1)
+//    {
+//    // sprintf(charBuf,"INFO:PD Conneted,TSVLD_CON_PWD = %d ms",(PD_Connect_Ts - ts0)/10) ;	
+// //	Report_MSG(charBuf)	 ;  
+//   Report_MSG("17. Maintain session for 30 seconds from configuration.");
 
-    ts3 =GlobleTime;
-    do{
-    sprintf(charBuf,"INFO: Avarage Current = %d mA",Get_Avarage_ADC_Value(ADC_VBUS_I,20000)/10) ;	
-	Report_MSG(charBuf)	 ;
-	  }while(300000>(GlobleTime - ts3))	;
-   }
-  else
-   {
-	 Report_MSG("ERRO: Enumerate Faild!")	 ;
-	 testResult = TEST_FAILED;
-   }
+//     ts3 =GlobleTime;
+//     do{
+//     sprintf(charBuf,"INFO: Avarage Current = %d mA",Get_Avarage_ADC_Value(ADC_VBUS_I,20000)/10) ;	
+// 	Report_MSG(charBuf)	 ;
+// 	  }while(300000>(GlobleTime - ts3))	;
+//    }
+//   else
+//    {
+// 	 Report_MSG("ERRO: Enumerate Faild!")	 ;
+// 	 testResult = TEST_FAILED;
+//    }
 
    //check current
    	if ( IsWatchBlockTriggered(0) )
@@ -3017,9 +3018,9 @@ PD_SDP_CHECKING_CURRENT_DRAW:
    	Report_MSG(" Wait 8 seconds, ignoring SRP pulse, for detachment to be detected");
 	Delay(80000);
 //End of Test
-}while(FALSE);
+}while(false);
 
-	DeInit_Test_Host();
+	// DeInit_Test_Host();
 	GPIO_Setting(RSW_VCC_PHY,OFF);   //power up the usb phy
   	GPIO_Setting(RSW_DMDP_TEST,OFF);
 
@@ -3224,7 +3225,7 @@ uint16_t PD_ACA_DockDetection(void *p){
 	} 
 
 //End of Test	
-	}while(TRUE);
+	}while(true);
 
 	TASK_CLEAN_UP()
 }
@@ -3336,7 +3337,7 @@ uint16_t PD_ACA_A_Detection(void *p){
 		break;
 	} 
 
-	}while(TRUE);
+	}while(true);
 	TASK_CLEAN_UP()
 }
 /*********** END OF 6.10 ACA-A Detection Test **********/
@@ -3400,7 +3401,7 @@ uint16_t PD_ACA_B_Detection(void* p){
 				//test failed
 			   Report_MSG("ERRO: UUT attempted to connect - FAIL.[PD8]");
 			   testResult = TEST_FAILED;
-			  // meetError = TRUE;
+			  // meetError = true;
 			  // break;									
 			}
 	}else{
@@ -3496,7 +3497,7 @@ if ( IsWatchBlockTriggered(0))
 	}
 //17. Disconnect data lines from PET test circuit.
 //End of Test
-  }while(TRUE);
+  }while(true);
 
 	TASK_CLEAN_UP()
  }
@@ -3652,7 +3653,7 @@ Report_MSG("----------CHECKING_CURRENT_DRAW---------------");
 		break;
 	}
 //End of Test
-  }while(TRUE);
+  }while(true);
 
 	TASK_CLEAN_UP()
  }
@@ -3767,7 +3768,7 @@ uint16_t PD_ACA_GND_Detection(void* p){
 
 		Report_MSG("End of This Test.")  ;
 //End of Test
-  }while(FALSE);
+  }while(false);
 
 	TASK_CLEAN_UP()
  }
@@ -3943,33 +3944,33 @@ DBP_TEST_STEP_15:
 //16. Check that PET can enumerate UUT (at HS if possible), and Set Configuration 1.
 	Report_MSG("16. Check that PET can enumerate UUT (at HS if possible), and Set Configuration 1.");
     Delay(10000); //µÈ´ýENUM DONE
-	 if(Enum_Done == 1)
-	 {
-	 	 ts0 = GlobleTime;
-		 bMaxPower = 2*Get_PD_bMaxPower();
-		 //17. For the next 30 seconds, check current drawn does not exceed bMaxPower.
-		  Report_MSG("17. For the next 30 seconds, check current drawn does not exceed bMaxPower.");
-		 while ((GlobleTime - ts0) < 300000)
-	  	  {
-				tmp_i = Get_Avarage_ADC_Value(ADC_VBUS_I,10000)/10;  //avarage 1 sec for VBUS_I
+	//  if(Enum_Done == 1)
+	//  {
+	//  	 ts0 = GlobleTime;
+	// 	 bMaxPower = 2*Get_PD_bMaxPower();
+	// 	 //17. For the next 30 seconds, check current drawn does not exceed bMaxPower.
+	// 	  Report_MSG("17. For the next 30 seconds, check current drawn does not exceed bMaxPower.");
+	// 	 while ((GlobleTime - ts0) < 300000)
+	//   	  {
+	// 			tmp_i = Get_Avarage_ADC_Value(ADC_VBUS_I,10000)/10;  //avarage 1 sec for VBUS_I
 
-				if(tmp_i>bMaxPower)
-				{
-				 Report_MSG("ERRO: Current exceeded bMaxPower!") ;
-				 sprintf(charBuf,"ERRO:I = %d mA",tmp_i) ;	
-		         Report_MSG(charBuf)  ;
-				}
-				else
-				{
-				 sprintf(charBuf,"INFO:I = %d mA",tmp_i) ;	
-		         Report_MSG(charBuf)  ;
-				}
-		   } 
-	  }
-	  else
-	  {
-			Report_MSG("ERRO: Enumeration Failed!") ;
-	  }
+	// 			if(tmp_i>bMaxPower)
+	// 			{
+	// 			 Report_MSG("ERRO: Current exceeded bMaxPower!") ;
+	// 			 sprintf(charBuf,"ERRO:I = %d mA",tmp_i) ;	
+	// 	         Report_MSG(charBuf)  ;
+	// 			}
+	// 			else
+	// 			{
+	// 			 sprintf(charBuf,"INFO:I = %d mA",tmp_i) ;	
+	// 	         Report_MSG(charBuf)  ;
+	// 			}
+	// 	   } 
+	//   }
+	//   else
+	//   {
+	// 		Report_MSG("ERRO: Enumeration Failed!") ;
+	//   }
 
 //18. Turn off VBUS and disconnect capacitance and pull-down resistance from VBUS.
   	  Report_MSG("18. Turn off VBUS and disconnect capacitance and pull-down resistance from VBUS.");
@@ -3993,12 +3994,12 @@ DBP_END_TEST:
 
     GPIO_Setting(RSW_DMDP_TEST,OFF);
 	Delay(5000);
-	DeInit_Test_Host();
+	// DeInit_Test_Host();
 	Delay(5000);
 	GPIO_Setting(RSW_VCC_PHY,OFF); 
 	  
 //End of Test
-}while(FALSE);
+}while(false);
 	  TASK_CLEAN_UP()
 }
 /*********** end of 6.16 Dead Battery Provision Test **********/
@@ -4157,7 +4158,7 @@ uint16_t PD_CommonModeTestFullSpeed(void* p){
 	//Report_MSG("> DeInit USB host...")  ;
     GPIO_Setting(RSW_DMDP_TEST,OFF);
 	Delay(5000);
-	DeInit_Test_Host();
+	// DeInit_Test_Host();
 	Delay(5000);
 
      GPIO_Setting(RSW_EL_TO_GND_AB,OFF);
@@ -4170,7 +4171,7 @@ uint16_t PD_CommonModeTestFullSpeed(void* p){
 //8. Remove common mode offset.
 //9. Wait 8 seconds, ignoring SRP pulse, for detachment to be detected.
 //End of Test
-  }while(FALSE);
+  }while(false);
 
 	TASK_CLEAN_UP()
  }
@@ -4328,7 +4329,7 @@ uint16_t PD_CommonModeTestHighSpeed(void* p){
 	//Report_MSG("> DeInit USB host...")  ;
     GPIO_Setting(RSW_DMDP_TEST,OFF);
 	Delay(5000);
-	DeInit_Test_Host();
+	// DeInit_Test_Host();
 	Delay(5000);
 
      GPIO_Setting(RSW_EL_TO_GND_AB,OFF);
@@ -4341,7 +4342,7 @@ uint16_t PD_CommonModeTestHighSpeed(void* p){
 //8. Remove common mode offset.
 //9. Wait 8 seconds, ignoring SRP pulse, for detachment to be detected.
 //End of Test
-  }while(FALSE);
+  }while(false);
 
 	TASK_CLEAN_UP()
  }
@@ -4988,7 +4989,7 @@ uint16_t DCP_VoltageAndCurrent(void *p){
 
 //End of Test
 	Report_MSG("End of Test") ;
-	}while(FALSE);
+	}while(false);
 
 	TASK_CLEAN_UP();
 }
@@ -5123,7 +5124,7 @@ uint16_t DCP_Handshaking(void *p){
 	Report_MSG("End Test");
 
 
-	  	}while(FALSE);
+	  	}while(false);
 
 
 	SetCurrentRangeMode(ADC_VBUS_I,AUTO_RANGE);
@@ -5392,7 +5393,7 @@ Report_MSG("------------Checking Capacitance of D+ or D-----------------------")
 //End of Test
 	Report_MSG("End of Test");
 
-	}while(FALSE);
+	}while(false);
 
 
    TASK_CLEAN_UP()
@@ -5727,7 +5728,7 @@ WaitHostToContinue("5/6. Now,Please Power up the UUT, then click OK.\n\n\rIf thi
 	
 //End of Test
 
-	}while(FALSE);
+	}while(false);
 
    SetCurrentRangeMode(ADC_VBUS_I,AUTO_RANGE);
    SetCurrentRangeMode(ADC_LOAD_I,AUTO_RANGE);
@@ -5851,7 +5852,7 @@ uint16_t CDP_VoltageAndCurrentTest(void *p){
 
 	Report_MSG("End of Test")  ;
 
-	}while(FALSE);
+	}while(false);
 
    SetCurrentRangeMode(ADC_VBUS_I,AUTO_RANGE);
    SetCurrentRangeMode(ADC_LOAD_I,AUTO_RANGE);
@@ -6359,7 +6360,7 @@ CDP_HANDSHAKING_BH2:
 
 	 
 
-	}while(FALSE);
+	}while(false);
 
 
 	TASK_CLEAN_UP()
@@ -6484,7 +6485,7 @@ uint16_t CDP_GroundOffsetTestFullSpeed(void *p){
 	GPIO_Setting(RSW_AGND_TO_GND_AB,OFF);   
 	GPIO_Setting(RSW_VCC_PHY,OFF);   //power OFF the usb phy
 
-	}while(FALSE);
+	}while(false);
 
 
 	 TASK_CLEAN_UP();
@@ -6618,7 +6619,7 @@ uint16_t CDP_GroundOffsetTestHighSpeed(void *p){
 
 
 
-	}while(FALSE);
+	}while(false);
 
 
 	 TASK_CLEAN_UP();
@@ -6730,7 +6731,7 @@ uint16_t  SDP_Handshaking (void* p)
 	 Report_MSG("End of Test");
 //End of Test
 
-	     }while(FALSE);
+	     }while(false);
 
 	TASK_CLEAN_UP()		;
  }
@@ -7087,7 +7088,7 @@ MRP_STEP_24:
 
   Report_MSG("End of Test");
 
-	}while(FALSE);	  	  
+	}while(false);	  	  
 
     
 TASK_CLEAN_UP();
@@ -7296,7 +7297,7 @@ BC12ImplementedCheck_CDPSDP	:
 
 
 
- }while(FALSE);
+ }while(false);
 
  
 	  
@@ -7395,7 +7396,7 @@ do
 	    Delay(10000);
 
 
- }while(FALSE);
+ }while(false);
 
  
 	  
@@ -7523,7 +7524,7 @@ uint16_t Handset_Usb_comm(void* p){
 	//Report_MSG("> DeInit USB host...")  ;
     GPIO_Setting(RSW_DMDP_TEST,OFF);
 	Delay(5000);
-	DeInit_Test_Host();
+	// DeInit_Test_Host();
 	Delay(5000);
 
      GPIO_Setting(RSW_EL_TO_GND_AB,OFF);
@@ -7536,7 +7537,7 @@ uint16_t Handset_Usb_comm(void* p){
 //8. Remove common mode offset.
 //9. Wait 8 seconds, ignoring SRP pulse, for detachment to be detected.
 //End of Test
-  }while(FALSE);
+  }while(false);
 
 	TASK_CLEAN_UP()
  }

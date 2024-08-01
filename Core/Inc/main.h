@@ -36,7 +36,7 @@ extern "C" {
 
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
-typedef enum {FALSE = 0, TRUE = !FALSE} bool;
+
 /* USER CODE END ET */
 
 /* Exported constants --------------------------------------------------------*/
@@ -67,3 +67,4 @@ void Error_Handler(void);
 #endif
 
 #endif /* __MAIN_H */
+

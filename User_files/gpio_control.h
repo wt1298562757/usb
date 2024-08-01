@@ -15,5 +15,10 @@ void DAC_DP_Output_Res(uint8_t res);
 void SetVbusCurrentRange(uint8_t range);
 void SetLoadCurrentRange(uint8_t range);
 void SetCurrentRangeMode(uint8_t name,uint8_t mode);
+uint8_t GetCurrentRangeMode(uint8_t name);
+uint8_t GetLoadCurrentRange();
+uint8_t GetVbusCurrentRange();
+extern void MEAS_HW_RST(void);
+
 
 #endif
