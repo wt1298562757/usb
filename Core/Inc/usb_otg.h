@@ -32,13 +32,11 @@ extern "C" {
 
 /* USER CODE END Includes */
 
-extern PCD_HandleTypeDef hpcd_USB_OTG_HS;
-
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
 
-void MX_USB_OTG_HS_PCD_Init(void);
+void MX_USB_OTG_HS_USB_Init(void);
 
 /* USER CODE BEGIN Prototypes */
 
