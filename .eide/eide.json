@@ -53,9 +53,6 @@
                   },
                   {
                     "path": "Core/Src/spi.c"
-                  },
-                  {
-                    "path": "Core/Src/usb_otg.c"
                   }
                 ],
                 "folders": []
@@ -89,15 +86,6 @@
                     "folders": []
                   }
                 ]
-              },
-              {
-                "name": "USB_HOST",
-                "files": [
-                  {
-                    "path": "USB_HOST/usbh_msc_usr.c"
-                  }
-                ],
-                "folders": []
               }
             ]
           },
@@ -148,6 +136,9 @@
               },
               {
                 "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd_ex.c"
+              },
+              {
+                "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c"
               },
               {
                 "path": "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c"
@@ -274,45 +265,6 @@
               }
             ],
             "folders": []
-          },
-          {
-            "name": "USB_Host_Library",
-            "files": [
-              {
-                "path": "Middlewares/ST/STM32_USB_HOST_Library/Core/src/usbh_core.c"
-              },
-              {
-                "path": "Middlewares/ST/STM32_USB_HOST_Library/Core/src/usbh_hcs.c"
-              },
-              {
-                "path": "Middlewares/ST/STM32_USB_HOST_Library/Core/src/usbh_ioreq.c"
-              },
-              {
-                "path": "Middlewares/ST/STM32_USB_HOST_Library/Core/src/usbh_stdreq.c"
-              }
-            ],
-            "folders": []
-          },
-          {
-            "name": "STM32_USB_OTG_Driver",
-            "files": [
-              {
-                "path": "Middlewares/ST/STM32_USB_OTG_Driver/src/usb_core.c"
-              },
-              {
-                "path": "Middlewares/ST/STM32_USB_OTG_Driver/src/usb_dcd.c"
-              },
-              {
-                "path": "Middlewares/ST/STM32_USB_OTG_Driver/src/usb_dcd_int.c"
-              },
-              {
-                "path": "Middlewares/ST/STM32_USB_OTG_Driver/src/usb_hcd.c"
-              },
-              {
-                "path": "Middlewares/ST/STM32_USB_OTG_Driver/src/usb_hcd_int.c"
-              }
-            ],
-            "folders": []
           }
         ]
       },
@@ -336,10 +288,7 @@
         "<virtual_root>/Application/User_files/UCPET_bsp.c",
         "<virtual_root>/Application/User_files/PET_CMD.c",
         "<virtual_root>/Application/User_files/ScriptPool.c",
-        "<virtual_root>/Application/User_files/TestScriptProcess.c",
-        "<virtual_root>/Drivers/STM32F4xx_HAL_Driver/stm32f4xx_ll_usb.c",
-        "<virtual_root>/Middlewares/STM32_USB_OTG_Driver/usb_hcd_int.c",
-        "<virtual_root>/Middlewares/STM32_USB_OTG_Driver/usb_hcd.c"
+        "<virtual_root>/Application/User_files/TestScriptProcess.c"
       ],
       "toolchain": "AC5",
       "compileConfig": {
@@ -514,19 +463,15 @@
           "Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2",
           ".cmsis/include",
           "MDK-ARM/RTE/_TAIER_usb_hs",
-          "User_files",
-          "Middlewares/ST/STM32_USB_HOST_Library/Core/inc",
-          "Middlewares/ST/STM32_USB_HOST_Library/Class/CDC/inc",
-          "Middlewares/ST/STM32_USB_OTG_Driver/inc",
-          "USB_HOST",
-          "Middlewares/ST/STM32_EVAL/STM324x9I_EVAL",
-          "Middlewares/ST/STM32_EVAL/Common"
+          "STM32_USB_OTG_Driver/inc",
+          "User_files"
         ],
         "libList": [],
         "defineList": [
           "USE_HAL_DRIVER",
           "STM32F429xx",
           "USE_STDPERIPH_DRIVER",
+          "USE_USB_OTG_FS",
           "USE_ULPI_PHY",
           "USE_USB_OTG_HS"
         ]

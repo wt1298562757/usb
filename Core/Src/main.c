@@ -22,7 +22,7 @@
 #include "adc.h"
 #include "dma.h"
 #include "spi.h"
-#include "usb_otg.h"
+#include "usb_device.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -97,7 +97,6 @@ int main(void)
   MX_DMA_Init();
   MX_ADC3_Init();
   MX_SPI1_Init();
-  MX_USB_OTG_HS_USB_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
