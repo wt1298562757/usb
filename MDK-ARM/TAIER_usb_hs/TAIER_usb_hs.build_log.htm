@@ -22,58 +22,1289 @@ Dialog DLL:      TCM.DLL V1.36.2.0
  
 <h2>Project:</h2>
 E:\winusb\winusb\f429\TAIER_usb_hs\MDK-ARM\TAIER_usb_hs.uvprojx
-Project File Date:  07/11/2024
+Project File Date:  07/30/2024
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'D:\tool\keil\ARM\ARMCC\Bin'
 Build target 'TAIER_usb_hs'
-assembling startup_stm32f429xx.s...
-compiling main.c...
-compiling usb_device.c...
-compiling stm32f4xx_it.c...
-compiling usbd_desc.c...
-compiling stm32f4xx_hal_pcd_ex.c...
-compiling usbd_cdc_if.c...
-compiling stm32f4xx_hal_msp.c...
 compiling gpio.c...
-compiling stm32f4xx_hal_pcd.c...
-compiling usbd_conf.c...
+compiling stm32f4xx_ll_adc.c...
+compiling stm32f4xx_hal_adc.c...
+compiling main.c...
+compiling spi.c...
 compiling freertos.c...
-compiling stm32f4xx_ll_usb.c...
-compiling stm32f4xx_hal_rcc_ex.c...
+compiling usb_otg.c...
+compiling adc.c...
+compiling stm32f4xx_hal_adc_ex.c...
+compiling stm32f4xx_hal_msp.c...
+compiling dma.c...
+compiling stm32f4xx_it.c...
 compiling stm32f4xx_hal_rcc.c...
-compiling stm32f4xx_hal_flash.c...
 compiling stm32f4xx_hal_pwr_ex.c...
+compiling stm32f4xx_hal_rcc_ex.c...
 compiling stm32f4xx_hal_cortex.c...
-compiling stm32f4xx_hal_flash_ex.c...
-compiling stm32f4xx_hal_dma_ex.c...
-compiling stm32f4xx_hal_gpio.c...
-compiling stm32f4xx_hal_flash_ramfunc.c...
-compiling stm32f4xx_hal_dma.c...
 compiling stm32f4xx_hal_pwr.c...
+compiling stm32f4xx_hal_gpio.c...
+compiling stm32f4xx_hal_flash.c...
+compiling stm32f4xx_hal_flash_ex.c...
+compiling stm32f4xx_hal.c...
 compiling croutine.c...
 compiling event_groups.c...
 compiling list.c...
+compiling stm32f4xx_hal_flash_ramfunc.c...
 compiling queue.c...
 compiling stream_buffer.c...
 compiling tasks.c...
 compiling timers.c...
 compiling heap_4.c...
+compiling stm32f4xx_hal_dma.c...
 compiling port.c...
+compiling stm32f4xx_hal_dma_ex.c...
 compiling stm32f4xx_hal_exti.c...
-compiling stm32f4xx_hal.c...
-compiling usbd_cdc.c...
-compiling usbd_ctlreq.c...
-compiling stm32f4xx_hal_tim.c...
-compiling stm32f4xx_hal_tim_ex.c...
-compiling cmsis_os2.c...
+compiling usbh_ioreq.c...
+..\User_files\usb_conf.h(272): warning:  #47-D: incompatible redefinition of macro "__ALIGN_BEGIN"  (declared at line 149 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h")
+    #define __ALIGN_BEGIN
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_regs.h(63): warning:  #47-D: incompatible redefinition of macro "USB_OTG_HS_MAX_PACKET_SIZE"  (declared at line 302 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_HS_MAX_PACKET_SIZE           512
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_regs.h(64): warning:  #47-D: incompatible redefinition of macro "USB_OTG_FS_MAX_PACKET_SIZE"  (declared at line 303 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_FS_MAX_PACKET_SIZE           64
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_regs.h(65): warning:  #47-D: incompatible redefinition of macro "USB_OTG_MAX_EP0_SIZE"  (declared at line 304 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_MAX_EP0_SIZE                 64
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(55): warning:  #47-D: incompatible redefinition of macro "USB_OTG_SPEED_HIGH"  (declared at line 269 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_SPEED_HIGH      0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(56): warning:  #47-D: incompatible redefinition of macro "USB_OTG_SPEED_FULL"  (declared at line 271 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_SPEED_FULL      1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(58): warning:  #47-D: incompatible redefinition of macro "USB_OTG_ULPI_PHY"  (declared at line 279 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_ULPI_PHY      1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(59): warning:  #47-D: incompatible redefinition of macro "USB_OTG_EMBEDDED_PHY"  (declared at line 280 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_EMBEDDED_PHY  2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(80): warning:  #47-D: incompatible redefinition of macro "GRXSTS_PKTSTS_IN"  (declared at line 434 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define GRXSTS_PKTSTS_IN                       2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(81): warning:  #47-D: incompatible redefinition of macro "GRXSTS_PKTSTS_IN_XFER_COMP"  (declared at line 435 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define GRXSTS_PKTSTS_IN_XFER_COMP             3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(82): warning:  #47-D: incompatible redefinition of macro "GRXSTS_PKTSTS_DATA_TOGGLE_ERR"  (declared at line 436 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define GRXSTS_PKTSTS_DATA_TOGGLE_ERR          5
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(83): warning:  #47-D: incompatible redefinition of macro "GRXSTS_PKTSTS_CH_HALTED"  (declared at line 437 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define GRXSTS_PKTSTS_CH_HALTED                7
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(115): warning:  #47-D: incompatible redefinition of macro "DSTS_ENUMSPD_HS_PHY_30MHZ_OR_60MHZ"  (declared at line 312 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DSTS_ENUMSPD_HS_PHY_30MHZ_OR_60MHZ     0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(116): warning:  #47-D: incompatible redefinition of macro "DSTS_ENUMSPD_FS_PHY_30MHZ_OR_60MHZ"  (declared at line 313 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DSTS_ENUMSPD_FS_PHY_30MHZ_OR_60MHZ     1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(118): warning:  #47-D: incompatible redefinition of macro "DSTS_ENUMSPD_FS_PHY_48MHZ"  (declared at line 314 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DSTS_ENUMSPD_FS_PHY_48MHZ              3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(120): warning:  #47-D: incompatible redefinition of macro "DCFG_FRAME_INTERVAL_80"  (declared at line 322 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DCFG_FRAME_INTERVAL_80                 0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(121): warning:  #47-D: incompatible redefinition of macro "DCFG_FRAME_INTERVAL_85"  (declared at line 323 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DCFG_FRAME_INTERVAL_85                 1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(122): warning:  #47-D: incompatible redefinition of macro "DCFG_FRAME_INTERVAL_90"  (declared at line 324 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DCFG_FRAME_INTERVAL_90                 2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(123): warning:  #47-D: incompatible redefinition of macro "DCFG_FRAME_INTERVAL_95"  (declared at line 325 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DCFG_FRAME_INTERVAL_95                 3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(130): warning:  #47-D: incompatible redefinition of macro "EP_SPEED_LOW"  (declared at line 356 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_SPEED_LOW                           0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(131): warning:  #47-D: incompatible redefinition of macro "EP_SPEED_FULL"  (declared at line 357 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_SPEED_FULL                          1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(132): warning:  #47-D: incompatible redefinition of macro "EP_SPEED_HIGH"  (declared at line 358 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_SPEED_HIGH                          2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(134): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_CTRL"  (declared at line 344 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_CTRL                           0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(135): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_ISOC"  (declared at line 345 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_ISOC                           1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(136): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_BULK"  (declared at line 346 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_BULK                           2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(137): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_INTR"  (declared at line 347 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_INTR                           3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(138): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_MSK"  (declared at line 348 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_MSK                            3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(140): warning:  #47-D: incompatible redefinition of macro "STS_GOUT_NAK"  (declared at line 390 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_GOUT_NAK                           1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(141): warning:  #47-D: incompatible redefinition of macro "STS_DATA_UPDT"  (declared at line 391 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_DATA_UPDT                          2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(142): warning:  #47-D: incompatible redefinition of macro "STS_XFER_COMP"  (declared at line 392 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_XFER_COMP                          3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(143): warning:  #47-D: incompatible redefinition of macro "STS_SETUP_COMP"  (declared at line 393 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_SETUP_COMP                         4
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(144): warning:  #47-D: incompatible redefinition of macro "STS_SETUP_UPDT"  (declared at line 394 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_SETUP_UPDT                         6
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(153): warning:  #47-D: incompatible redefinition of macro "HC_PID_DATA0"  (declared at line 366 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HC_PID_DATA0                           0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(154): warning:  #47-D: incompatible redefinition of macro "HC_PID_DATA2"  (declared at line 367 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HC_PID_DATA2                           1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(155): warning:  #47-D: incompatible redefinition of macro "HC_PID_DATA1"  (declared at line 368 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HC_PID_DATA1                           2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(156): warning:  #47-D: incompatible redefinition of macro "HC_PID_SETUP"  (declared at line 369 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HC_PID_SETUP                           3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(158): warning:  #47-D: incompatible redefinition of macro "HPRT0_PRTSPD_HIGH_SPEED"  (declared at line 422 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HPRT0_PRTSPD_HIGH_SPEED                0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(159): warning:  #47-D: incompatible redefinition of macro "HPRT0_PRTSPD_FULL_SPEED"  (declared at line 423 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HPRT0_PRTSPD_FULL_SPEED                1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(160): warning:  #47-D: incompatible redefinition of macro "HPRT0_PRTSPD_LOW_SPEED"  (declared at line 424 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HPRT0_PRTSPD_LOW_SPEED                 2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(162): warning:  #47-D: incompatible redefinition of macro "HCFG_30_60_MHZ"  (declared at line 402 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCFG_30_60_MHZ                         0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(163): warning:  #47-D: incompatible redefinition of macro "HCFG_48_MHZ"  (declared at line 403 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCFG_48_MHZ                            1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(164): warning:  #47-D: incompatible redefinition of macro "HCFG_6_MHZ"  (declared at line 404 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCFG_6_MHZ                             2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(166): warning:  #47-D: incompatible redefinition of macro "HCCHAR_CTRL"  (declared at line 429 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCCHAR_CTRL                            0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(167): warning:  #47-D: incompatible redefinition of macro "HCCHAR_ISOC"  (declared at line 430 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCCHAR_ISOC                            1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(168): warning:  #47-D: incompatible redefinition of macro "HCCHAR_BULK"  (declared at line 431 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCCHAR_BULK                            2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(169): warning:  #47-D: incompatible redefinition of macro "HCCHAR_INTR"  (declared at line 432 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCCHAR_INTR                            3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(79): error:  #101: "HC_IDLE" has already been declared in the current scope
+    HC_IDLE = 0,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(80): error:  #101: "HC_XFRC" has already been declared in the current scope
+    HC_XFRC,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(81): error:  #101: "HC_HALTED" has already been declared in the current scope
+    HC_HALTED,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(82): error:  #101: "HC_NAK" has already been declared in the current scope
+    HC_NAK,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(83): error:  #101: "HC_NYET" has already been declared in the current scope
+    HC_NYET,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(84): error:  #101: "HC_STALL" has already been declared in the current scope
+    HC_STALL,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(85): error:  #101: "HC_XACTERR" has already been declared in the current scope
+    HC_XACTERR,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(86): error:  #101: "HC_BBLERR" has already been declared in the current scope
+    HC_BBLERR,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(87): error:  #101: "HC_DATATGLERR" has already been declared in the current scope
+    HC_DATATGLERR,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(91): error:  #101: "URB_IDLE" has already been declared in the current scope
+    URB_IDLE = 0,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(92): error:  #101: "URB_DONE" has already been declared in the current scope
+    URB_DONE,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(93): error:  #101: "URB_NOTREADY" has already been declared in the current scope
+    URB_NOTREADY,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(94): error:  #101: "URB_ERROR" has already been declared in the current scope
+    URB_ERROR,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(95): error:  #101: "URB_STALL" has already been declared in the current scope
+    URB_STALL
+..\Middlewares\ST\STM32_USB_HOST_Library\Core\src\usbh_ioreq.c: 46 warnings, 14 errors
+compiling usbh_hcs.c...
+..\User_files\usb_conf.h(272): warning:  #47-D: incompatible redefinition of macro "__ALIGN_BEGIN"  (declared at line 149 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h")
+    #define __ALIGN_BEGIN
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_regs.h(63): warning:  #47-D: incompatible redefinition of macro "USB_OTG_HS_MAX_PACKET_SIZE"  (declared at line 302 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_HS_MAX_PACKET_SIZE           512
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_regs.h(64): warning:  #47-D: incompatible redefinition of macro "USB_OTG_FS_MAX_PACKET_SIZE"  (declared at line 303 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_FS_MAX_PACKET_SIZE           64
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_regs.h(65): warning:  #47-D: incompatible redefinition of macro "USB_OTG_MAX_EP0_SIZE"  (declared at line 304 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_MAX_EP0_SIZE                 64
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(55): warning:  #47-D: incompatible redefinition of macro "USB_OTG_SPEED_HIGH"  (declared at line 269 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_SPEED_HIGH      0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(56): warning:  #47-D: incompatible redefinition of macro "USB_OTG_SPEED_FULL"  (declared at line 271 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_SPEED_FULL      1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(58): warning:  #47-D: incompatible redefinition of macro "USB_OTG_ULPI_PHY"  (declared at line 279 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_ULPI_PHY      1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(59): warning:  #47-D: incompatible redefinition of macro "USB_OTG_EMBEDDED_PHY"  (declared at line 280 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_EMBEDDED_PHY  2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(80): warning:  #47-D: incompatible redefinition of macro "GRXSTS_PKTSTS_IN"  (declared at line 434 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define GRXSTS_PKTSTS_IN                       2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(81): warning:  #47-D: incompatible redefinition of macro "GRXSTS_PKTSTS_IN_XFER_COMP"  (declared at line 435 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define GRXSTS_PKTSTS_IN_XFER_COMP             3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(82): warning:  #47-D: incompatible redefinition of macro "GRXSTS_PKTSTS_DATA_TOGGLE_ERR"  (declared at line 436 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define GRXSTS_PKTSTS_DATA_TOGGLE_ERR          5
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(83): warning:  #47-D: incompatible redefinition of macro "GRXSTS_PKTSTS_CH_HALTED"  (declared at line 437 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define GRXSTS_PKTSTS_CH_HALTED                7
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(115): warning:  #47-D: incompatible redefinition of macro "DSTS_ENUMSPD_HS_PHY_30MHZ_OR_60MHZ"  (declared at line 312 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DSTS_ENUMSPD_HS_PHY_30MHZ_OR_60MHZ     0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(116): warning:  #47-D: incompatible redefinition of macro "DSTS_ENUMSPD_FS_PHY_30MHZ_OR_60MHZ"  (declared at line 313 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DSTS_ENUMSPD_FS_PHY_30MHZ_OR_60MHZ     1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(118): warning:  #47-D: incompatible redefinition of macro "DSTS_ENUMSPD_FS_PHY_48MHZ"  (declared at line 314 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DSTS_ENUMSPD_FS_PHY_48MHZ              3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(120): warning:  #47-D: incompatible redefinition of macro "DCFG_FRAME_INTERVAL_80"  (declared at line 322 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DCFG_FRAME_INTERVAL_80                 0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(121): warning:  #47-D: incompatible redefinition of macro "DCFG_FRAME_INTERVAL_85"  (declared at line 323 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DCFG_FRAME_INTERVAL_85                 1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(122): warning:  #47-D: incompatible redefinition of macro "DCFG_FRAME_INTERVAL_90"  (declared at line 324 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DCFG_FRAME_INTERVAL_90                 2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(123): warning:  #47-D: incompatible redefinition of macro "DCFG_FRAME_INTERVAL_95"  (declared at line 325 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DCFG_FRAME_INTERVAL_95                 3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(130): warning:  #47-D: incompatible redefinition of macro "EP_SPEED_LOW"  (declared at line 356 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_SPEED_LOW                           0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(131): warning:  #47-D: incompatible redefinition of macro "EP_SPEED_FULL"  (declared at line 357 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_SPEED_FULL                          1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(132): warning:  #47-D: incompatible redefinition of macro "EP_SPEED_HIGH"  (declared at line 358 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_SPEED_HIGH                          2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(134): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_CTRL"  (declared at line 344 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_CTRL                           0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(135): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_ISOC"  (declared at line 345 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_ISOC                           1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(136): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_BULK"  (declared at line 346 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_BULK                           2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(137): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_INTR"  (declared at line 347 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_INTR                           3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(138): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_MSK"  (declared at line 348 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_MSK                            3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(140): warning:  #47-D: incompatible redefinition of macro "STS_GOUT_NAK"  (declared at line 390 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_GOUT_NAK                           1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(141): warning:  #47-D: incompatible redefinition of macro "STS_DATA_UPDT"  (declared at line 391 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_DATA_UPDT                          2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(142): warning:  #47-D: incompatible redefinition of macro "STS_XFER_COMP"  (declared at line 392 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_XFER_COMP                          3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(143): warning:  #47-D: incompatible redefinition of macro "STS_SETUP_COMP"  (declared at line 393 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_SETUP_COMP                         4
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(144): warning:  #47-D: incompatible redefinition of macro "STS_SETUP_UPDT"  (declared at line 394 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_SETUP_UPDT                         6
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(153): warning:  #47-D: incompatible redefinition of macro "HC_PID_DATA0"  (declared at line 366 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HC_PID_DATA0                           0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(154): warning:  #47-D: incompatible redefinition of macro "HC_PID_DATA2"  (declared at line 367 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HC_PID_DATA2                           1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(155): warning:  #47-D: incompatible redefinition of macro "HC_PID_DATA1"  (declared at line 368 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HC_PID_DATA1                           2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(156): warning:  #47-D: incompatible redefinition of macro "HC_PID_SETUP"  (declared at line 369 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HC_PID_SETUP                           3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(158): warning:  #47-D: incompatible redefinition of macro "HPRT0_PRTSPD_HIGH_SPEED"  (declared at line 422 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HPRT0_PRTSPD_HIGH_SPEED                0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(159): warning:  #47-D: incompatible redefinition of macro "HPRT0_PRTSPD_FULL_SPEED"  (declared at line 423 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HPRT0_PRTSPD_FULL_SPEED                1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(160): warning:  #47-D: incompatible redefinition of macro "HPRT0_PRTSPD_LOW_SPEED"  (declared at line 424 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HPRT0_PRTSPD_LOW_SPEED                 2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(162): warning:  #47-D: incompatible redefinition of macro "HCFG_30_60_MHZ"  (declared at line 402 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCFG_30_60_MHZ                         0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(163): warning:  #47-D: incompatible redefinition of macro "HCFG_48_MHZ"  (declared at line 403 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCFG_48_MHZ                            1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(164): warning:  #47-D: incompatible redefinition of macro "HCFG_6_MHZ"  (declared at line 404 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCFG_6_MHZ                             2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(166): warning:  #47-D: incompatible redefinition of macro "HCCHAR_CTRL"  (declared at line 429 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCCHAR_CTRL                            0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(167): warning:  #47-D: incompatible redefinition of macro "HCCHAR_ISOC"  (declared at line 430 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCCHAR_ISOC                            1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(168): warning:  #47-D: incompatible redefinition of macro "HCCHAR_BULK"  (declared at line 431 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCCHAR_BULK                            2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(169): warning:  #47-D: incompatible redefinition of macro "HCCHAR_INTR"  (declared at line 432 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCCHAR_INTR                            3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(79): error:  #101: "HC_IDLE" has already been declared in the current scope
+    HC_IDLE = 0,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(80): error:  #101: "HC_XFRC" has already been declared in the current scope
+    HC_XFRC,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(81): error:  #101: "HC_HALTED" has already been declared in the current scope
+    HC_HALTED,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(82): error:  #101: "HC_NAK" has already been declared in the current scope
+    HC_NAK,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(83): error:  #101: "HC_NYET" has already been declared in the current scope
+    HC_NYET,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(84): error:  #101: "HC_STALL" has already been declared in the current scope
+    HC_STALL,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(85): error:  #101: "HC_XACTERR" has already been declared in the current scope
+    HC_XACTERR,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(86): error:  #101: "HC_BBLERR" has already been declared in the current scope
+    HC_BBLERR,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(87): error:  #101: "HC_DATATGLERR" has already been declared in the current scope
+    HC_DATATGLERR,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(91): error:  #101: "URB_IDLE" has already been declared in the current scope
+    URB_IDLE = 0,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(92): error:  #101: "URB_DONE" has already been declared in the current scope
+    URB_DONE,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(93): error:  #101: "URB_NOTREADY" has already been declared in the current scope
+    URB_NOTREADY,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(94): error:  #101: "URB_ERROR" has already been declared in the current scope
+    URB_ERROR,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(95): error:  #101: "URB_STALL" has already been declared in the current scope
+    URB_STALL
+..\Middlewares\ST\STM32_USB_HOST_Library\Core\src\usbh_hcs.c: 46 warnings, 14 errors
+compiling stm32f4xx_hal_spi.c...
 compiling system_stm32f4xx.c...
-compiling usbd_ioreq.c...
+compiling stm32f4xx_hal_tim.c...
+compiling cmsis_os2.c...
+compiling usbh_stdreq.c...
+..\User_files\usb_conf.h(272): warning:  #47-D: incompatible redefinition of macro "__ALIGN_BEGIN"  (declared at line 149 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h")
+    #define __ALIGN_BEGIN
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_regs.h(63): warning:  #47-D: incompatible redefinition of macro "USB_OTG_HS_MAX_PACKET_SIZE"  (declared at line 302 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_HS_MAX_PACKET_SIZE           512
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_regs.h(64): warning:  #47-D: incompatible redefinition of macro "USB_OTG_FS_MAX_PACKET_SIZE"  (declared at line 303 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_FS_MAX_PACKET_SIZE           64
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_regs.h(65): warning:  #47-D: incompatible redefinition of macro "USB_OTG_MAX_EP0_SIZE"  (declared at line 304 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_MAX_EP0_SIZE                 64
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(55): warning:  #47-D: incompatible redefinition of macro "USB_OTG_SPEED_HIGH"  (declared at line 269 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_SPEED_HIGH      0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(56): warning:  #47-D: incompatible redefinition of macro "USB_OTG_SPEED_FULL"  (declared at line 271 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_SPEED_FULL      1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(58): warning:  #47-D: incompatible redefinition of macro "USB_OTG_ULPI_PHY"  (declared at line 279 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_ULPI_PHY      1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(59): warning:  #47-D: incompatible redefinition of macro "USB_OTG_EMBEDDED_PHY"  (declared at line 280 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_EMBEDDED_PHY  2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(80): warning:  #47-D: incompatible redefinition of macro "GRXSTS_PKTSTS_IN"  (declared at line 434 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define GRXSTS_PKTSTS_IN                       2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(81): warning:  #47-D: incompatible redefinition of macro "GRXSTS_PKTSTS_IN_XFER_COMP"  (declared at line 435 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define GRXSTS_PKTSTS_IN_XFER_COMP             3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(82): warning:  #47-D: incompatible redefinition of macro "GRXSTS_PKTSTS_DATA_TOGGLE_ERR"  (declared at line 436 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define GRXSTS_PKTSTS_DATA_TOGGLE_ERR          5
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(83): warning:  #47-D: incompatible redefinition of macro "GRXSTS_PKTSTS_CH_HALTED"  (declared at line 437 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define GRXSTS_PKTSTS_CH_HALTED                7
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(115): warning:  #47-D: incompatible redefinition of macro "DSTS_ENUMSPD_HS_PHY_30MHZ_OR_60MHZ"  (declared at line 312 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DSTS_ENUMSPD_HS_PHY_30MHZ_OR_60MHZ     0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(116): warning:  #47-D: incompatible redefinition of macro "DSTS_ENUMSPD_FS_PHY_30MHZ_OR_60MHZ"  (declared at line 313 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DSTS_ENUMSPD_FS_PHY_30MHZ_OR_60MHZ     1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(118): warning:  #47-D: incompatible redefinition of macro "DSTS_ENUMSPD_FS_PHY_48MHZ"  (declared at line 314 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DSTS_ENUMSPD_FS_PHY_48MHZ              3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(120): warning:  #47-D: incompatible redefinition of macro "DCFG_FRAME_INTERVAL_80"  (declared at line 322 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DCFG_FRAME_INTERVAL_80                 0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(121): warning:  #47-D: incompatible redefinition of macro "DCFG_FRAME_INTERVAL_85"  (declared at line 323 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DCFG_FRAME_INTERVAL_85                 1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(122): warning:  #47-D: incompatible redefinition of macro "DCFG_FRAME_INTERVAL_90"  (declared at line 324 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DCFG_FRAME_INTERVAL_90                 2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(123): warning:  #47-D: incompatible redefinition of macro "DCFG_FRAME_INTERVAL_95"  (declared at line 325 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DCFG_FRAME_INTERVAL_95                 3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(130): warning:  #47-D: incompatible redefinition of macro "EP_SPEED_LOW"  (declared at line 356 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_SPEED_LOW                           0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(131): warning:  #47-D: incompatible redefinition of macro "EP_SPEED_FULL"  (declared at line 357 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_SPEED_FULL                          1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(132): warning:  #47-D: incompatible redefinition of macro "EP_SPEED_HIGH"  (declared at line 358 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_SPEED_HIGH                          2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(134): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_CTRL"  (declared at line 344 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_CTRL                           0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(135): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_ISOC"  (declared at line 345 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_ISOC                           1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(136): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_BULK"  (declared at line 346 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_BULK                           2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(137): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_INTR"  (declared at line 347 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_INTR                           3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(138): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_MSK"  (declared at line 348 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_MSK                            3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(140): warning:  #47-D: incompatible redefinition of macro "STS_GOUT_NAK"  (declared at line 390 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_GOUT_NAK                           1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(141): warning:  #47-D: incompatible redefinition of macro "STS_DATA_UPDT"  (declared at line 391 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_DATA_UPDT                          2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(142): warning:  #47-D: incompatible redefinition of macro "STS_XFER_COMP"  (declared at line 392 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_XFER_COMP                          3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(143): warning:  #47-D: incompatible redefinition of macro "STS_SETUP_COMP"  (declared at line 393 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_SETUP_COMP                         4
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(144): warning:  #47-D: incompatible redefinition of macro "STS_SETUP_UPDT"  (declared at line 394 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_SETUP_UPDT                         6
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(153): warning:  #47-D: incompatible redefinition of macro "HC_PID_DATA0"  (declared at line 366 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HC_PID_DATA0                           0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(154): warning:  #47-D: incompatible redefinition of macro "HC_PID_DATA2"  (declared at line 367 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HC_PID_DATA2                           1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(155): warning:  #47-D: incompatible redefinition of macro "HC_PID_DATA1"  (declared at line 368 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HC_PID_DATA1                           2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(156): warning:  #47-D: incompatible redefinition of macro "HC_PID_SETUP"  (declared at line 369 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HC_PID_SETUP                           3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(158): warning:  #47-D: incompatible redefinition of macro "HPRT0_PRTSPD_HIGH_SPEED"  (declared at line 422 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HPRT0_PRTSPD_HIGH_SPEED                0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(159): warning:  #47-D: incompatible redefinition of macro "HPRT0_PRTSPD_FULL_SPEED"  (declared at line 423 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HPRT0_PRTSPD_FULL_SPEED                1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(160): warning:  #47-D: incompatible redefinition of macro "HPRT0_PRTSPD_LOW_SPEED"  (declared at line 424 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HPRT0_PRTSPD_LOW_SPEED                 2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(162): warning:  #47-D: incompatible redefinition of macro "HCFG_30_60_MHZ"  (declared at line 402 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCFG_30_60_MHZ                         0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(163): warning:  #47-D: incompatible redefinition of macro "HCFG_48_MHZ"  (declared at line 403 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCFG_48_MHZ                            1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(164): warning:  #47-D: incompatible redefinition of macro "HCFG_6_MHZ"  (declared at line 404 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCFG_6_MHZ                             2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(166): warning:  #47-D: incompatible redefinition of macro "HCCHAR_CTRL"  (declared at line 429 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCCHAR_CTRL                            0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(167): warning:  #47-D: incompatible redefinition of macro "HCCHAR_ISOC"  (declared at line 430 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCCHAR_ISOC                            1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(168): warning:  #47-D: incompatible redefinition of macro "HCCHAR_BULK"  (declared at line 431 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCCHAR_BULK                            2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(169): warning:  #47-D: incompatible redefinition of macro "HCCHAR_INTR"  (declared at line 432 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCCHAR_INTR                            3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(79): error:  #101: "HC_IDLE" has already been declared in the current scope
+    HC_IDLE = 0,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(80): error:  #101: "HC_XFRC" has already been declared in the current scope
+    HC_XFRC,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(81): error:  #101: "HC_HALTED" has already been declared in the current scope
+    HC_HALTED,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(82): error:  #101: "HC_NAK" has already been declared in the current scope
+    HC_NAK,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(83): error:  #101: "HC_NYET" has already been declared in the current scope
+    HC_NYET,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(84): error:  #101: "HC_STALL" has already been declared in the current scope
+    HC_STALL,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(85): error:  #101: "HC_XACTERR" has already been declared in the current scope
+    HC_XACTERR,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(86): error:  #101: "HC_BBLERR" has already been declared in the current scope
+    HC_BBLERR,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(87): error:  #101: "HC_DATATGLERR" has already been declared in the current scope
+    HC_DATATGLERR,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(91): error:  #101: "URB_IDLE" has already been declared in the current scope
+    URB_IDLE = 0,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(92): error:  #101: "URB_DONE" has already been declared in the current scope
+    URB_DONE,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(93): error:  #101: "URB_NOTREADY" has already been declared in the current scope
+    URB_NOTREADY,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(94): error:  #101: "URB_ERROR" has already been declared in the current scope
+    URB_ERROR,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(95): error:  #101: "URB_STALL" has already been declared in the current scope
+    URB_STALL
+..\Middlewares\ST\STM32_USB_HOST_Library\Core\src\usbh_stdreq.c: 46 warnings, 14 errors
+compiling stm32f4xx_hal_tim_ex.c...
 compiling usbd_core.c...
-linking...
-Program Size: Code=28292 RO-data=572 RW-data=592 ZI-data=163096  
-FromELF: creating hex file...
-"TAIER_usb_hs\TAIER_usb_hs.axf" - 0 Error(s), 0 Warning(s).
+compiling usbh_core.c...
+..\User_files\usb_conf.h(272): warning:  #47-D: incompatible redefinition of macro "__ALIGN_BEGIN"  (declared at line 149 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h")
+    #define __ALIGN_BEGIN
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_regs.h(63): warning:  #47-D: incompatible redefinition of macro "USB_OTG_HS_MAX_PACKET_SIZE"  (declared at line 302 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_HS_MAX_PACKET_SIZE           512
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_regs.h(64): warning:  #47-D: incompatible redefinition of macro "USB_OTG_FS_MAX_PACKET_SIZE"  (declared at line 303 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_FS_MAX_PACKET_SIZE           64
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_regs.h(65): warning:  #47-D: incompatible redefinition of macro "USB_OTG_MAX_EP0_SIZE"  (declared at line 304 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_MAX_EP0_SIZE                 64
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(55): warning:  #47-D: incompatible redefinition of macro "USB_OTG_SPEED_HIGH"  (declared at line 269 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_SPEED_HIGH      0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(56): warning:  #47-D: incompatible redefinition of macro "USB_OTG_SPEED_FULL"  (declared at line 271 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_SPEED_FULL      1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(58): warning:  #47-D: incompatible redefinition of macro "USB_OTG_ULPI_PHY"  (declared at line 279 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_ULPI_PHY      1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(59): warning:  #47-D: incompatible redefinition of macro "USB_OTG_EMBEDDED_PHY"  (declared at line 280 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_EMBEDDED_PHY  2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(80): warning:  #47-D: incompatible redefinition of macro "GRXSTS_PKTSTS_IN"  (declared at line 434 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define GRXSTS_PKTSTS_IN                       2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(81): warning:  #47-D: incompatible redefinition of macro "GRXSTS_PKTSTS_IN_XFER_COMP"  (declared at line 435 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define GRXSTS_PKTSTS_IN_XFER_COMP             3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(82): warning:  #47-D: incompatible redefinition of macro "GRXSTS_PKTSTS_DATA_TOGGLE_ERR"  (declared at line 436 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define GRXSTS_PKTSTS_DATA_TOGGLE_ERR          5
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(83): warning:  #47-D: incompatible redefinition of macro "GRXSTS_PKTSTS_CH_HALTED"  (declared at line 437 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define GRXSTS_PKTSTS_CH_HALTED                7
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(115): warning:  #47-D: incompatible redefinition of macro "DSTS_ENUMSPD_HS_PHY_30MHZ_OR_60MHZ"  (declared at line 312 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DSTS_ENUMSPD_HS_PHY_30MHZ_OR_60MHZ     0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(116): warning:  #47-D: incompatible redefinition of macro "DSTS_ENUMSPD_FS_PHY_30MHZ_OR_60MHZ"  (declared at line 313 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DSTS_ENUMSPD_FS_PHY_30MHZ_OR_60MHZ     1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(118): warning:  #47-D: incompatible redefinition of macro "DSTS_ENUMSPD_FS_PHY_48MHZ"  (declared at line 314 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DSTS_ENUMSPD_FS_PHY_48MHZ              3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(120): warning:  #47-D: incompatible redefinition of macro "DCFG_FRAME_INTERVAL_80"  (declared at line 322 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DCFG_FRAME_INTERVAL_80                 0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(121): warning:  #47-D: incompatible redefinition of macro "DCFG_FRAME_INTERVAL_85"  (declared at line 323 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DCFG_FRAME_INTERVAL_85                 1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(122): warning:  #47-D: incompatible redefinition of macro "DCFG_FRAME_INTERVAL_90"  (declared at line 324 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DCFG_FRAME_INTERVAL_90                 2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(123): warning:  #47-D: incompatible redefinition of macro "DCFG_FRAME_INTERVAL_95"  (declared at line 325 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DCFG_FRAME_INTERVAL_95                 3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(130): warning:  #47-D: incompatible redefinition of macro "EP_SPEED_LOW"  (declared at line 356 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_SPEED_LOW                           0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(131): warning:  #47-D: incompatible redefinition of macro "EP_SPEED_FULL"  (declared at line 357 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_SPEED_FULL                          1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(132): warning:  #47-D: incompatible redefinition of macro "EP_SPEED_HIGH"  (declared at line 358 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_SPEED_HIGH                          2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(134): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_CTRL"  (declared at line 344 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_CTRL                           0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(135): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_ISOC"  (declared at line 345 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_ISOC                           1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(136): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_BULK"  (declared at line 346 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_BULK                           2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(137): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_INTR"  (declared at line 347 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_INTR                           3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(138): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_MSK"  (declared at line 348 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_MSK                            3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(140): warning:  #47-D: incompatible redefinition of macro "STS_GOUT_NAK"  (declared at line 390 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_GOUT_NAK                           1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(141): warning:  #47-D: incompatible redefinition of macro "STS_DATA_UPDT"  (declared at line 391 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_DATA_UPDT                          2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(142): warning:  #47-D: incompatible redefinition of macro "STS_XFER_COMP"  (declared at line 392 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_XFER_COMP                          3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(143): warning:  #47-D: incompatible redefinition of macro "STS_SETUP_COMP"  (declared at line 393 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_SETUP_COMP                         4
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(144): warning:  #47-D: incompatible redefinition of macro "STS_SETUP_UPDT"  (declared at line 394 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_SETUP_UPDT                         6
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(153): warning:  #47-D: incompatible redefinition of macro "HC_PID_DATA0"  (declared at line 366 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HC_PID_DATA0                           0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(154): warning:  #47-D: incompatible redefinition of macro "HC_PID_DATA2"  (declared at line 367 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HC_PID_DATA2                           1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(155): warning:  #47-D: incompatible redefinition of macro "HC_PID_DATA1"  (declared at line 368 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HC_PID_DATA1                           2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(156): warning:  #47-D: incompatible redefinition of macro "HC_PID_SETUP"  (declared at line 369 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HC_PID_SETUP                           3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(158): warning:  #47-D: incompatible redefinition of macro "HPRT0_PRTSPD_HIGH_SPEED"  (declared at line 422 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HPRT0_PRTSPD_HIGH_SPEED                0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(159): warning:  #47-D: incompatible redefinition of macro "HPRT0_PRTSPD_FULL_SPEED"  (declared at line 423 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HPRT0_PRTSPD_FULL_SPEED                1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(160): warning:  #47-D: incompatible redefinition of macro "HPRT0_PRTSPD_LOW_SPEED"  (declared at line 424 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HPRT0_PRTSPD_LOW_SPEED                 2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(162): warning:  #47-D: incompatible redefinition of macro "HCFG_30_60_MHZ"  (declared at line 402 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCFG_30_60_MHZ                         0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(163): warning:  #47-D: incompatible redefinition of macro "HCFG_48_MHZ"  (declared at line 403 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCFG_48_MHZ                            1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(164): warning:  #47-D: incompatible redefinition of macro "HCFG_6_MHZ"  (declared at line 404 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCFG_6_MHZ                             2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(166): warning:  #47-D: incompatible redefinition of macro "HCCHAR_CTRL"  (declared at line 429 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCCHAR_CTRL                            0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(167): warning:  #47-D: incompatible redefinition of macro "HCCHAR_ISOC"  (declared at line 430 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCCHAR_ISOC                            1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(168): warning:  #47-D: incompatible redefinition of macro "HCCHAR_BULK"  (declared at line 431 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCCHAR_BULK                            2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(169): warning:  #47-D: incompatible redefinition of macro "HCCHAR_INTR"  (declared at line 432 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCCHAR_INTR                            3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(79): error:  #101: "HC_IDLE" has already been declared in the current scope
+    HC_IDLE = 0,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(80): error:  #101: "HC_XFRC" has already been declared in the current scope
+    HC_XFRC,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(81): error:  #101: "HC_HALTED" has already been declared in the current scope
+    HC_HALTED,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(82): error:  #101: "HC_NAK" has already been declared in the current scope
+    HC_NAK,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(83): error:  #101: "HC_NYET" has already been declared in the current scope
+    HC_NYET,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(84): error:  #101: "HC_STALL" has already been declared in the current scope
+    HC_STALL,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(85): error:  #101: "HC_XACTERR" has already been declared in the current scope
+    HC_XACTERR,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(86): error:  #101: "HC_BBLERR" has already been declared in the current scope
+    HC_BBLERR,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(87): error:  #101: "HC_DATATGLERR" has already been declared in the current scope
+    HC_DATATGLERR,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(91): error:  #101: "URB_IDLE" has already been declared in the current scope
+    URB_IDLE = 0,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(92): error:  #101: "URB_DONE" has already been declared in the current scope
+    URB_DONE,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(93): error:  #101: "URB_NOTREADY" has already been declared in the current scope
+    URB_NOTREADY,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(94): error:  #101: "URB_ERROR" has already been declared in the current scope
+    URB_ERROR,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(95): error:  #101: "URB_STALL" has already been declared in the current scope
+    URB_STALL
+..\Middlewares\ST\STM32_USB_HOST_Library\Core\src\usbh_core.c: 46 warnings, 14 errors
+compiling usbd_ctlreq.c...
+compiling usbd_desc_template.c...
+compiling usb_core.c...
+..\User_files\usb_conf.h(272): warning:  #47-D: incompatible redefinition of macro "__ALIGN_BEGIN"  (declared at line 149 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h")
+    #define __ALIGN_BEGIN
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_regs.h(63): warning:  #47-D: incompatible redefinition of macro "USB_OTG_HS_MAX_PACKET_SIZE"  (declared at line 302 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_HS_MAX_PACKET_SIZE           512
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_regs.h(64): warning:  #47-D: incompatible redefinition of macro "USB_OTG_FS_MAX_PACKET_SIZE"  (declared at line 303 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_FS_MAX_PACKET_SIZE           64
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_regs.h(65): warning:  #47-D: incompatible redefinition of macro "USB_OTG_MAX_EP0_SIZE"  (declared at line 304 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_MAX_EP0_SIZE                 64
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(55): warning:  #47-D: incompatible redefinition of macro "USB_OTG_SPEED_HIGH"  (declared at line 269 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_SPEED_HIGH      0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(56): warning:  #47-D: incompatible redefinition of macro "USB_OTG_SPEED_FULL"  (declared at line 271 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_SPEED_FULL      1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(58): warning:  #47-D: incompatible redefinition of macro "USB_OTG_ULPI_PHY"  (declared at line 279 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_ULPI_PHY      1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(59): warning:  #47-D: incompatible redefinition of macro "USB_OTG_EMBEDDED_PHY"  (declared at line 280 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_EMBEDDED_PHY  2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(80): warning:  #47-D: incompatible redefinition of macro "GRXSTS_PKTSTS_IN"  (declared at line 434 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define GRXSTS_PKTSTS_IN                       2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(81): warning:  #47-D: incompatible redefinition of macro "GRXSTS_PKTSTS_IN_XFER_COMP"  (declared at line 435 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define GRXSTS_PKTSTS_IN_XFER_COMP             3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(82): warning:  #47-D: incompatible redefinition of macro "GRXSTS_PKTSTS_DATA_TOGGLE_ERR"  (declared at line 436 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define GRXSTS_PKTSTS_DATA_TOGGLE_ERR          5
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(83): warning:  #47-D: incompatible redefinition of macro "GRXSTS_PKTSTS_CH_HALTED"  (declared at line 437 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define GRXSTS_PKTSTS_CH_HALTED                7
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(115): warning:  #47-D: incompatible redefinition of macro "DSTS_ENUMSPD_HS_PHY_30MHZ_OR_60MHZ"  (declared at line 312 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DSTS_ENUMSPD_HS_PHY_30MHZ_OR_60MHZ     0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(116): warning:  #47-D: incompatible redefinition of macro "DSTS_ENUMSPD_FS_PHY_30MHZ_OR_60MHZ"  (declared at line 313 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DSTS_ENUMSPD_FS_PHY_30MHZ_OR_60MHZ     1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(118): warning:  #47-D: incompatible redefinition of macro "DSTS_ENUMSPD_FS_PHY_48MHZ"  (declared at line 314 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DSTS_ENUMSPD_FS_PHY_48MHZ              3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(120): warning:  #47-D: incompatible redefinition of macro "DCFG_FRAME_INTERVAL_80"  (declared at line 322 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DCFG_FRAME_INTERVAL_80                 0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(121): warning:  #47-D: incompatible redefinition of macro "DCFG_FRAME_INTERVAL_85"  (declared at line 323 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DCFG_FRAME_INTERVAL_85                 1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(122): warning:  #47-D: incompatible redefinition of macro "DCFG_FRAME_INTERVAL_90"  (declared at line 324 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DCFG_FRAME_INTERVAL_90                 2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(123): warning:  #47-D: incompatible redefinition of macro "DCFG_FRAME_INTERVAL_95"  (declared at line 325 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DCFG_FRAME_INTERVAL_95                 3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(130): warning:  #47-D: incompatible redefinition of macro "EP_SPEED_LOW"  (declared at line 356 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_SPEED_LOW                           0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(131): warning:  #47-D: incompatible redefinition of macro "EP_SPEED_FULL"  (declared at line 357 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_SPEED_FULL                          1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(132): warning:  #47-D: incompatible redefinition of macro "EP_SPEED_HIGH"  (declared at line 358 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_SPEED_HIGH                          2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(134): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_CTRL"  (declared at line 344 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_CTRL                           0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(135): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_ISOC"  (declared at line 345 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_ISOC                           1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(136): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_BULK"  (declared at line 346 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_BULK                           2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(137): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_INTR"  (declared at line 347 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_INTR                           3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(138): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_MSK"  (declared at line 348 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_MSK                            3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(140): warning:  #47-D: incompatible redefinition of macro "STS_GOUT_NAK"  (declared at line 390 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_GOUT_NAK                           1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(141): warning:  #47-D: incompatible redefinition of macro "STS_DATA_UPDT"  (declared at line 391 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_DATA_UPDT                          2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(142): warning:  #47-D: incompatible redefinition of macro "STS_XFER_COMP"  (declared at line 392 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_XFER_COMP                          3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(143): warning:  #47-D: incompatible redefinition of macro "STS_SETUP_COMP"  (declared at line 393 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_SETUP_COMP                         4
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(144): warning:  #47-D: incompatible redefinition of macro "STS_SETUP_UPDT"  (declared at line 394 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_SETUP_UPDT                         6
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(153): warning:  #47-D: incompatible redefinition of macro "HC_PID_DATA0"  (declared at line 366 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HC_PID_DATA0                           0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(154): warning:  #47-D: incompatible redefinition of macro "HC_PID_DATA2"  (declared at line 367 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HC_PID_DATA2                           1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(155): warning:  #47-D: incompatible redefinition of macro "HC_PID_DATA1"  (declared at line 368 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HC_PID_DATA1                           2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(156): warning:  #47-D: incompatible redefinition of macro "HC_PID_SETUP"  (declared at line 369 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HC_PID_SETUP                           3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(158): warning:  #47-D: incompatible redefinition of macro "HPRT0_PRTSPD_HIGH_SPEED"  (declared at line 422 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HPRT0_PRTSPD_HIGH_SPEED                0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(159): warning:  #47-D: incompatible redefinition of macro "HPRT0_PRTSPD_FULL_SPEED"  (declared at line 423 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HPRT0_PRTSPD_FULL_SPEED                1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(160): warning:  #47-D: incompatible redefinition of macro "HPRT0_PRTSPD_LOW_SPEED"  (declared at line 424 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HPRT0_PRTSPD_LOW_SPEED                 2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(162): warning:  #47-D: incompatible redefinition of macro "HCFG_30_60_MHZ"  (declared at line 402 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCFG_30_60_MHZ                         0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(163): warning:  #47-D: incompatible redefinition of macro "HCFG_48_MHZ"  (declared at line 403 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCFG_48_MHZ                            1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(164): warning:  #47-D: incompatible redefinition of macro "HCFG_6_MHZ"  (declared at line 404 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCFG_6_MHZ                             2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(166): warning:  #47-D: incompatible redefinition of macro "HCCHAR_CTRL"  (declared at line 429 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCCHAR_CTRL                            0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(167): warning:  #47-D: incompatible redefinition of macro "HCCHAR_ISOC"  (declared at line 430 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCCHAR_ISOC                            1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(168): warning:  #47-D: incompatible redefinition of macro "HCCHAR_BULK"  (declared at line 431 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCCHAR_BULK                            2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(169): warning:  #47-D: incompatible redefinition of macro "HCCHAR_INTR"  (declared at line 432 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCCHAR_INTR                            3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(79): error:  #101: "HC_IDLE" has already been declared in the current scope
+    HC_IDLE = 0,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(80): error:  #101: "HC_XFRC" has already been declared in the current scope
+    HC_XFRC,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(81): error:  #101: "HC_HALTED" has already been declared in the current scope
+    HC_HALTED,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(82): error:  #101: "HC_NAK" has already been declared in the current scope
+    HC_NAK,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(83): error:  #101: "HC_NYET" has already been declared in the current scope
+    HC_NYET,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(84): error:  #101: "HC_STALL" has already been declared in the current scope
+    HC_STALL,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(85): error:  #101: "HC_XACTERR" has already been declared in the current scope
+    HC_XACTERR,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(86): error:  #101: "HC_BBLERR" has already been declared in the current scope
+    HC_BBLERR,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(87): error:  #101: "HC_DATATGLERR" has already been declared in the current scope
+    HC_DATATGLERR,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(91): error:  #101: "URB_IDLE" has already been declared in the current scope
+    URB_IDLE = 0,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(92): error:  #101: "URB_DONE" has already been declared in the current scope
+    URB_DONE,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(93): error:  #101: "URB_NOTREADY" has already been declared in the current scope
+    URB_NOTREADY,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(94): error:  #101: "URB_ERROR" has already been declared in the current scope
+    URB_ERROR,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(95): error:  #101: "URB_STALL" has already been declared in the current scope
+    URB_STALL
+..\Middlewares\ST\STM32_USB_OTG_Driver\src\usb_core.c: 46 warnings, 14 errors
+compiling usb_dcd.c...
+..\User_files\usb_conf.h(272): warning:  #47-D: incompatible redefinition of macro "__ALIGN_BEGIN"  (declared at line 149 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h")
+    #define __ALIGN_BEGIN
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_regs.h(63): warning:  #47-D: incompatible redefinition of macro "USB_OTG_HS_MAX_PACKET_SIZE"  (declared at line 302 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_HS_MAX_PACKET_SIZE           512
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_regs.h(64): warning:  #47-D: incompatible redefinition of macro "USB_OTG_FS_MAX_PACKET_SIZE"  (declared at line 303 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_FS_MAX_PACKET_SIZE           64
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_regs.h(65): warning:  #47-D: incompatible redefinition of macro "USB_OTG_MAX_EP0_SIZE"  (declared at line 304 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_MAX_EP0_SIZE                 64
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(55): warning:  #47-D: incompatible redefinition of macro "USB_OTG_SPEED_HIGH"  (declared at line 269 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_SPEED_HIGH      0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(56): warning:  #47-D: incompatible redefinition of macro "USB_OTG_SPEED_FULL"  (declared at line 271 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_SPEED_FULL      1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(58): warning:  #47-D: incompatible redefinition of macro "USB_OTG_ULPI_PHY"  (declared at line 279 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_ULPI_PHY      1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(59): warning:  #47-D: incompatible redefinition of macro "USB_OTG_EMBEDDED_PHY"  (declared at line 280 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_EMBEDDED_PHY  2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(80): warning:  #47-D: incompatible redefinition of macro "GRXSTS_PKTSTS_IN"  (declared at line 434 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define GRXSTS_PKTSTS_IN                       2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(81): warning:  #47-D: incompatible redefinition of macro "GRXSTS_PKTSTS_IN_XFER_COMP"  (declared at line 435 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define GRXSTS_PKTSTS_IN_XFER_COMP             3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(82): warning:  #47-D: incompatible redefinition of macro "GRXSTS_PKTSTS_DATA_TOGGLE_ERR"  (declared at line 436 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define GRXSTS_PKTSTS_DATA_TOGGLE_ERR          5
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(83): warning:  #47-D: incompatible redefinition of macro "GRXSTS_PKTSTS_CH_HALTED"  (declared at line 437 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define GRXSTS_PKTSTS_CH_HALTED                7
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(115): warning:  #47-D: incompatible redefinition of macro "DSTS_ENUMSPD_HS_PHY_30MHZ_OR_60MHZ"  (declared at line 312 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DSTS_ENUMSPD_HS_PHY_30MHZ_OR_60MHZ     0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(116): warning:  #47-D: incompatible redefinition of macro "DSTS_ENUMSPD_FS_PHY_30MHZ_OR_60MHZ"  (declared at line 313 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DSTS_ENUMSPD_FS_PHY_30MHZ_OR_60MHZ     1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(118): warning:  #47-D: incompatible redefinition of macro "DSTS_ENUMSPD_FS_PHY_48MHZ"  (declared at line 314 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DSTS_ENUMSPD_FS_PHY_48MHZ              3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(120): warning:  #47-D: incompatible redefinition of macro "DCFG_FRAME_INTERVAL_80"  (declared at line 322 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DCFG_FRAME_INTERVAL_80                 0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(121): warning:  #47-D: incompatible redefinition of macro "DCFG_FRAME_INTERVAL_85"  (declared at line 323 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DCFG_FRAME_INTERVAL_85                 1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(122): warning:  #47-D: incompatible redefinition of macro "DCFG_FRAME_INTERVAL_90"  (declared at line 324 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DCFG_FRAME_INTERVAL_90                 2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(123): warning:  #47-D: incompatible redefinition of macro "DCFG_FRAME_INTERVAL_95"  (declared at line 325 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DCFG_FRAME_INTERVAL_95                 3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(130): warning:  #47-D: incompatible redefinition of macro "EP_SPEED_LOW"  (declared at line 356 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_SPEED_LOW                           0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(131): warning:  #47-D: incompatible redefinition of macro "EP_SPEED_FULL"  (declared at line 357 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_SPEED_FULL                          1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(132): warning:  #47-D: incompatible redefinition of macro "EP_SPEED_HIGH"  (declared at line 358 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_SPEED_HIGH                          2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(134): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_CTRL"  (declared at line 344 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_CTRL                           0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(135): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_ISOC"  (declared at line 345 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_ISOC                           1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(136): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_BULK"  (declared at line 346 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_BULK                           2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(137): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_INTR"  (declared at line 347 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_INTR                           3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(138): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_MSK"  (declared at line 348 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_MSK                            3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(140): warning:  #47-D: incompatible redefinition of macro "STS_GOUT_NAK"  (declared at line 390 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_GOUT_NAK                           1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(141): warning:  #47-D: incompatible redefinition of macro "STS_DATA_UPDT"  (declared at line 391 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_DATA_UPDT                          2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(142): warning:  #47-D: incompatible redefinition of macro "STS_XFER_COMP"  (declared at line 392 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_XFER_COMP                          3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(143): warning:  #47-D: incompatible redefinition of macro "STS_SETUP_COMP"  (declared at line 393 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_SETUP_COMP                         4
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(144): warning:  #47-D: incompatible redefinition of macro "STS_SETUP_UPDT"  (declared at line 394 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_SETUP_UPDT                         6
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(153): warning:  #47-D: incompatible redefinition of macro "HC_PID_DATA0"  (declared at line 366 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HC_PID_DATA0                           0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(154): warning:  #47-D: incompatible redefinition of macro "HC_PID_DATA2"  (declared at line 367 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HC_PID_DATA2                           1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(155): warning:  #47-D: incompatible redefinition of macro "HC_PID_DATA1"  (declared at line 368 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HC_PID_DATA1                           2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(156): warning:  #47-D: incompatible redefinition of macro "HC_PID_SETUP"  (declared at line 369 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HC_PID_SETUP                           3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(158): warning:  #47-D: incompatible redefinition of macro "HPRT0_PRTSPD_HIGH_SPEED"  (declared at line 422 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HPRT0_PRTSPD_HIGH_SPEED                0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(159): warning:  #47-D: incompatible redefinition of macro "HPRT0_PRTSPD_FULL_SPEED"  (declared at line 423 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HPRT0_PRTSPD_FULL_SPEED                1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(160): warning:  #47-D: incompatible redefinition of macro "HPRT0_PRTSPD_LOW_SPEED"  (declared at line 424 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HPRT0_PRTSPD_LOW_SPEED                 2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(162): warning:  #47-D: incompatible redefinition of macro "HCFG_30_60_MHZ"  (declared at line 402 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCFG_30_60_MHZ                         0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(163): warning:  #47-D: incompatible redefinition of macro "HCFG_48_MHZ"  (declared at line 403 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCFG_48_MHZ                            1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(164): warning:  #47-D: incompatible redefinition of macro "HCFG_6_MHZ"  (declared at line 404 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCFG_6_MHZ                             2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(166): warning:  #47-D: incompatible redefinition of macro "HCCHAR_CTRL"  (declared at line 429 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCCHAR_CTRL                            0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(167): warning:  #47-D: incompatible redefinition of macro "HCCHAR_ISOC"  (declared at line 430 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCCHAR_ISOC                            1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(168): warning:  #47-D: incompatible redefinition of macro "HCCHAR_BULK"  (declared at line 431 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCCHAR_BULK                            2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(169): warning:  #47-D: incompatible redefinition of macro "HCCHAR_INTR"  (declared at line 432 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCCHAR_INTR                            3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(79): error:  #101: "HC_IDLE" has already been declared in the current scope
+    HC_IDLE = 0,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(80): error:  #101: "HC_XFRC" has already been declared in the current scope
+    HC_XFRC,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(81): error:  #101: "HC_HALTED" has already been declared in the current scope
+    HC_HALTED,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(82): error:  #101: "HC_NAK" has already been declared in the current scope
+    HC_NAK,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(83): error:  #101: "HC_NYET" has already been declared in the current scope
+    HC_NYET,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(84): error:  #101: "HC_STALL" has already been declared in the current scope
+    HC_STALL,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(85): error:  #101: "HC_XACTERR" has already been declared in the current scope
+    HC_XACTERR,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(86): error:  #101: "HC_BBLERR" has already been declared in the current scope
+    HC_BBLERR,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(87): error:  #101: "HC_DATATGLERR" has already been declared in the current scope
+    HC_DATATGLERR,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(91): error:  #101: "URB_IDLE" has already been declared in the current scope
+    URB_IDLE = 0,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(92): error:  #101: "URB_DONE" has already been declared in the current scope
+    URB_DONE,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(93): error:  #101: "URB_NOTREADY" has already been declared in the current scope
+    URB_NOTREADY,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(94): error:  #101: "URB_ERROR" has already been declared in the current scope
+    URB_ERROR,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(95): error:  #101: "URB_STALL" has already been declared in the current scope
+    URB_STALL
+..\Middlewares\ST\STM32_USB_OTG_Driver\src\usb_dcd.c: 46 warnings, 14 errors
+compiling usbd_ioreq.c...
+compiling usbd_cdc_if.c...
+compiling usbh_msc_usr.c...
+..\User_files\usb_conf.h(272): warning:  #47-D: incompatible redefinition of macro "__ALIGN_BEGIN"  (declared at line 149 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h")
+    #define __ALIGN_BEGIN
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_regs.h(63): warning:  #47-D: incompatible redefinition of macro "USB_OTG_HS_MAX_PACKET_SIZE"  (declared at line 302 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_HS_MAX_PACKET_SIZE           512
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_regs.h(64): warning:  #47-D: incompatible redefinition of macro "USB_OTG_FS_MAX_PACKET_SIZE"  (declared at line 303 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_FS_MAX_PACKET_SIZE           64
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_regs.h(65): warning:  #47-D: incompatible redefinition of macro "USB_OTG_MAX_EP0_SIZE"  (declared at line 304 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_MAX_EP0_SIZE                 64
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(55): warning:  #47-D: incompatible redefinition of macro "USB_OTG_SPEED_HIGH"  (declared at line 269 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_SPEED_HIGH      0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(56): warning:  #47-D: incompatible redefinition of macro "USB_OTG_SPEED_FULL"  (declared at line 271 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_SPEED_FULL      1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(58): warning:  #47-D: incompatible redefinition of macro "USB_OTG_ULPI_PHY"  (declared at line 279 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_ULPI_PHY      1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(59): warning:  #47-D: incompatible redefinition of macro "USB_OTG_EMBEDDED_PHY"  (declared at line 280 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_EMBEDDED_PHY  2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(80): warning:  #47-D: incompatible redefinition of macro "GRXSTS_PKTSTS_IN"  (declared at line 434 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define GRXSTS_PKTSTS_IN                       2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(81): warning:  #47-D: incompatible redefinition of macro "GRXSTS_PKTSTS_IN_XFER_COMP"  (declared at line 435 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define GRXSTS_PKTSTS_IN_XFER_COMP             3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(82): warning:  #47-D: incompatible redefinition of macro "GRXSTS_PKTSTS_DATA_TOGGLE_ERR"  (declared at line 436 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define GRXSTS_PKTSTS_DATA_TOGGLE_ERR          5
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(83): warning:  #47-D: incompatible redefinition of macro "GRXSTS_PKTSTS_CH_HALTED"  (declared at line 437 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define GRXSTS_PKTSTS_CH_HALTED                7
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(115): warning:  #47-D: incompatible redefinition of macro "DSTS_ENUMSPD_HS_PHY_30MHZ_OR_60MHZ"  (declared at line 312 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DSTS_ENUMSPD_HS_PHY_30MHZ_OR_60MHZ     0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(116): warning:  #47-D: incompatible redefinition of macro "DSTS_ENUMSPD_FS_PHY_30MHZ_OR_60MHZ"  (declared at line 313 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DSTS_ENUMSPD_FS_PHY_30MHZ_OR_60MHZ     1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(118): warning:  #47-D: incompatible redefinition of macro "DSTS_ENUMSPD_FS_PHY_48MHZ"  (declared at line 314 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DSTS_ENUMSPD_FS_PHY_48MHZ              3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(120): warning:  #47-D: incompatible redefinition of macro "DCFG_FRAME_INTERVAL_80"  (declared at line 322 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DCFG_FRAME_INTERVAL_80                 0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(121): warning:  #47-D: incompatible redefinition of macro "DCFG_FRAME_INTERVAL_85"  (declared at line 323 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DCFG_FRAME_INTERVAL_85                 1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(122): warning:  #47-D: incompatible redefinition of macro "DCFG_FRAME_INTERVAL_90"  (declared at line 324 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DCFG_FRAME_INTERVAL_90                 2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(123): warning:  #47-D: incompatible redefinition of macro "DCFG_FRAME_INTERVAL_95"  (declared at line 325 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DCFG_FRAME_INTERVAL_95                 3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(130): warning:  #47-D: incompatible redefinition of macro "EP_SPEED_LOW"  (declared at line 356 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_SPEED_LOW                           0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(131): warning:  #47-D: incompatible redefinition of macro "EP_SPEED_FULL"  (declared at line 357 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_SPEED_FULL                          1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(132): warning:  #47-D: incompatible redefinition of macro "EP_SPEED_HIGH"  (declared at line 358 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_SPEED_HIGH                          2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(134): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_CTRL"  (declared at line 344 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_CTRL                           0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(135): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_ISOC"  (declared at line 345 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_ISOC                           1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(136): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_BULK"  (declared at line 346 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_BULK                           2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(137): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_INTR"  (declared at line 347 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_INTR                           3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(138): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_MSK"  (declared at line 348 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_MSK                            3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(140): warning:  #47-D: incompatible redefinition of macro "STS_GOUT_NAK"  (declared at line 390 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_GOUT_NAK                           1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(141): warning:  #47-D: incompatible redefinition of macro "STS_DATA_UPDT"  (declared at line 391 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_DATA_UPDT                          2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(142): warning:  #47-D: incompatible redefinition of macro "STS_XFER_COMP"  (declared at line 392 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_XFER_COMP                          3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(143): warning:  #47-D: incompatible redefinition of macro "STS_SETUP_COMP"  (declared at line 393 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_SETUP_COMP                         4
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(144): warning:  #47-D: incompatible redefinition of macro "STS_SETUP_UPDT"  (declared at line 394 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_SETUP_UPDT                         6
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(153): warning:  #47-D: incompatible redefinition of macro "HC_PID_DATA0"  (declared at line 366 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HC_PID_DATA0                           0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(154): warning:  #47-D: incompatible redefinition of macro "HC_PID_DATA2"  (declared at line 367 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HC_PID_DATA2                           1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(155): warning:  #47-D: incompatible redefinition of macro "HC_PID_DATA1"  (declared at line 368 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HC_PID_DATA1                           2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(156): warning:  #47-D: incompatible redefinition of macro "HC_PID_SETUP"  (declared at line 369 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HC_PID_SETUP                           3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(158): warning:  #47-D: incompatible redefinition of macro "HPRT0_PRTSPD_HIGH_SPEED"  (declared at line 422 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HPRT0_PRTSPD_HIGH_SPEED                0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(159): warning:  #47-D: incompatible redefinition of macro "HPRT0_PRTSPD_FULL_SPEED"  (declared at line 423 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HPRT0_PRTSPD_FULL_SPEED                1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(160): warning:  #47-D: incompatible redefinition of macro "HPRT0_PRTSPD_LOW_SPEED"  (declared at line 424 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HPRT0_PRTSPD_LOW_SPEED                 2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(162): warning:  #47-D: incompatible redefinition of macro "HCFG_30_60_MHZ"  (declared at line 402 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCFG_30_60_MHZ                         0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(163): warning:  #47-D: incompatible redefinition of macro "HCFG_48_MHZ"  (declared at line 403 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCFG_48_MHZ                            1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(164): warning:  #47-D: incompatible redefinition of macro "HCFG_6_MHZ"  (declared at line 404 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCFG_6_MHZ                             2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(166): warning:  #47-D: incompatible redefinition of macro "HCCHAR_CTRL"  (declared at line 429 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCCHAR_CTRL                            0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(167): warning:  #47-D: incompatible redefinition of macro "HCCHAR_ISOC"  (declared at line 430 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCCHAR_ISOC                            1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(168): warning:  #47-D: incompatible redefinition of macro "HCCHAR_BULK"  (declared at line 431 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCCHAR_BULK                            2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(169): warning:  #47-D: incompatible redefinition of macro "HCCHAR_INTR"  (declared at line 432 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCCHAR_INTR                            3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(79): error:  #101: "HC_IDLE" has already been declared in the current scope
+    HC_IDLE = 0,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(80): error:  #101: "HC_XFRC" has already been declared in the current scope
+    HC_XFRC,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(81): error:  #101: "HC_HALTED" has already been declared in the current scope
+    HC_HALTED,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(82): error:  #101: "HC_NAK" has already been declared in the current scope
+    HC_NAK,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(83): error:  #101: "HC_NYET" has already been declared in the current scope
+    HC_NYET,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(84): error:  #101: "HC_STALL" has already been declared in the current scope
+    HC_STALL,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(85): error:  #101: "HC_XACTERR" has already been declared in the current scope
+    HC_XACTERR,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(86): error:  #101: "HC_BBLERR" has already been declared in the current scope
+    HC_BBLERR,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(87): error:  #101: "HC_DATATGLERR" has already been declared in the current scope
+    HC_DATATGLERR,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(91): error:  #101: "URB_IDLE" has already been declared in the current scope
+    URB_IDLE = 0,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(92): error:  #101: "URB_DONE" has already been declared in the current scope
+    URB_DONE,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(93): error:  #101: "URB_NOTREADY" has already been declared in the current scope
+    URB_NOTREADY,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(94): error:  #101: "URB_ERROR" has already been declared in the current scope
+    URB_ERROR,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(95): error:  #101: "URB_STALL" has already been declared in the current scope
+    URB_STALL
+..\USB_HOST\usbh_msc_usr.h(31): error:  #5: cannot open source input file "usbh_msc_core.h": No such file or directory
+  #include "usbh_msc_core.h"
+..\USB_HOST\usbh_msc_usr.c: 46 warnings, 15 errors
+compiling usbd_desc.c...
+compiling usb_hcd.c...
+..\User_files\usb_conf.h(272): warning:  #47-D: incompatible redefinition of macro "__ALIGN_BEGIN"  (declared at line 149 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h")
+    #define __ALIGN_BEGIN
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_regs.h(63): warning:  #47-D: incompatible redefinition of macro "USB_OTG_HS_MAX_PACKET_SIZE"  (declared at line 302 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_HS_MAX_PACKET_SIZE           512
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_regs.h(64): warning:  #47-D: incompatible redefinition of macro "USB_OTG_FS_MAX_PACKET_SIZE"  (declared at line 303 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_FS_MAX_PACKET_SIZE           64
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_regs.h(65): warning:  #47-D: incompatible redefinition of macro "USB_OTG_MAX_EP0_SIZE"  (declared at line 304 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_MAX_EP0_SIZE                 64
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(55): warning:  #47-D: incompatible redefinition of macro "USB_OTG_SPEED_HIGH"  (declared at line 269 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_SPEED_HIGH      0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(56): warning:  #47-D: incompatible redefinition of macro "USB_OTG_SPEED_FULL"  (declared at line 271 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_SPEED_FULL      1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(58): warning:  #47-D: incompatible redefinition of macro "USB_OTG_ULPI_PHY"  (declared at line 279 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_ULPI_PHY      1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(59): warning:  #47-D: incompatible redefinition of macro "USB_OTG_EMBEDDED_PHY"  (declared at line 280 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_EMBEDDED_PHY  2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(80): warning:  #47-D: incompatible redefinition of macro "GRXSTS_PKTSTS_IN"  (declared at line 434 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define GRXSTS_PKTSTS_IN                       2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(81): warning:  #47-D: incompatible redefinition of macro "GRXSTS_PKTSTS_IN_XFER_COMP"  (declared at line 435 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define GRXSTS_PKTSTS_IN_XFER_COMP             3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(82): warning:  #47-D: incompatible redefinition of macro "GRXSTS_PKTSTS_DATA_TOGGLE_ERR"  (declared at line 436 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define GRXSTS_PKTSTS_DATA_TOGGLE_ERR          5
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(83): warning:  #47-D: incompatible redefinition of macro "GRXSTS_PKTSTS_CH_HALTED"  (declared at line 437 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define GRXSTS_PKTSTS_CH_HALTED                7
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(115): warning:  #47-D: incompatible redefinition of macro "DSTS_ENUMSPD_HS_PHY_30MHZ_OR_60MHZ"  (declared at line 312 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DSTS_ENUMSPD_HS_PHY_30MHZ_OR_60MHZ     0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(116): warning:  #47-D: incompatible redefinition of macro "DSTS_ENUMSPD_FS_PHY_30MHZ_OR_60MHZ"  (declared at line 313 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DSTS_ENUMSPD_FS_PHY_30MHZ_OR_60MHZ     1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(118): warning:  #47-D: incompatible redefinition of macro "DSTS_ENUMSPD_FS_PHY_48MHZ"  (declared at line 314 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DSTS_ENUMSPD_FS_PHY_48MHZ              3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(120): warning:  #47-D: incompatible redefinition of macro "DCFG_FRAME_INTERVAL_80"  (declared at line 322 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DCFG_FRAME_INTERVAL_80                 0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(121): warning:  #47-D: incompatible redefinition of macro "DCFG_FRAME_INTERVAL_85"  (declared at line 323 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DCFG_FRAME_INTERVAL_85                 1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(122): warning:  #47-D: incompatible redefinition of macro "DCFG_FRAME_INTERVAL_90"  (declared at line 324 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DCFG_FRAME_INTERVAL_90                 2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(123): warning:  #47-D: incompatible redefinition of macro "DCFG_FRAME_INTERVAL_95"  (declared at line 325 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DCFG_FRAME_INTERVAL_95                 3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(130): warning:  #47-D: incompatible redefinition of macro "EP_SPEED_LOW"  (declared at line 356 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_SPEED_LOW                           0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(131): warning:  #47-D: incompatible redefinition of macro "EP_SPEED_FULL"  (declared at line 357 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_SPEED_FULL                          1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(132): warning:  #47-D: incompatible redefinition of macro "EP_SPEED_HIGH"  (declared at line 358 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_SPEED_HIGH                          2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(134): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_CTRL"  (declared at line 344 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_CTRL                           0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(135): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_ISOC"  (declared at line 345 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_ISOC                           1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(136): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_BULK"  (declared at line 346 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_BULK                           2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(137): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_INTR"  (declared at line 347 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_INTR                           3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(138): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_MSK"  (declared at line 348 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_MSK                            3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(140): warning:  #47-D: incompatible redefinition of macro "STS_GOUT_NAK"  (declared at line 390 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_GOUT_NAK                           1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(141): warning:  #47-D: incompatible redefinition of macro "STS_DATA_UPDT"  (declared at line 391 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_DATA_UPDT                          2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(142): warning:  #47-D: incompatible redefinition of macro "STS_XFER_COMP"  (declared at line 392 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_XFER_COMP                          3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(143): warning:  #47-D: incompatible redefinition of macro "STS_SETUP_COMP"  (declared at line 393 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_SETUP_COMP                         4
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(144): warning:  #47-D: incompatible redefinition of macro "STS_SETUP_UPDT"  (declared at line 394 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_SETUP_UPDT                         6
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(153): warning:  #47-D: incompatible redefinition of macro "HC_PID_DATA0"  (declared at line 366 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HC_PID_DATA0                           0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(154): warning:  #47-D: incompatible redefinition of macro "HC_PID_DATA2"  (declared at line 367 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HC_PID_DATA2                           1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(155): warning:  #47-D: incompatible redefinition of macro "HC_PID_DATA1"  (declared at line 368 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HC_PID_DATA1                           2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(156): warning:  #47-D: incompatible redefinition of macro "HC_PID_SETUP"  (declared at line 369 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HC_PID_SETUP                           3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(158): warning:  #47-D: incompatible redefinition of macro "HPRT0_PRTSPD_HIGH_SPEED"  (declared at line 422 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HPRT0_PRTSPD_HIGH_SPEED                0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(159): warning:  #47-D: incompatible redefinition of macro "HPRT0_PRTSPD_FULL_SPEED"  (declared at line 423 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HPRT0_PRTSPD_FULL_SPEED                1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(160): warning:  #47-D: incompatible redefinition of macro "HPRT0_PRTSPD_LOW_SPEED"  (declared at line 424 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HPRT0_PRTSPD_LOW_SPEED                 2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(162): warning:  #47-D: incompatible redefinition of macro "HCFG_30_60_MHZ"  (declared at line 402 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCFG_30_60_MHZ                         0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(163): warning:  #47-D: incompatible redefinition of macro "HCFG_48_MHZ"  (declared at line 403 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCFG_48_MHZ                            1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(164): warning:  #47-D: incompatible redefinition of macro "HCFG_6_MHZ"  (declared at line 404 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCFG_6_MHZ                             2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(166): warning:  #47-D: incompatible redefinition of macro "HCCHAR_CTRL"  (declared at line 429 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCCHAR_CTRL                            0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(167): warning:  #47-D: incompatible redefinition of macro "HCCHAR_ISOC"  (declared at line 430 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCCHAR_ISOC                            1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(168): warning:  #47-D: incompatible redefinition of macro "HCCHAR_BULK"  (declared at line 431 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCCHAR_BULK                            2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(169): warning:  #47-D: incompatible redefinition of macro "HCCHAR_INTR"  (declared at line 432 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCCHAR_INTR                            3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(79): error:  #101: "HC_IDLE" has already been declared in the current scope
+    HC_IDLE = 0,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(80): error:  #101: "HC_XFRC" has already been declared in the current scope
+    HC_XFRC,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(81): error:  #101: "HC_HALTED" has already been declared in the current scope
+    HC_HALTED,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(82): error:  #101: "HC_NAK" has already been declared in the current scope
+    HC_NAK,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(83): error:  #101: "HC_NYET" has already been declared in the current scope
+    HC_NYET,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(84): error:  #101: "HC_STALL" has already been declared in the current scope
+    HC_STALL,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(85): error:  #101: "HC_XACTERR" has already been declared in the current scope
+    HC_XACTERR,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(86): error:  #101: "HC_BBLERR" has already been declared in the current scope
+    HC_BBLERR,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(87): error:  #101: "HC_DATATGLERR" has already been declared in the current scope
+    HC_DATATGLERR,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(91): error:  #101: "URB_IDLE" has already been declared in the current scope
+    URB_IDLE = 0,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(92): error:  #101: "URB_DONE" has already been declared in the current scope
+    URB_DONE,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(93): error:  #101: "URB_NOTREADY" has already been declared in the current scope
+    URB_NOTREADY,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(94): error:  #101: "URB_ERROR" has already been declared in the current scope
+    URB_ERROR,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(95): error:  #101: "URB_STALL" has already been declared in the current scope
+    URB_STALL
+..\Middlewares\ST\STM32_USB_OTG_Driver\src\usb_hcd.c: 46 warnings, 14 errors
+compiling usb_dcd_int.c...
+..\User_files\usb_conf.h(272): warning:  #47-D: incompatible redefinition of macro "__ALIGN_BEGIN"  (declared at line 149 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h")
+    #define __ALIGN_BEGIN
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_regs.h(63): warning:  #47-D: incompatible redefinition of macro "USB_OTG_HS_MAX_PACKET_SIZE"  (declared at line 302 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_HS_MAX_PACKET_SIZE           512
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_regs.h(64): warning:  #47-D: incompatible redefinition of macro "USB_OTG_FS_MAX_PACKET_SIZE"  (declared at line 303 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_FS_MAX_PACKET_SIZE           64
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_regs.h(65): warning:  #47-D: incompatible redefinition of macro "USB_OTG_MAX_EP0_SIZE"  (declared at line 304 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_MAX_EP0_SIZE                 64
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(55): warning:  #47-D: incompatible redefinition of macro "USB_OTG_SPEED_HIGH"  (declared at line 269 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_SPEED_HIGH      0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(56): warning:  #47-D: incompatible redefinition of macro "USB_OTG_SPEED_FULL"  (declared at line 271 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_SPEED_FULL      1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(58): warning:  #47-D: incompatible redefinition of macro "USB_OTG_ULPI_PHY"  (declared at line 279 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_ULPI_PHY      1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(59): warning:  #47-D: incompatible redefinition of macro "USB_OTG_EMBEDDED_PHY"  (declared at line 280 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_EMBEDDED_PHY  2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(80): warning:  #47-D: incompatible redefinition of macro "GRXSTS_PKTSTS_IN"  (declared at line 434 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define GRXSTS_PKTSTS_IN                       2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(81): warning:  #47-D: incompatible redefinition of macro "GRXSTS_PKTSTS_IN_XFER_COMP"  (declared at line 435 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define GRXSTS_PKTSTS_IN_XFER_COMP             3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(82): warning:  #47-D: incompatible redefinition of macro "GRXSTS_PKTSTS_DATA_TOGGLE_ERR"  (declared at line 436 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define GRXSTS_PKTSTS_DATA_TOGGLE_ERR          5
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(83): warning:  #47-D: incompatible redefinition of macro "GRXSTS_PKTSTS_CH_HALTED"  (declared at line 437 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define GRXSTS_PKTSTS_CH_HALTED                7
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(115): warning:  #47-D: incompatible redefinition of macro "DSTS_ENUMSPD_HS_PHY_30MHZ_OR_60MHZ"  (declared at line 312 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DSTS_ENUMSPD_HS_PHY_30MHZ_OR_60MHZ     0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(116): warning:  #47-D: incompatible redefinition of macro "DSTS_ENUMSPD_FS_PHY_30MHZ_OR_60MHZ"  (declared at line 313 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DSTS_ENUMSPD_FS_PHY_30MHZ_OR_60MHZ     1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(118): warning:  #47-D: incompatible redefinition of macro "DSTS_ENUMSPD_FS_PHY_48MHZ"  (declared at line 314 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DSTS_ENUMSPD_FS_PHY_48MHZ              3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(120): warning:  #47-D: incompatible redefinition of macro "DCFG_FRAME_INTERVAL_80"  (declared at line 322 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DCFG_FRAME_INTERVAL_80                 0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(121): warning:  #47-D: incompatible redefinition of macro "DCFG_FRAME_INTERVAL_85"  (declared at line 323 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DCFG_FRAME_INTERVAL_85                 1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(122): warning:  #47-D: incompatible redefinition of macro "DCFG_FRAME_INTERVAL_90"  (declared at line 324 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DCFG_FRAME_INTERVAL_90                 2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(123): warning:  #47-D: incompatible redefinition of macro "DCFG_FRAME_INTERVAL_95"  (declared at line 325 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DCFG_FRAME_INTERVAL_95                 3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(130): warning:  #47-D: incompatible redefinition of macro "EP_SPEED_LOW"  (declared at line 356 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_SPEED_LOW                           0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(131): warning:  #47-D: incompatible redefinition of macro "EP_SPEED_FULL"  (declared at line 357 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_SPEED_FULL                          1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(132): warning:  #47-D: incompatible redefinition of macro "EP_SPEED_HIGH"  (declared at line 358 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_SPEED_HIGH                          2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(134): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_CTRL"  (declared at line 344 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_CTRL                           0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(135): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_ISOC"  (declared at line 345 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_ISOC                           1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(136): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_BULK"  (declared at line 346 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_BULK                           2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(137): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_INTR"  (declared at line 347 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_INTR                           3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(138): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_MSK"  (declared at line 348 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_MSK                            3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(140): warning:  #47-D: incompatible redefinition of macro "STS_GOUT_NAK"  (declared at line 390 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_GOUT_NAK                           1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(141): warning:  #47-D: incompatible redefinition of macro "STS_DATA_UPDT"  (declared at line 391 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_DATA_UPDT                          2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(142): warning:  #47-D: incompatible redefinition of macro "STS_XFER_COMP"  (declared at line 392 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_XFER_COMP                          3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(143): warning:  #47-D: incompatible redefinition of macro "STS_SETUP_COMP"  (declared at line 393 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_SETUP_COMP                         4
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(144): warning:  #47-D: incompatible redefinition of macro "STS_SETUP_UPDT"  (declared at line 394 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_SETUP_UPDT                         6
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(153): warning:  #47-D: incompatible redefinition of macro "HC_PID_DATA0"  (declared at line 366 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HC_PID_DATA0                           0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(154): warning:  #47-D: incompatible redefinition of macro "HC_PID_DATA2"  (declared at line 367 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HC_PID_DATA2                           1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(155): warning:  #47-D: incompatible redefinition of macro "HC_PID_DATA1"  (declared at line 368 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HC_PID_DATA1                           2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(156): warning:  #47-D: incompatible redefinition of macro "HC_PID_SETUP"  (declared at line 369 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HC_PID_SETUP                           3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(158): warning:  #47-D: incompatible redefinition of macro "HPRT0_PRTSPD_HIGH_SPEED"  (declared at line 422 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HPRT0_PRTSPD_HIGH_SPEED                0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(159): warning:  #47-D: incompatible redefinition of macro "HPRT0_PRTSPD_FULL_SPEED"  (declared at line 423 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HPRT0_PRTSPD_FULL_SPEED                1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(160): warning:  #47-D: incompatible redefinition of macro "HPRT0_PRTSPD_LOW_SPEED"  (declared at line 424 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HPRT0_PRTSPD_LOW_SPEED                 2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(162): warning:  #47-D: incompatible redefinition of macro "HCFG_30_60_MHZ"  (declared at line 402 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCFG_30_60_MHZ                         0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(163): warning:  #47-D: incompatible redefinition of macro "HCFG_48_MHZ"  (declared at line 403 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCFG_48_MHZ                            1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(164): warning:  #47-D: incompatible redefinition of macro "HCFG_6_MHZ"  (declared at line 404 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCFG_6_MHZ                             2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(166): warning:  #47-D: incompatible redefinition of macro "HCCHAR_CTRL"  (declared at line 429 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCCHAR_CTRL                            0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(167): warning:  #47-D: incompatible redefinition of macro "HCCHAR_ISOC"  (declared at line 430 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCCHAR_ISOC                            1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(168): warning:  #47-D: incompatible redefinition of macro "HCCHAR_BULK"  (declared at line 431 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCCHAR_BULK                            2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(169): warning:  #47-D: incompatible redefinition of macro "HCCHAR_INTR"  (declared at line 432 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCCHAR_INTR                            3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(79): error:  #101: "HC_IDLE" has already been declared in the current scope
+    HC_IDLE = 0,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(80): error:  #101: "HC_XFRC" has already been declared in the current scope
+    HC_XFRC,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(81): error:  #101: "HC_HALTED" has already been declared in the current scope
+    HC_HALTED,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(82): error:  #101: "HC_NAK" has already been declared in the current scope
+    HC_NAK,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(83): error:  #101: "HC_NYET" has already been declared in the current scope
+    HC_NYET,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(84): error:  #101: "HC_STALL" has already been declared in the current scope
+    HC_STALL,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(85): error:  #101: "HC_XACTERR" has already been declared in the current scope
+    HC_XACTERR,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(86): error:  #101: "HC_BBLERR" has already been declared in the current scope
+    HC_BBLERR,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(87): error:  #101: "HC_DATATGLERR" has already been declared in the current scope
+    HC_DATATGLERR,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(91): error:  #101: "URB_IDLE" has already been declared in the current scope
+    URB_IDLE = 0,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(92): error:  #101: "URB_DONE" has already been declared in the current scope
+    URB_DONE,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(93): error:  #101: "URB_NOTREADY" has already been declared in the current scope
+    URB_NOTREADY,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(94): error:  #101: "URB_ERROR" has already been declared in the current scope
+    URB_ERROR,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(95): error:  #101: "URB_STALL" has already been declared in the current scope
+    URB_STALL
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_dcd_int.h(79): warning:  #47-D: incompatible redefinition of macro "CLEAR_IN_EP_INTR"  (declared at line 487 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define CLEAR_IN_EP_INTR(epnum,intr) \
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_dcd_int.h(84): warning:  #47-D: incompatible redefinition of macro "CLEAR_OUT_EP_INTR"  (declared at line 488 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define CLEAR_OUT_EP_INTR(epnum,intr) \
+..\Middlewares\ST\STM32_USB_OTG_Driver\src\usb_dcd_int.c(767): error:  #20: identifier "RCC_ClocksTypeDef" is undefined
+    RCC_ClocksTypeDef RCC_Clocks;
+..\Middlewares\ST\STM32_USB_OTG_Driver\src\usb_dcd_int.c(771): warning:  #223-D: function "RCC_GetClocksFreq" declared implicitly
+    RCC_GetClocksFreq(&RCC_Clocks);
+..\Middlewares\ST\STM32_USB_OTG_Driver\src\usb_dcd_int.c: 49 warnings, 15 errors
+compiling usb_hcd_int.c...
+..\User_files\usb_conf.h(272): warning:  #47-D: incompatible redefinition of macro "__ALIGN_BEGIN"  (declared at line 149 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h")
+    #define __ALIGN_BEGIN
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_regs.h(63): warning:  #47-D: incompatible redefinition of macro "USB_OTG_HS_MAX_PACKET_SIZE"  (declared at line 302 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_HS_MAX_PACKET_SIZE           512
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_regs.h(64): warning:  #47-D: incompatible redefinition of macro "USB_OTG_FS_MAX_PACKET_SIZE"  (declared at line 303 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_FS_MAX_PACKET_SIZE           64
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_regs.h(65): warning:  #47-D: incompatible redefinition of macro "USB_OTG_MAX_EP0_SIZE"  (declared at line 304 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_MAX_EP0_SIZE                 64
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(55): warning:  #47-D: incompatible redefinition of macro "USB_OTG_SPEED_HIGH"  (declared at line 269 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_SPEED_HIGH      0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(56): warning:  #47-D: incompatible redefinition of macro "USB_OTG_SPEED_FULL"  (declared at line 271 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_SPEED_FULL      1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(58): warning:  #47-D: incompatible redefinition of macro "USB_OTG_ULPI_PHY"  (declared at line 279 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_ULPI_PHY      1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(59): warning:  #47-D: incompatible redefinition of macro "USB_OTG_EMBEDDED_PHY"  (declared at line 280 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define USB_OTG_EMBEDDED_PHY  2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(80): warning:  #47-D: incompatible redefinition of macro "GRXSTS_PKTSTS_IN"  (declared at line 434 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define GRXSTS_PKTSTS_IN                       2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(81): warning:  #47-D: incompatible redefinition of macro "GRXSTS_PKTSTS_IN_XFER_COMP"  (declared at line 435 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define GRXSTS_PKTSTS_IN_XFER_COMP             3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(82): warning:  #47-D: incompatible redefinition of macro "GRXSTS_PKTSTS_DATA_TOGGLE_ERR"  (declared at line 436 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define GRXSTS_PKTSTS_DATA_TOGGLE_ERR          5
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(83): warning:  #47-D: incompatible redefinition of macro "GRXSTS_PKTSTS_CH_HALTED"  (declared at line 437 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define GRXSTS_PKTSTS_CH_HALTED                7
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(115): warning:  #47-D: incompatible redefinition of macro "DSTS_ENUMSPD_HS_PHY_30MHZ_OR_60MHZ"  (declared at line 312 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DSTS_ENUMSPD_HS_PHY_30MHZ_OR_60MHZ     0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(116): warning:  #47-D: incompatible redefinition of macro "DSTS_ENUMSPD_FS_PHY_30MHZ_OR_60MHZ"  (declared at line 313 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DSTS_ENUMSPD_FS_PHY_30MHZ_OR_60MHZ     1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(118): warning:  #47-D: incompatible redefinition of macro "DSTS_ENUMSPD_FS_PHY_48MHZ"  (declared at line 314 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DSTS_ENUMSPD_FS_PHY_48MHZ              3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(120): warning:  #47-D: incompatible redefinition of macro "DCFG_FRAME_INTERVAL_80"  (declared at line 322 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DCFG_FRAME_INTERVAL_80                 0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(121): warning:  #47-D: incompatible redefinition of macro "DCFG_FRAME_INTERVAL_85"  (declared at line 323 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DCFG_FRAME_INTERVAL_85                 1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(122): warning:  #47-D: incompatible redefinition of macro "DCFG_FRAME_INTERVAL_90"  (declared at line 324 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DCFG_FRAME_INTERVAL_90                 2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(123): warning:  #47-D: incompatible redefinition of macro "DCFG_FRAME_INTERVAL_95"  (declared at line 325 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define DCFG_FRAME_INTERVAL_95                 3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(130): warning:  #47-D: incompatible redefinition of macro "EP_SPEED_LOW"  (declared at line 356 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_SPEED_LOW                           0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(131): warning:  #47-D: incompatible redefinition of macro "EP_SPEED_FULL"  (declared at line 357 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_SPEED_FULL                          1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(132): warning:  #47-D: incompatible redefinition of macro "EP_SPEED_HIGH"  (declared at line 358 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_SPEED_HIGH                          2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(134): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_CTRL"  (declared at line 344 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_CTRL                           0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(135): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_ISOC"  (declared at line 345 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_ISOC                           1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(136): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_BULK"  (declared at line 346 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_BULK                           2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(137): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_INTR"  (declared at line 347 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_INTR                           3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(138): warning:  #47-D: incompatible redefinition of macro "EP_TYPE_MSK"  (declared at line 348 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define EP_TYPE_MSK                            3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(140): warning:  #47-D: incompatible redefinition of macro "STS_GOUT_NAK"  (declared at line 390 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_GOUT_NAK                           1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(141): warning:  #47-D: incompatible redefinition of macro "STS_DATA_UPDT"  (declared at line 391 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_DATA_UPDT                          2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(142): warning:  #47-D: incompatible redefinition of macro "STS_XFER_COMP"  (declared at line 392 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_XFER_COMP                          3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(143): warning:  #47-D: incompatible redefinition of macro "STS_SETUP_COMP"  (declared at line 393 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_SETUP_COMP                         4
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(144): warning:  #47-D: incompatible redefinition of macro "STS_SETUP_UPDT"  (declared at line 394 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define STS_SETUP_UPDT                         6
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(153): warning:  #47-D: incompatible redefinition of macro "HC_PID_DATA0"  (declared at line 366 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HC_PID_DATA0                           0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(154): warning:  #47-D: incompatible redefinition of macro "HC_PID_DATA2"  (declared at line 367 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HC_PID_DATA2                           1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(155): warning:  #47-D: incompatible redefinition of macro "HC_PID_DATA1"  (declared at line 368 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HC_PID_DATA1                           2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(156): warning:  #47-D: incompatible redefinition of macro "HC_PID_SETUP"  (declared at line 369 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HC_PID_SETUP                           3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(158): warning:  #47-D: incompatible redefinition of macro "HPRT0_PRTSPD_HIGH_SPEED"  (declared at line 422 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HPRT0_PRTSPD_HIGH_SPEED                0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(159): warning:  #47-D: incompatible redefinition of macro "HPRT0_PRTSPD_FULL_SPEED"  (declared at line 423 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HPRT0_PRTSPD_FULL_SPEED                1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(160): warning:  #47-D: incompatible redefinition of macro "HPRT0_PRTSPD_LOW_SPEED"  (declared at line 424 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HPRT0_PRTSPD_LOW_SPEED                 2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(162): warning:  #47-D: incompatible redefinition of macro "HCFG_30_60_MHZ"  (declared at line 402 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCFG_30_60_MHZ                         0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(163): warning:  #47-D: incompatible redefinition of macro "HCFG_48_MHZ"  (declared at line 403 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCFG_48_MHZ                            1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(164): warning:  #47-D: incompatible redefinition of macro "HCFG_6_MHZ"  (declared at line 404 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCFG_6_MHZ                             2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(166): warning:  #47-D: incompatible redefinition of macro "HCCHAR_CTRL"  (declared at line 429 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCCHAR_CTRL                            0
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(167): warning:  #47-D: incompatible redefinition of macro "HCCHAR_ISOC"  (declared at line 430 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCCHAR_ISOC                            1
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(168): warning:  #47-D: incompatible redefinition of macro "HCCHAR_BULK"  (declared at line 431 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCCHAR_BULK                            2
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_defines.h(169): warning:  #47-D: incompatible redefinition of macro "HCCHAR_INTR"  (declared at line 432 of "../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h")
+  #define HCCHAR_INTR                            3
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(79): error:  #101: "HC_IDLE" has already been declared in the current scope
+    HC_IDLE = 0,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(80): error:  #101: "HC_XFRC" has already been declared in the current scope
+    HC_XFRC,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(81): error:  #101: "HC_HALTED" has already been declared in the current scope
+    HC_HALTED,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(82): error:  #101: "HC_NAK" has already been declared in the current scope
+    HC_NAK,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(83): error:  #101: "HC_NYET" has already been declared in the current scope
+    HC_NYET,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(84): error:  #101: "HC_STALL" has already been declared in the current scope
+    HC_STALL,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(85): error:  #101: "HC_XACTERR" has already been declared in the current scope
+    HC_XACTERR,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(86): error:  #101: "HC_BBLERR" has already been declared in the current scope
+    HC_BBLERR,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(87): error:  #101: "HC_DATATGLERR" has already been declared in the current scope
+    HC_DATATGLERR,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(91): error:  #101: "URB_IDLE" has already been declared in the current scope
+    URB_IDLE = 0,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(92): error:  #101: "URB_DONE" has already been declared in the current scope
+    URB_DONE,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(93): error:  #101: "URB_NOTREADY" has already been declared in the current scope
+    URB_NOTREADY,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(94): error:  #101: "URB_ERROR" has already been declared in the current scope
+    URB_ERROR,
+..\Middlewares\ST\STM32_USB_OTG_Driver\inc\usb_core.h(95): error:  #101: "URB_STALL" has already been declared in the current scope
+    URB_STALL
+..\Middlewares\ST\STM32_USB_OTG_Driver\src\usb_hcd_int.c: 46 warnings, 14 errors
+compiling usb_device.c...
+compiling usbd_conf.c...
+"TAIER_usb_hs\TAIER_usb_hs.axf" - 142 Error(s), 463 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -96,7 +1327,8 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.2.0
-Build Time Elapsed:  00:00:26
+Target not created.
+Build Time Elapsed:  00:00:32
 </pre>
 </body>
 </html>
