@@ -102,7 +102,7 @@ void WinUSB_Receive_HS()
   else if(usb_ep3_rxne == SET)
 	{
 		i = usb_ep3_rx[0] + (usb_ep3_rx[1]<<8);
-		CDC_Transmit_HS(usb_ep3_rx, i, FS_LINK_OUT_EP);
+		CDC_Transmit_HS(usb_ep3_rx+2, i, FS_LINK_IN_EP);
 		usb_ep3_rxne = RESET;
 	}
 	
