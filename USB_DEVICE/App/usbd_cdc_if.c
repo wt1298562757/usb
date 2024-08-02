@@ -42,8 +42,11 @@ extern volatile int8_t usb_ep1_rxne;
 extern uint8_t usb_ep1_rx[2048]; 
 extern volatile int8_t usb_ep3_rxne;
 extern uint8_t usb_ep3_rx[2048]; 
+
+extern uint8_t usb_ep3_tx[40960]; 
 extern volatile int8_t usb_ep4_rxne;
 extern uint8_t usb_ep4_rx[2048]; 
+extern uint8_t usb_ep4_tx[40960]; 
 //---------------------------------------------------
 
 /* USER CODE END PV */
@@ -294,8 +297,8 @@ static int8_t CDC_Receive_HS(uint8_t* Buf, uint32_t *Len, uint8_t ep) //CHANGE
 			usb_ep3_rxne = SET;
 			break;
     case EP_ADC_IN:
-			memcpy(usb_ep4_rx, Buf, *Len); 
-			usb_ep3_rxne = SET;
+			memcpy(usb_ep4_tx, Buf, *Len); 
+			usb_ep4_rxne = SET;
 			break;
 		default:
 			break;

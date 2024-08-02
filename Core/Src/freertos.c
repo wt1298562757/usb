@@ -61,6 +61,8 @@ uint8_t usb_ep4_tx[40960];
 volatile int8_t usb_ep1_rxne = RESET;
 volatile int8_t usb_ep3_rxne = RESET;
 volatile int8_t usb_ep4_rxne = RESET;
+volatile int8_t usb_ep3_txne = RESET;
+volatile int8_t usb_ep4_txne = RESET;
 
 extern USBD_HandleTypeDef hUsbDeviceHS;
 //-----------------------------------------------
@@ -82,20 +84,26 @@ void WinUSB_Receive_HS()
 	if (usb_ep1_rxne == SET)
 	{
 		i = usb_ep1_rx[0] + (usb_ep1_rx[1]<<8);
-		CDC_Transmit_HS(usb_ep1_tx, i, CDC_IN_EP);
+		CDC_Transmit_HS(usb_ep1_rx, i, CDC_IN_EP);
 		usb_ep1_rxne = RESET;
 	}
-	else if(usb_ep3_rxne == SET)
+	else if(usb_ep3_txne == SET)
 	{
 		i = usb_ep3_rx[0] + (usb_ep3_rx[1]<<8);
-		CDC_Transmit_HS(usb_ep3_tx, i, FS_LINK_IN_EP);
+		CDC_Transmit_HS(usb_ep3_rx, i, FS_LINK_IN_EP);
 		usb_ep3_rxne = RESET;
 	}
   else if(usb_ep4_rxne == SET)
 	{
 		i = usb_ep4_rx[0] + (usb_ep4_rx[1]<<8);
-		CDC_Transmit_HS(usb_ep4_tx, i, EP_ADC_IN);
+		CDC_Transmit_HS(usb_ep4_rx, i, EP_ADC_IN);
 		usb_ep4_rxne = RESET;
+	}
+  else if(usb_ep3_rxne == SET)
+	{
+		i = usb_ep3_rx[0] + (usb_ep3_rx[1]<<8);
+		CDC_Transmit_HS(usb_ep3_rx, i, FS_LINK_OUT_EP);
+		usb_ep3_rxne = RESET;
 	}
 	
 }

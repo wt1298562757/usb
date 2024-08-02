@@ -15,7 +15,6 @@
     },
     "asm-compiler": {},
     "linker": {
-        "output-format": "elf",
-        "$disableOutputTask": true
+        "output-format": "elf"
     }
 }
