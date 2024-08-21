@@ -27,6 +27,10 @@
 /* USER CODE BEGIN Includes */
 //---------------ADD WT--------------------------
 #include "usbd_cdc_if.h"
+#include "LinkUsb.h"
+#include "queue.h"
+#include "stdbool.h"
+#include "THE_CMD.h"
 //----------------------------------------------------
 
 /* USER CODE END Includes */
@@ -38,6 +42,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define MSG_BUFF_SIZE 2560	   // 上传给HOST的MSG数据缓冲�?
 
 /* USER CODE END PD */
 
@@ -65,6 +70,13 @@ volatile int8_t usb_ep3_txne = RESET;
 volatile int8_t usb_ep4_txne = RESET;
 
 extern USBD_HandleTypeDef hUsbDeviceHS;
+
+uint8_t MsgSendBuffA[MSG_BUFF_SIZE+28];
+uint8_t MsgSendBuffB[MSG_BUFF_SIZE+28];
+uint8_t* pCurBuffer = MsgSendBuffA;
+uint32_t  MsgSendBuffOffset = 0;
+
+static  uint8_t USB_TX_pktSn =0;
 //-----------------------------------------------
 
 /* USER CODE END Variables */
@@ -74,6 +86,23 @@ const osThreadAttr_t defaultTask_attributes = {
   .name = "defaultTask",
   .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityNormal,
+};
+/* Definitions for LINK_USB_CMD */
+osThreadId_t LINK_USB_CMDHandle;
+const osThreadAttr_t LINK_USB_CMD_attributes = {
+  .name = "LINK_USB_CMD",
+  .stack_size = 256 * 4,
+  .priority = (osPriority_t) osPriorityNormal2,
+};
+/* Definitions for xQueueLinkUsbRecvCmd */
+osMessageQueueId_t xQueueLinkUsbRecvCmdHandle;
+const osMessageQueueAttr_t xQueueLinkUsbRecvCmd_attributes = {
+  .name = "xQueueLinkUsbRecvCmd"
+};
+/* Definitions for xMutexMsgBuff */
+osMutexId_t xMutexMsgBuffHandle;
+const osMutexAttr_t xMutexMsgBuff_attributes = {
+  .name = "xMutexMsgBuff"
 };
 
 /* Private function prototypes -----------------------------------------------*/
@@ -112,6 +141,7 @@ void WinUSB_Receive_HS()
 /* USER CODE END FunctionPrototypes */
 
 void StartDefaultTask(void *argument);
+void vTaskLinkUsbCmdProcess(void *argument);
 
 extern void MX_USB_DEVICE_Init(void);
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
@@ -125,6 +155,9 @@ void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN Init */
 
   /* USER CODE END Init */
+  /* Create the mutex(es) */
+  /* creation of xMutexMsgBuff */
+  xMutexMsgBuffHandle = osMutexNew(&xMutexMsgBuff_attributes);
 
   /* USER CODE BEGIN RTOS_MUTEX */
   /* add mutexes, ... */
@@ -138,6 +171,10 @@ void MX_FREERTOS_Init(void) {
   /* start timers, add new ones, ... */
   /* USER CODE END RTOS_TIMERS */
 
+  /* Create the queue(s) */
+  /* creation of xQueueLinkUsbRecvCmd */
+  xQueueLinkUsbRecvCmdHandle = osMessageQueueNew (8, sizeof(uint32_t), &xQueueLinkUsbRecvCmd_attributes);
+
   /* USER CODE BEGIN RTOS_QUEUES */
   /* add queues, ... */
   /* USER CODE END RTOS_QUEUES */
@@ -145,6 +182,9 @@ void MX_FREERTOS_Init(void) {
   /* Create the thread(s) */
   /* creation of defaultTask */
   defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
+
+  /* creation of LINK_USB_CMD */
+  LINK_USB_CMDHandle = osThreadNew(vTaskLinkUsbCmdProcess, NULL, &LINK_USB_CMD_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -177,8 +217,106 @@ void StartDefaultTask(void *argument)
   /* USER CODE END StartDefaultTask */
 }
 
+/* USER CODE BEGIN Header_vTaskLinkUsbCmdProcess */
+/**
+* @brief Function implementing the myTask02 thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_vTaskLinkUsbCmdProcess */
+void vTaskLinkUsbCmdProcess(void *argument)
+{
+  /* USER CODE BEGIN vTaskLinkUsbCmdProcess */
+  FS_LINK_CMD_FMT RecvCmd;
+  /* Infinite loop */
+  for(;;)
+  {
+    if(xQueueReceive(xQueueLinkUsbRecvCmdHandle,&RecvCmd,portMAX_DELAY)  == pdPASS)
+	 {
+	   //处理收到的有效消�?
+		// Report_MSG(">>>>>>>>>>>>>>>>>>>  for debug  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+	   	// sprintf(charBuf,"INFO: cmd = 0x%X,target= 0x%X, para = 0x%X",RecvCmd.cmd,RecvCmd.target,RecvCmd.para) ;
+
+		//	GetRunTimeStats();  //run time stat only 须使能TIM3
+	   switch(RecvCmd.cmd)
+	   {
+
+     }
+    }
+    osDelay(1);
+  }
+  /* USER CODE END vTaskLinkUsbCmdProcess */
+}
+
 /* Private application code --------------------------------------------------*/
 /* USER CODE BEGIN Application */
+bool AddHostCmdtoQueue(uint8_t* pRecvBuff, uint32_t count)
+{
+	bool success = false;
 
+	DOWN_FMT *rxBuffPtr = (DOWN_FMT*)pRecvBuff;
+	FS_LINK_CMD_FMT LinkCmd;
+
+	do{
+		if(count != PC_DOWN_CMD_SIZE)
+		{
+			break;
+		}
+
+		if(rxBuffPtr->startFlag != DOWN_START_FLAG ) 
+		{
+			break;
+		}
+
+		//到此，数据有效，将向xQueueLinkUsbRecvCmd发�?�一条消�?
+		LinkCmd.cmd =  rxBuffPtr->cmd;
+		LinkCmd.target = rxBuffPtr->target;
+		LinkCmd.para = 	rxBuffPtr->para;
+
+		if(xQueueSend(xQueueLinkUsbRecvCmdHandle,&LinkCmd,10) !=pdPASS)
+		{
+		   //xQueueLinkUsbRecvCmd队列已满
+		  // GPIO_Toggle(SW_LED2_R) ;	 ;
+		}
+
+		success = true;
+
+     }while(false);
+   return success;
+}
+
+static void AddMsgToBuff(uint8_t infoCategory, uint8_t src, uint8_t msgLen,  uint8_t* content)
+ {
+
+	UP_FMT onePkt;
+
+
+	onePkt.startFlag = UP_START_FLAG;
+	onePkt.pktSn = USB_TX_pktSn++	;
+	onePkt.ts = xTaskGetTickCount();//GlobleTime;	//fill current time
+	onePkt.src = src;
+	onePkt.msgType = infoCategory;
+	onePkt.msgLenth = 	msgLen;
+
+  if(osMutexAcquire(xMutexMsgBuffHandle,MSG_BUFF_WRITE_TIMEOUT)== pdPASS  )
+	{
+	//copy the message header to CurBuff
+  	memcpy(pCurBuffer + MsgSendBuffOffset, &onePkt, 12);	//消息头长12 byte
+	MsgSendBuffOffset = MsgSendBuffOffset + 12 ;	
+	//copy the current
+	memcpy(pCurBuffer + MsgSendBuffOffset, content, msgLen);	//消息头长12 byte
+	MsgSendBuffOffset = MsgSendBuffOffset + msgLen ;
+
+	osMutexRelease(xMutexMsgBuffHandle);
+	}
+   else
+   {
+	 //写buff失败，其他程序没有Give xMutexMsgBuff
+	//  ;
+	//  GPIO_Toggle(SW_LED1_R) ;
+   }
+
+
+}
 /* USER CODE END Application */
 

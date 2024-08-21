@@ -22,7 +22,7 @@
 #include "usbd_cdc_if.h"
 
 /* USER CODE BEGIN INCLUDE */
-
+#include "stdbool.h"
 /* USER CODE END INCLUDE */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -46,7 +46,8 @@ extern uint8_t usb_ep3_rx[2048];
 extern uint8_t usb_ep3_tx[40960]; 
 extern volatile int8_t usb_ep4_rxne;
 extern uint8_t usb_ep4_rx[2048]; 
-extern uint8_t usb_ep4_tx[40960]; 
+extern uint8_t usb_ep4_tx[40960];
+extern bool AddHostCmdtoQueue(uint8_t* pRecvBuff, uint32_t count); 
 //---------------------------------------------------
 
 /* USER CODE END PV */
@@ -289,16 +290,9 @@ static int8_t CDC_Receive_HS(uint8_t* Buf, uint32_t *Len, uint8_t ep) //CHANGE
 			usb_ep1_rxne = SET;
 			break;
 		case FS_LINK_OUT_EP:
-			memcpy(usb_ep3_rx, Buf, *Len); 
-			usb_ep3_rxne = SET;
-			break;
-    case FS_LINK_IN_EP:
-			memcpy(usb_ep3_rx, Buf, *Len); 
-			usb_ep3_rxne = SET;
-			break;
-    case EP_ADC_IN:
-			memcpy(usb_ep4_tx, Buf, *Len); 
-			usb_ep4_rxne = SET;
+			// memcpy(usb_ep3_rx, Buf, *Len); 
+			// usb_ep3_rxne = SET;
+      AddHostCmdtoQueue(Buf, *Len);
 			break;
 		default:
 			break;

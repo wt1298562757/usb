@@ -299,7 +299,12 @@
         "<virtual_root>/Application/User_files/TestScriptProcess.c",
         "<virtual_root>/Application/User_files/flash_if.c",
         "<virtual_root>/Application/User_files/ScriptPool.c",
-        "<virtual_root>/Application/User_files/AdcProcess.c"
+        "<virtual_root>/Application/User_files/AdcProcess.c",
+        "<virtual_root>/Application/User_files/LinkUsbProcess.c",
+        "<virtual_root>/Application/User_files/MeasureProcess.c",
+        "<virtual_root>/Application/User_files/eeprom.c",
+        "<virtual_root>/Application/User_files/DAC7568.c",
+        "<virtual_root>/Application/User_files/gpio_control.c"
       ],
       "toolchain": "AC5",
       "compileConfig": {

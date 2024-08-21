@@ -24,16 +24,16 @@
 #include "string.h"
 
 #define ADC_Buf_Size 8
+__IO uint16_t ADC_ConvertedValue[RHEOSTAT_NOFCHANEL]={0};
 
 
-
-//ADC 全局变量
-__IO uint16_t ADC_ConvertedBuff0[ADC_Buf_Size];	//__IO = volatile,表示该变量的值觉的改变无法预知，
-//__IO uint16_t ADC_ConvertedBuff1[ADC_Buf_Size];	 //告诉编译器不要去假设这个变量的�??
+//ADC 全局坘針
+__IO uint16_t ADC_ConvertedBuff0[ADC_Buf_Size];	//__IO = volatile,表示该坘針的值觉的改坘无法预知，
+//__IO uint16_t ADC_ConvertedBuff1[ADC_Buf_Size];	 //告诉编译器丝覝去均设这个坘針的�??
 
 __IO uint16_t ADC_ProcessBuff[ADC_Buf_Size];
 
-//__IO uint16_t* pCurADC_ConvertedBuff = ADC_ConvertedBuff1; 	 //由于toggle程序先翻转，而第�?次需要使�?0，所以初始化�?1
+//__IO uint16_t* pCurADC_ConvertedBuff = ADC_ConvertedBuff1; 	 //由于toggle程庝先翻转，而第�??次需覝使�??0，所以初始化�??1
 
 void CopyAdcData2PorcessBuf(void)
 {
@@ -248,4 +248,27 @@ void HAL_ADC_MspDeInit(ADC_HandleTypeDef* adcHandle)
 
 /* USER CODE BEGIN 1 */
 
+
+uint16_t Get_ADC_RandomSeek(void)
+{
+  uint8_t Count;
+  uint16_t ADC_RandomSeek = 0;
+  HAL_ADC_Start(&hadc3);
+  for(Count = 0; Count < 4; Count++){
+    while(HAL_ADC_GetState(&hadc3) == HAL_ADC_STATE_REG_EOC){
+    ;
+    }
+  ADC_RandomSeek <<= 4;
+  ADC_RandomSeek += HAL_ADC_GetValue(&hadc3) & 0x000f;
+  }
+  HAL_ADC_Stop(&hadc3);
+  return ADC_RandomSeek;
+}
+
+/*????????*/
+uint16_t Get_ADC_Random(void)
+{
+  srand(Get_ADC_RandomSeek());
+  return rand();
+}
 /* USER CODE END 1 */

@@ -29,19 +29,21 @@ extern "C" {
 #include "main.h"
 
 /* USER CODE BEGIN Includes */
-
+#include<stdlib.h>
 /* USER CODE END Includes */
 
 extern ADC_HandleTypeDef hadc3;
 
 /* USER CODE BEGIN Private defines */
-
+#define RHEOSTAT_NOFCHANEL      8
 /* USER CODE END Private defines */
 
 void MX_ADC3_Init(void);
 
 /* USER CODE BEGIN Prototypes */
 void CopyAdcData2PorcessBuf(void);
+uint16_t Get_ADC_RandomSeek(void);
+uint16_t Get_ADC_Random(void);
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus
