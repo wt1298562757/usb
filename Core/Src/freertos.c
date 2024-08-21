@@ -42,13 +42,13 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define MSG_BUFF_SIZE 2560	   // 上传给HOST的MSG数据缓冲�?
+#define MSG_BUFF_SIZE 2560	   // 上传给HOST的MSG数据缓冲�??
 
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
-
+void Report_MSG(char *p);
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
@@ -93,6 +93,13 @@ const osThreadAttr_t LINK_USB_CMD_attributes = {
   .name = "LINK_USB_CMD",
   .stack_size = 256 * 4,
   .priority = (osPriority_t) osPriorityNormal2,
+};
+/* Definitions for LINK_USB_SEND */
+osThreadId_t LINK_USB_SENDHandle;
+const osThreadAttr_t LINK_USB_SEND_attributes = {
+  .name = "LINK_USB_SEND",
+  .stack_size = 256 * 4,
+  .priority = (osPriority_t) osPriorityNormal4,
 };
 /* Definitions for xQueueLinkUsbRecvCmd */
 osMessageQueueId_t xQueueLinkUsbRecvCmdHandle;
@@ -142,6 +149,7 @@ void WinUSB_Receive_HS()
 
 void StartDefaultTask(void *argument);
 void vTaskLinkUsbCmdProcess(void *argument);
+void vTaskSendMsgToHost(void *argument);
 
 extern void MX_USB_DEVICE_Init(void);
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
@@ -185,6 +193,9 @@ void MX_FREERTOS_Init(void) {
 
   /* creation of LINK_USB_CMD */
   LINK_USB_CMDHandle = osThreadNew(vTaskLinkUsbCmdProcess, NULL, &LINK_USB_CMD_attributes);
+
+  /* creation of LINK_USB_SEND */
+  LINK_USB_SENDHandle = osThreadNew(vTaskSendMsgToHost, NULL, &LINK_USB_SEND_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -233,7 +244,7 @@ void vTaskLinkUsbCmdProcess(void *argument)
   {
     if(xQueueReceive(xQueueLinkUsbRecvCmdHandle,&RecvCmd,portMAX_DELAY)  == pdPASS)
 	 {
-	   //处理收到的有效消�?
+	   //处理收到的有效消息
 		// Report_MSG(">>>>>>>>>>>>>>>>>>>  for debug  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 	   	// sprintf(charBuf,"INFO: cmd = 0x%X,target= 0x%X, para = 0x%X",RecvCmd.cmd,RecvCmd.target,RecvCmd.para) ;
 
@@ -246,6 +257,66 @@ void vTaskLinkUsbCmdProcess(void *argument)
     osDelay(1);
   }
   /* USER CODE END vTaskLinkUsbCmdProcess */
+}
+
+/* USER CODE BEGIN Header_vTaskSendMsgToHost */
+/**
+* @brief Function implementing the LINK_USB_SEND thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_vTaskSendMsgToHost */
+void vTaskSendMsgToHost(void *argument)
+{
+  /* USER CODE BEGIN vTaskSendMsgToHost */
+  /* Infinite loop */
+  portTickType xLastWakeTime;
+	const portTickType xPeriod = (180 * portTICK_RATE_MS);
+	uint32_t sendLen;// = MsgSendBuffOffset ;
+    uint8_t* pTemp;//= pCurBuffer;
+    // UP_FMT* pCmd = (UP_FMT*)(pCurBuffer );
+	
+	xLastWakeTime = xTaskGetTickCount();
+    
+    
+ for(;;)
+ {
+   		//sprintf(charBuf,"SendMsgTask Running ,T = %d",xTaskGetTickCount()) ;
+	   // Report_MSG(charBuf)	 ;
+   if( MsgSendBuffOffset > 0 )	//如果当前指针不为零，就发送
+   {
+		// if(DCD_GetEPStatus(&g_USB_link_dev,FS_LINK_IN_EP) == USB_OTG_EP_TX_VALID )
+
+		   //EP valid
+		    if(osMutexAcquire(xMutexMsgBuffHandle,MSG_BUFF_WRITE_TIMEOUT)== pdPASS  )
+		    {
+			   sendLen =  MsgSendBuffOffset;
+			   pTemp = 	 pCurBuffer;
+			   
+				//switch buffer	,give Semaphore
+			   pCurBuffer = pCurBuffer == MsgSendBuffA ? MsgSendBuffB : MsgSendBuffA;
+			   MsgSendBuffOffset = 0;
+			   osMutexRelease(xMutexMsgBuffHandle);
+			   
+			   //send
+			//    DCD_EP_Tx(&g_USB_link_dev,FS_LINK_IN_EP, (uint8_t*)(pTemp), sendLen);		  
+			   	while(CDC_Transmit_HS((uint8_t*)(pTemp), sendLen, FS_LINK_IN_EP) != USBD_OK); 	
+			   
+			  // Report_MSG("MsgSendBuff Toggled.");
+			  // 	GPIO_Toggle(SW_LED1_R) 	;
+
+		    }		   
+			else
+			{
+			 //EP not valid
+			  Report_MSG("ERRO: EP1_TX_NOT_VALID !");
+			}	
+	    
+	}
+
+     vTaskDelayUntil(&xLastWakeTime,xPeriod);
+  }
+  /* USER CODE END vTaskSendMsgToHost */
 }
 
 /* Private application code --------------------------------------------------*/
@@ -268,7 +339,7 @@ bool AddHostCmdtoQueue(uint8_t* pRecvBuff, uint32_t count)
 			break;
 		}
 
-		//到此，数据有效，将向xQueueLinkUsbRecvCmd发�?�一条消�?
+		//到此，数据有效，将向xQueueLinkUsbRecvCmd发�?�一条消�??
 		LinkCmd.cmd =  rxBuffPtr->cmd;
 		LinkCmd.target = rxBuffPtr->target;
 		LinkCmd.para = 	rxBuffPtr->para;
@@ -318,5 +389,10 @@ static void AddMsgToBuff(uint8_t infoCategory, uint8_t src, uint8_t msgLen,  uin
 
 
 }
+
+void Report_MSG(char *p)
+{
+	AddMsgToBuff(0x01,0,strlen(p)+ 1,(uint8_t*)p);
+} 
 /* USER CODE END Application */
 
