@@ -181,7 +181,7 @@ void MX_FREERTOS_Init(void) {
 
   /* Create the queue(s) */
   /* creation of xQueueLinkUsbRecvCmd */
-  xQueueLinkUsbRecvCmdHandle = osMessageQueueNew (8, sizeof(uint32_t), &xQueueLinkUsbRecvCmd_attributes);
+  xQueueLinkUsbRecvCmdHandle = osMessageQueueNew (8, sizeof(FS_LINK_CMD_FMT), &xQueueLinkUsbRecvCmd_attributes);
 
   /* USER CODE BEGIN RTOS_QUEUES */
   /* add queues, ... */
@@ -242,7 +242,7 @@ void vTaskLinkUsbCmdProcess(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    if(xQueueReceive(xQueueLinkUsbRecvCmdHandle,&RecvCmd,portMAX_DELAY)  == pdPASS)
+    if(osMessageQueueGet(xQueueLinkUsbRecvCmdHandle,&RecvCmd,NULL,osWaitForever)  == osOK)
 	 {
 	   //处理收到的有效消息
 		Report_MSG(">>>>>>>>>>>>>>>>>>>  for debug  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
@@ -277,7 +277,6 @@ void vTaskSendMsgToHost(void *argument)
     // UP_FMT* pCmd = (UP_FMT*)(pCurBuffer );
 	
 	xLastWakeTime = xTaskGetTickCount();
-  Report_MSG("vTaskSendMsgToHost !");
     
     
  for(;;)
@@ -289,7 +288,7 @@ void vTaskSendMsgToHost(void *argument)
 		// if(DCD_GetEPStatus(&g_USB_link_dev,FS_LINK_IN_EP) == USB_OTG_EP_TX_VALID )
 
 		   //EP valid
-		    if(osMutexAcquire(xMutexMsgBuffHandle,MSG_BUFF_WRITE_TIMEOUT)== pdPASS  )
+		    if(osMutexAcquire(xMutexMsgBuffHandle,MSG_BUFF_WRITE_TIMEOUT)== osOK  )
 		    {
 			   sendLen =  MsgSendBuffOffset;
 			   pTemp = 	 pCurBuffer;
@@ -337,7 +336,7 @@ bool AddHostCmdtoQueue(uint8_t* pRecvBuff, uint32_t count)
 
 		if(rxBuffPtr->startFlag != DOWN_START_FLAG ) 
 		{
-			break;
+			// break;
 		}
 
 		//到此，数据有效，将向xQueueLinkUsbRecvCmd发�?�一条消�??
@@ -345,7 +344,7 @@ bool AddHostCmdtoQueue(uint8_t* pRecvBuff, uint32_t count)
 		LinkCmd.target = rxBuffPtr->target;
 		LinkCmd.para = 	rxBuffPtr->para;
 
-		if(xQueueSend(xQueueLinkUsbRecvCmdHandle,&LinkCmd,10) !=pdPASS)
+		if(osMessageQueuePut(xQueueLinkUsbRecvCmdHandle,&LinkCmd,0,0) != osOK)
 		{
 		   //xQueueLinkUsbRecvCmd队列已满
 		  // GPIO_Toggle(SW_LED2_R) ;	 ;
@@ -370,7 +369,7 @@ static void AddMsgToBuff(uint8_t infoCategory, uint8_t src, uint8_t msgLen,  uin
 	onePkt.msgType = infoCategory;
 	onePkt.msgLenth = 	msgLen;
 
-  if(osMutexAcquire(xMutexMsgBuffHandle,MSG_BUFF_WRITE_TIMEOUT)== pdPASS  )
+  if(osMutexAcquire(xMutexMsgBuffHandle,MSG_BUFF_WRITE_TIMEOUT)== osOK  )
 	{
 	//copy the message header to CurBuff
   	memcpy(pCurBuffer + MsgSendBuffOffset, &onePkt, 12);	//消息头长12 byte
