@@ -222,7 +222,7 @@ void StartDefaultTask(void *argument)
   /* Infinite loop */
   for(;;)
   {
-		WinUSB_Receive_HS();
+		// WinUSB_Receive_HS();
     osDelay(1);
   }
   /* USER CODE END StartDefaultTask */
@@ -245,7 +245,7 @@ void vTaskLinkUsbCmdProcess(void *argument)
     if(xQueueReceive(xQueueLinkUsbRecvCmdHandle,&RecvCmd,portMAX_DELAY)  == pdPASS)
 	 {
 	   //处理收到的有效消息
-		// Report_MSG(">>>>>>>>>>>>>>>>>>>  for debug  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+		Report_MSG(">>>>>>>>>>>>>>>>>>>  for debug  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 	   	// sprintf(charBuf,"INFO: cmd = 0x%X,target= 0x%X, para = 0x%X",RecvCmd.cmd,RecvCmd.target,RecvCmd.para) ;
 
 		//	GetRunTimeStats();  //run time stat only 须使能TIM3
@@ -277,6 +277,7 @@ void vTaskSendMsgToHost(void *argument)
     // UP_FMT* pCmd = (UP_FMT*)(pCurBuffer );
 	
 	xLastWakeTime = xTaskGetTickCount();
+  Report_MSG("vTaskSendMsgToHost !");
     
     
  for(;;)
