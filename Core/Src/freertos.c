@@ -43,7 +43,7 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 #define MSG_BUFF_SIZE 2560	   // 上传给HOST的MSG数据缓冲�??
-
+#define MAX_MSG_LENTH 512
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -77,6 +77,7 @@ uint8_t* pCurBuffer = MsgSendBuffA;
 uint32_t  MsgSendBuffOffset = 0;
 
 static  uint8_t USB_TX_pktSn =0;
+char charBuf[MAX_MSG_LENTH];
 //-----------------------------------------------
 
 /* USER CODE END Variables */
@@ -246,12 +247,13 @@ void vTaskLinkUsbCmdProcess(void *argument)
 	 {
 	   //处理收到的有效消息
 		Report_MSG(">>>>>>>>>>>>>>>>>>>  for debug  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-	   	// sprintf(charBuf,"INFO: cmd = 0x%X,target= 0x%X, para = 0x%X",RecvCmd.cmd,RecvCmd.target,RecvCmd.para) ;
+	  sprintf(charBuf,"INFO: cmd = 0x%X,target= 0x%X, para = 0x%X",RecvCmd.cmd,RecvCmd.target,RecvCmd.para) ;
+    Report_MSG(charBuf);
 
 		//	GetRunTimeStats();  //run time stat only 须使能TIM3
 	   switch(RecvCmd.cmd)
 	   {
-
+        
      }
     }
     osDelay(1);
@@ -336,7 +338,7 @@ bool AddHostCmdtoQueue(uint8_t* pRecvBuff, uint32_t count)
 
 		if(rxBuffPtr->startFlag != DOWN_START_FLAG ) 
 		{
-			// break;
+			break;
 		}
 
 		//到此，数据有效，将向xQueueLinkUsbRecvCmd发�?�一条消�??
@@ -392,7 +394,7 @@ static void AddMsgToBuff(uint8_t infoCategory, uint8_t src, uint8_t msgLen,  uin
 
 void Report_MSG(char *p)
 {
-	AddMsgToBuff(0x01,0,strlen(p)+ 1,(uint8_t*)p);
+	AddMsgToBuff(0x00,0,strlen(p)+ 1,(uint8_t*)p);
 } 
 /* USER CODE END Application */
 
