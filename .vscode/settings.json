@@ -23,6 +23,13 @@
         "task.h": "c",
         "usbd_cdc_if.h": "c",
         "linkusb.h": "c",
-        "the_cmd.h": "c"
+        "the_cmd.h": "c",
+        "lua.h": "c",
+        "lualib.h": "c",
+        "lauxlib.h": "c",
+        "time.h": "c",
+        "dac7568.h": "c",
+        "gpio_control.h": "c",
+        "luaconf.h": "c"
     }
 }

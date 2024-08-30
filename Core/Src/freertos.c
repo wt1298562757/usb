@@ -42,7 +42,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define MSG_BUFF_SIZE 2560	   // 上传给HOST的MSG数据缓冲�??
+#define MSG_BUFF_SIZE 2560	   // 上传给HOST的MSG数据缓冲�????
 #define MAX_MSG_LENTH 512
 /* USER CODE END PD */
 
@@ -245,7 +245,7 @@ void vTaskLinkUsbCmdProcess(void *argument)
   {
     if(osMessageQueueGet(xQueueLinkUsbRecvCmdHandle,&RecvCmd,NULL,osWaitForever)  == osOK)
 	 {
-	   //处理收到的有效消息
+	   //处理收到的有效消�??
 		Report_MSG(">>>>>>>>>>>>>>>>>>>  for debug  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 	  sprintf(charBuf,"INFO: cmd = 0x%X,target= 0x%X, para = 0x%X",RecvCmd.cmd,RecvCmd.target,RecvCmd.para) ;
     Report_MSG(charBuf);
@@ -285,7 +285,7 @@ void vTaskSendMsgToHost(void *argument)
  {
    		//sprintf(charBuf,"SendMsgTask Running ,T = %d",xTaskGetTickCount()) ;
 	   // Report_MSG(charBuf)	 ;
-   if( MsgSendBuffOffset > 0 )	//如果当前指针不为零，就发送
+   if( MsgSendBuffOffset > 0 )	//如果当前指针不为零，就发�??
    {
 		// if(DCD_GetEPStatus(&g_USB_link_dev,FS_LINK_IN_EP) == USB_OTG_EP_TX_VALID )
 
@@ -341,7 +341,7 @@ bool AddHostCmdtoQueue(uint8_t* pRecvBuff, uint32_t count)
 			break;
 		}
 
-		//到此，数据有效，将向xQueueLinkUsbRecvCmd发�?�一条消�??
+		//到此，数据有效，将向xQueueLinkUsbRecvCmd发�?�一条消�????
 		LinkCmd.cmd =  rxBuffPtr->cmd;
 		LinkCmd.target = rxBuffPtr->target;
 		LinkCmd.para = 	rxBuffPtr->para;

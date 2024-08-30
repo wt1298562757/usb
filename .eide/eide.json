@@ -274,6 +274,108 @@
               }
             ],
             "folders": []
+          },
+          {
+            "name": "LUA",
+            "files": [
+              {
+                "path": "LUA/lapi.c"
+              },
+              {
+                "path": "LUA/lauxlib.c"
+              },
+              {
+                "path": "LUA/lbaselib.c"
+              },
+              {
+                "path": "LUA/lcode.c"
+              },
+              {
+                "path": "LUA/lcorolib.c"
+              },
+              {
+                "path": "LUA/lctype.c"
+              },
+              {
+                "path": "LUA/ldblib.c"
+              },
+              {
+                "path": "LUA/ldebug.c"
+              },
+              {
+                "path": "LUA/ldo.c"
+              },
+              {
+                "path": "LUA/ldump.c"
+              },
+              {
+                "path": "LUA/lfunc.c"
+              },
+              {
+                "path": "LUA/lgc.c"
+              },
+              {
+                "path": "LUA/linit.c"
+              },
+              {
+                "path": "LUA/liolib.c"
+              },
+              {
+                "path": "LUA/llex.c"
+              },
+              {
+                "path": "LUA/lmathlib.c"
+              },
+              {
+                "path": "LUA/lmem.c"
+              },
+              {
+                "path": "LUA/loadlib.c"
+              },
+              {
+                "path": "LUA/lobject.c"
+              },
+              {
+                "path": "LUA/lopcodes.c"
+              },
+              {
+                "path": "LUA/loslib.c"
+              },
+              {
+                "path": "LUA/lparser.c"
+              },
+              {
+                "path": "LUA/lstate.c"
+              },
+              {
+                "path": "LUA/lstring.c"
+              },
+              {
+                "path": "LUA/lstrlib.c"
+              },
+              {
+                "path": "LUA/ltable.c"
+              },
+              {
+                "path": "LUA/ltablib.c"
+              },
+              {
+                "path": "LUA/ltm.c"
+              },
+              {
+                "path": "LUA/lundump.c"
+              },
+              {
+                "path": "LUA/lutf8lib.c"
+              },
+              {
+                "path": "LUA/lvm.c"
+              },
+              {
+                "path": "LUA/lzio.c"
+              }
+            ],
+            "folders": []
           }
         ]
       },
@@ -480,7 +582,8 @@
           ".cmsis/include",
           "MDK-ARM/RTE/_TAIER_usb_hs",
           "STM32_USB_OTG_Driver/inc",
-          "User_files"
+          "User_files",
+          "LUA"
         ],
         "libList": [],
         "defineList": [
@@ -498,7 +601,8 @@
           "beforeBuildTasks": [],
           "afterBuildTasks": [],
           "global": {
-            "output-debug-info": "enable"
+            "output-debug-info": "enable",
+            "use-microLIB": true
           },
           "c/cpp-compiler": {
             "optimization": "level-0",

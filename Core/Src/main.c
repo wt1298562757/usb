@@ -27,6 +27,11 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "lua.h"
+#include "lauxlib.h"
+#include "lualib.h"
+#include "stdio.h"
+#include "stdlib.h"
 
 
 /* USER CODE END Includes */
@@ -49,7 +54,12 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+/* 测试的Lua代码字符�??? */
 
+const char lua_test[] = {
+
+    "HAL_GPIO_WritePin(GPIOD,GPIO_PIN_12,GPIO_PIN_RESET)\n"
+};
 
 /* USER CODE END PV */
 
@@ -62,7 +72,17 @@ void MX_FREERTOS_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+/* 运行Lua */
+static int do_file_script(void)
+{
+    lua_State *L;
+    L = luaL_newstate(); /* 建立Lua运行环境 */
+    luaL_openlibs(L);
+    luaopen_base(L);
+    luaL_dostring(L, lua_test); /* 运行Lua脚本 */
+    lua_close(L);
+    return 0;
+}
 /* USER CODE END 0 */
 
 /**
@@ -98,7 +118,7 @@ int main(void)
   MX_ADC3_Init();
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
-
+  do_file_script();
   /* USER CODE END 2 */
 
   /* Init scheduler */
