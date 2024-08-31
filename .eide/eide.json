@@ -274,6 +274,114 @@
               }
             ],
             "folders": []
+          },
+          {
+            "name": "Lua",
+            "files": [
+              {
+                "path": "Middlewares/Third_Party/Lua/lapi.c"
+              },
+              {
+                "path": "Middlewares/Third_Party/Lua/lauxlib.c"
+              },
+              {
+                "path": "Middlewares/Third_Party/Lua/lbaselib.c"
+              },
+              {
+                "path": "Middlewares/Third_Party/Lua/lcode.c"
+              },
+              {
+                "path": "Middlewares/Third_Party/Lua/lcorolib.c"
+              },
+              {
+                "path": "Middlewares/Third_Party/Lua/lctype.c"
+              },
+              {
+                "path": "Middlewares/Third_Party/Lua/ldblib.c"
+              },
+              {
+                "path": "Middlewares/Third_Party/Lua/ldebug.c"
+              },
+              {
+                "path": "Middlewares/Third_Party/Lua/ldo.c"
+              },
+              {
+                "path": "Middlewares/Third_Party/Lua/ldump.c"
+              },
+              {
+                "path": "Middlewares/Third_Party/Lua/lfunc.c"
+              },
+              {
+                "path": "Middlewares/Third_Party/Lua/lgc.c"
+              },
+              {
+                "path": "Middlewares/Third_Party/Lua/linit.c"
+              },
+              {
+                "path": "Middlewares/Third_Party/Lua/liolib.c"
+              },
+              {
+                "path": "Middlewares/Third_Party/Lua/llex.c"
+              },
+              {
+                "path": "Middlewares/Third_Party/Lua/lmathlib.c"
+              },
+              {
+                "path": "Middlewares/Third_Party/Lua/lmem.c"
+              },
+              {
+                "path": "Middlewares/Third_Party/Lua/loadlib.c"
+              },
+              {
+                "path": "Middlewares/Third_Party/Lua/lobject.c"
+              },
+              {
+                "path": "Middlewares/Third_Party/Lua/lopcodes.c"
+              },
+              {
+                "path": "Middlewares/Third_Party/Lua/loslib.c"
+              },
+              {
+                "path": "Middlewares/Third_Party/Lua/lparser.c"
+              },
+              {
+                "path": "Middlewares/Third_Party/Lua/lstate.c"
+              },
+              {
+                "path": "Middlewares/Third_Party/Lua/lstring.c"
+              },
+              {
+                "path": "Middlewares/Third_Party/Lua/lstrlib.c"
+              },
+              {
+                "path": "Middlewares/Third_Party/Lua/ltable.c"
+              },
+              {
+                "path": "Middlewares/Third_Party/Lua/ltablib.c"
+              },
+              {
+                "path": "Middlewares/Third_Party/Lua/ltm.c"
+              },
+              {
+                "path": "Middlewares/Third_Party/Lua/lua.c"
+              },
+              {
+                "path": "Middlewares/Third_Party/Lua/luac.c"
+              },
+              {
+                "path": "Middlewares/Third_Party/Lua/lundump.c"
+              },
+              {
+                "path": "Middlewares/Third_Party/Lua/lutf8lib.c"
+              },
+              {
+                "path": "Middlewares/Third_Party/Lua/lvm.c"
+              },
+              {
+                "path": "Middlewares/Third_Party/Lua/lzio.c"
+              }
+            ],
+            "folders": []
           }
         ]
       },
@@ -304,7 +412,9 @@
         "<virtual_root>/Application/User_files/MeasureProcess.c",
         "<virtual_root>/Application/User_files/eeprom.c",
         "<virtual_root>/Application/User_files/DAC7568.c",
-        "<virtual_root>/Application/User_files/gpio_control.c"
+        "<virtual_root>/Application/User_files/gpio_control.c",
+        "<virtual_root>/Middlewares/Lua/lua.c",
+        "<virtual_root>/Middlewares/Lua/luac.c"
       ],
       "toolchain": "AC5",
       "compileConfig": {
@@ -428,7 +538,7 @@
           "vendor": "ST",
           "cpuName": "STM32F429IG"
         },
-        "proType": 0,
+        "proType": 1,
         "speed": 8000,
         "otherCmds": ""
       },
@@ -480,7 +590,8 @@
           ".cmsis/include",
           "MDK-ARM/RTE/_TAIER_usb_hs",
           "STM32_USB_OTG_Driver/inc",
-          "User_files"
+          "User_files",
+          "Middlewares/Third_Party/Lua"
         ],
         "libList": [],
         "defineList": [

@@ -32,7 +32,13 @@
 #include "stdbool.h"
 #include "THE_CMD.h"
 //----------------------------------------------------
+#include "lua.h"     // Lua数据类型与函数接口
+#include "lauxlib.h" // Lua与C交互辅助函数接口
+#include "lualib.h"  // Lua标准库打开接口
 
+// #define LUA_LIB
+// #include "luaconf.h" // Lua配置文件
+#include "lapi.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -48,6 +54,7 @@
 
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
+void *rtos_alloc_for_lua(void *ud, void *ptr, size_t osize, size_t nsize);
 void Report_MSG(char *p);
 /* USER CODE END PM */
 
@@ -85,7 +92,7 @@ char charBuf[MAX_MSG_LENTH];
 osThreadId_t defaultTaskHandle;
 const osThreadAttr_t defaultTask_attributes = {
   .name = "defaultTask",
-  .stack_size = 128 * 4,
+  .stack_size = 512 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
 /* Definitions for LINK_USB_CMD */
@@ -155,6 +162,19 @@ void vTaskSendMsgToHost(void *argument);
 extern void MX_USB_DEVICE_Init(void);
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
+/* Hook prototypes */
+void vApplicationStackOverflowHook(xTaskHandle xTask, signed char *pcTaskName);
+
+/* USER CODE BEGIN 4 */
+void vApplicationStackOverflowHook(xTaskHandle xTask, signed char *pcTaskName)
+{
+  (void)xTask;  (void)pcTaskName;
+   /* Run time stack overflow checking is performed if
+   configCHECK_FOR_STACK_OVERFLOW is defined to 1 or 2. This hook function is
+   called if a stack overflow is detected. */
+}
+/* USER CODE END 4 */
+
 /**
   * @brief  FreeRTOS initialization
   * @param  None
@@ -220,11 +240,36 @@ void StartDefaultTask(void *argument)
   /* init code for USB_DEVICE */
   MX_USB_DEVICE_Init();
   /* USER CODE BEGIN StartDefaultTask */
+  // 创建 Lua 线程
+  lua_State *L = lua_newstate(rtos_alloc_for_lua, NULL);
+  // volatile int checkTemp = lua_gettop(L);
+  if (L) {
+    volatile int checkTemp = lua_gettop(L); // 堆栈的当前顶部
+    lua_pushglobaltable(L); // 检查这一行是否成功
+    checkTemp = lua_gettop(L);
+    lua_pushvalue(L, -1); // 复制全局表
+    checkTemp = lua_gettop(L);
+    lua_setglobal(L, "_G"); // 直接设置 _G
+    checkTemp = lua_gettop(L);
+    lua_pushliteral(L, LUA_VERSION);
+    checkTemp = lua_gettop(L);
+    lua_setglobal(L, "_VERSION"); // 直接设置 _VERSION
+    checkTemp = lua_gettop(L);
+    luaL_openlibs(L); // 观察是否继续出错
+  }
+  /*
+  if (l_likely(L)) {
+    lua_atpanic(L, &panic);
+    lua_setwarnf(L, warnfoff, L); // default is warnings off
+  }
+  */
+  luaL_openlibs(L); // 打开标准库
   /* Infinite loop */
   for(;;)
   {
 		// WinUSB_Receive_HS();
-    osDelay(1);
+    HAL_GPIO_TogglePin(LED_SYS_GPIO_Port, LED_SYS_Pin);
+    osDelay(500);
   }
   /* USER CODE END StartDefaultTask */
 }
@@ -323,6 +368,16 @@ void vTaskSendMsgToHost(void *argument)
 
 /* Private application code --------------------------------------------------*/
 /* USER CODE BEGIN Application */
+void *rtos_alloc_for_lua(void *ud, void *ptr, size_t osize, size_t nsize) {
+    (void)ud; (void)osize;  // not used
+    if (nsize == 0) {
+        vPortFree(ptr);
+        return NULL;
+    } else {
+        return pvPortMalloc(nsize);
+    }
+}
+
 bool AddHostCmdtoQueue(uint8_t* pRecvBuff, uint32_t count)
 {
 	bool success = false;

@@ -1,0 +1,22 @@
+Level,Function,Stack Frame,Source,PC,Return Address,Stack Used
+0,"_sys_exit"," 0 @ 0x20021010","handlers.s",0x08001C4A,"R14: 0x0800113A",480
+0,"abort"," 8 @ 0x20021010","handlers.s",0x08001136,"[0x20021014]: 0x080186BC",480
+0,"luaD_throw","16 @ 0x20021018","ldo.c:132:7",0x080186B8,"[0x20021024]: 0x08018CFC",472
+0,"luaG_errormsg","16 @ 0x20021028","ldebug.c:835:3",0x08018CF8,"[0x20021034]: 0x08018F58",456
+0,"luaG_runerror","40 @ 0x20021038","ldebug.c:852:3",0x08018F54,"[0x2002104C]: 0x0802ABB4",440
+0,"typeerror","32 @ 0x20021060","ldebug.c:745:3",0x0802ABB0,"[0x2002107C]: 0x08019134",400
+0,"luaG_typeerror","24 @ 0x20021080","ldebug.c:754:3",0x08019130,"[0x20021094]: 0x0801FFB2",368
+0,"luaV_finishset","40 @ 0x20021098","lvm.c:352:9",0x0801FFAE,"[0x200210BC]: 0x0800E884",344
+0,"auxsetstr","32 @ 0x200210C0","lapi.c:840:5",0x0800E880,"[0x200210DC]: 0x08021AE4",304
+0,"lua_setfield","24 @ 0x200210E0","lapi.c:873:3",0x08021AE0,"[0x200210F4]: 0x0801B142",272
+0,"luaL_setfuncs","24 @ 0x200210F8","lauxlib.c:953:5",0x0801B13E,"[0x2002110C]: 0x080222AE",248
+0,"luaopen_base"," 8 @ 0x20021110","lbaselib.c:540:3",0x080222AA,"[0x20021114]: 0x08024CDE",224
+0,"precallC","40 @ 0x20021118","ldo.c:529:3",0x08024CDC,"[0x2002113C]: 0x08018274",216
+0,"luaD_precall","56 @ 0x20021140","ldo.c:595:7",0x08018270,"[0x20021174]: 0x0800F0EA",176
+0,"ccall","32 @ 0x20021178","ldo.c:635:3",0x0800F0E6,"[0x20021194]: 0x08017F98",120
+0,"luaD_callnoyield","16 @ 0x20021198","ldo.c:655:3",0x08017F94,"[0x200211A4]: 0x0802096A"," 88"
+0,"lua_callk","32 @ 0x200211A8","lapi.c:1020:5",0x08020966,"[0x200211C4]: 0x0801B0A4"," 72"
+0,"luaL_requiref","24 @ 0x200211C8","lauxlib.c:991:5",0x0801B0A0,"[0x200211DC]: 0x0801AF34"," 40"
+0,"luaL_openlibs","16 @ 0x200211E0","linit.c:61:5",0x0801AF30,"[0x200211EC]: 0x08007814"," 16"
+0,"StartDefaultTask"," 0 @ 0x200211F0","freertos.c:238:3",0x08007810,"<undefined>: 0xFFFFFFFF","  0"
+0,"Top of stack - no unwinding symbols at 0x8007810",,,,,

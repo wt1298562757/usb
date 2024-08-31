@@ -33,7 +33,7 @@ __IO uint16_t ADC_ConvertedBuff0[ADC_Buf_Size];	//__IO = volatile,表示该坘�
 
 __IO uint16_t ADC_ProcessBuff[ADC_Buf_Size];
 
-//__IO uint16_t* pCurADC_ConvertedBuff = ADC_ConvertedBuff1; 	 //由于toggle程庝先翻转，而第�??次需覝使�??0，所以初始化�??1
+//__IO uint16_t* pCurADC_ConvertedBuff = ADC_ConvertedBuff1; 	 //由于toggle程庝先翻转，而第�??次需覝使�??0，所以初始化�??1
 
 void CopyAdcData2PorcessBuf(void)
 {
