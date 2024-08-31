@@ -138,6 +138,23 @@
 #endif
 #endif
 
+// Mannual implementation of time() and system() for STM32
+time_t time(time_t *time)
+{
+    return 0;
+}
+
+void exit(int status)
+{
+    while(1){
+      volatile int temp = status;
+    };
+}
+
+int system(const char * string)
+{
+    return 0;
+}
 
 static int os_execute (lua_State *L) {
   const char *cmd = luaL_optstring(L, 1, NULL);

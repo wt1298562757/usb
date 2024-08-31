@@ -32,6 +32,8 @@
 #include "stdbool.h"
 #include "THE_CMD.h"
 //----------------------------------------------------
+#include "tim.h"
+
 #include "lua.h"     // Lua数据类型与函数接口
 #include "lauxlib.h" // Lua与C交互辅助函数接口
 #include "lualib.h"  // Lua标准库打开接口
@@ -163,7 +165,22 @@ extern void MX_USB_DEVICE_Init(void);
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
 /* Hook prototypes */
+void configureTimerForRunTimeStats(void);
+unsigned long getRunTimeCounterValue(void);
 void vApplicationStackOverflowHook(xTaskHandle xTask, signed char *pcTaskName);
+
+/* USER CODE BEGIN 1 */
+/* Functions needed when configGENERATE_RUN_TIME_STATS is on */
+__weak void configureTimerForRunTimeStats(void)
+{
+  HAL_TIM_Base_Start_IT(&htim10);
+}
+
+__weak unsigned long getRunTimeCounterValue(void)
+{
+  return (unsigned long)htim10.Instance->CNT;
+}
+/* USER CODE END 1 */
 
 /* USER CODE BEGIN 4 */
 void vApplicationStackOverflowHook(xTaskHandle xTask, signed char *pcTaskName)
@@ -245,17 +262,6 @@ void StartDefaultTask(void *argument)
   // volatile int checkTemp = lua_gettop(L);
   if (L) {
     volatile int checkTemp = lua_gettop(L); // 堆栈的当前顶部
-    lua_pushglobaltable(L); // 检查这一行是否成功
-    checkTemp = lua_gettop(L);
-    lua_pushvalue(L, -1); // 复制全局表
-    checkTemp = lua_gettop(L);
-    lua_setglobal(L, "_G"); // 直接设置 _G
-    checkTemp = lua_gettop(L);
-    lua_pushliteral(L, LUA_VERSION);
-    checkTemp = lua_gettop(L);
-    lua_setglobal(L, "_VERSION"); // 直接设置 _VERSION
-    checkTemp = lua_gettop(L);
-    luaL_openlibs(L); // 观察是否继续出错
   }
   /*
   if (l_likely(L)) {

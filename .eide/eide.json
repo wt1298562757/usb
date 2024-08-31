@@ -53,6 +53,9 @@
                   },
                   {
                     "path": "Core/Src/spi.c"
+                  },
+                  {
+                    "path": "Core/Src/tim.c"
                   }
                 ],
                 "folders": []
@@ -609,7 +612,8 @@
           "beforeBuildTasks": [],
           "afterBuildTasks": [],
           "global": {
-            "output-debug-info": "enable"
+            "output-debug-info": "enable",
+            "use-microLIB": true
           },
           "c/cpp-compiler": {
             "optimization": "level-0",
