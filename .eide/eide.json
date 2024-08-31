@@ -385,6 +385,18 @@
               }
             ],
             "folders": []
+          },
+          {
+            "name": "SEGGER",
+            "files": [
+              {
+                "path": "Middlewares/SEGGER/SEGGER_RTT.c"
+              },
+              {
+                "path": "Middlewares/SEGGER/SEGGER_RTT_printf.c"
+              }
+            ],
+            "folders": []
           }
         ]
       },
@@ -594,7 +606,8 @@
           "MDK-ARM/RTE/_TAIER_usb_hs",
           "STM32_USB_OTG_Driver/inc",
           "User_files",
-          "Middlewares/Third_Party/Lua"
+          "Middlewares/Third_Party/Lua",
+          "Middlewares/SEGGER"
         ],
         "libList": [],
         "defineList": [

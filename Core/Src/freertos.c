@@ -34,6 +34,7 @@
 //----------------------------------------------------
 #include "tim.h"
 
+// #include "SEGGER_RTT.h"
 #include "lua.h"     // Lua数据类型与函数接口
 #include "lauxlib.h" // Lua与C交互辅助函数接口
 #include "lualib.h"  // Lua标准库打开接口

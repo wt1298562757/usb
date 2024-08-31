@@ -28,7 +28,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "SEGGER_RTT.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -38,7 +38,12 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+/* With GCC, small printf (option LD Linker->Libraries->Small printf set to 'Yes') calls __io_putchar() */
+#ifdef __GNUC__
+#define PUTCHAR_PROTOTYPE int __io_putchar(int ch) // 实现__io_putchar函数
+#else
+#define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
+#endif /* __GNUC__ */
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -62,7 +67,13 @@ void MX_FREERTOS_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+PUTCHAR_PROTOTYPE
+{
+	// 实际发送操作，这里可以改成自己真实需要操作的端口
+  // HAL_UART_Transmit(&huart3, (uint8_t *)&ch, 1, 0xFFFF);
+  SEGGER_RTT_PutChar(0, ch);
+  return ch;
+}
 /* USER CODE END 0 */
 
 /**
@@ -99,7 +110,10 @@ int main(void)
   MX_SPI1_Init();
   MX_TIM10_Init();
   /* USER CODE BEGIN 2 */
-
+  SEGGER_RTT_Init();
+  SEGGER_RTT_TerminalOut(0, RTT_CTRL_CLEAR RTT_CTRL_BG_BLACK \
+                            RTT_CTRL_TEXT_BRIGHT_GREEN "RTT Terminal 0 is ready.\r\n" \
+                            RTT_CTRL_TEXT_BRIGHT_WHITE);
   /* USER CODE END 2 */
 
   /* Init scheduler */
