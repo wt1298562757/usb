@@ -155,7 +155,12 @@ void WinUSB_Receive_HS()
 	
 }
 //------------------------------------------
-
+static int lua_led_on(lua_State *L)
+{
+    // HAL_GPIO_TogglePin(LED_SYS_GPIO_Port, LED_SYS_Pin);
+    HAL_GPIO_WritePin(LED_SYS_GPIO_Port, LED_SYS_Pin, GPIO_PIN_RESET);
+    return 1;
+}
 /* USER CODE END FunctionPrototypes */
 
 void StartDefaultTask(void *argument);
@@ -260,23 +265,38 @@ void StartDefaultTask(void *argument)
   /* USER CODE BEGIN StartDefaultTask */
   // 创建 Lua 线程
   lua_State *L = lua_newstate(rtos_alloc_for_lua, NULL);
+  Printf("Lua State Created");
+  lua_gc(L, LUA_GCSTOP);  // 停止垃圾回收
   // volatile int checkTemp = lua_gettop(L);
-  if (L) {
-    volatile int checkTemp = lua_gettop(L); // 堆栈的当前顶部
+  if (L != NULL) {
+    volatile int checkTemp = lua_gettop(L); // TAG: DEBUG 堆栈的当前顶部
+  } else {
+    volatile int checkTemp = 10086; // 10086 为错误假值
   }
-  /*
-  if (l_likely(L)) {
-    lua_atpanic(L, &panic);
-    lua_setwarnf(L, warnfoff, L); // default is warnings off
-  }
-  */
-  luaL_openlibs(L); // 打开标准库
+
+  // luaL_openlibs(L); // 打开标准库
+  // luaopen_base(L);  // 打开基础库
+  // 自定义 C 函数库
+  static const struct luaL_Reg mylib[] =
+  {
+      {"led_on",lua_led_on},
+      {NULL,NULL}
+  };
+  // Lua 主循环
+  const char LUA_SCRIPT_GLOBAL_ON[] = "led_on()";
+  //    "while 1 do\n"
+  //    "  led_on()\n"
+  //    "end";
+  // 开始 Lua 任务
+  luaL_setfuncs(L, mylib, 0);
+  luaL_dostring(L, LUA_SCRIPT_GLOBAL_ON);
+  HAL_GPIO_WritePin(LED_SYS_GPIO_Port, LED_SYS_Pin, GPIO_PIN_SET);
   /* Infinite loop */
   for(;;)
   {
 		// WinUSB_Receive_HS();
     HAL_GPIO_TogglePin(LED_SYS_GPIO_Port, LED_SYS_Pin);
-    osDelay(500);
+    osDelay(250); // LED 闪烁表明 Lua 异常退出了主循环
   }
   /* USER CODE END StartDefaultTask */
 }

@@ -33,3 +33,5 @@ MDK-ARM/RTE/_TAIER_usb_hs/RTE_Components.h
 MDK-ARM/TAIER_usb_hs/TAIER_usb_hs_TAIER_usb_hs.dep
 MDK-ARM/TAIER_usb_hs/TAIER_usb_hs.lnp
 MDK-ARM/TAIER_usb_hs/TAIER_usb_hs.sct
+
+Debugger/Ozone_*.csv
