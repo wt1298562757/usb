@@ -257,46 +257,54 @@ void MX_FREERTOS_Init(void) {
   * @param  argument: Not used
   * @retval None
   */
+ 
+static int lua_tester()
+{
+    printf("Lua tester runned!\r\n");
+    return 1;
+}
+
 /* USER CODE END Header_StartDefaultTask */
 void StartDefaultTask(void *argument)
 {
   /* init code for USB_DEVICE */
-  MX_USB_DEVICE_Init();
+  // MX_USB_DEVICE_Init();
   /* USER CODE BEGIN StartDefaultTask */
+
+
+
   // 创建 Lua 线程
   lua_State *L = lua_newstate(rtos_alloc_for_lua, NULL);
-  Printf("Lua State Created");
-  lua_gc(L, LUA_GCSTOP);  // 停止垃圾回收
-  // volatile int checkTemp = lua_gettop(L);
-  if (L != NULL) {
-    volatile int checkTemp = lua_gettop(L); // TAG: DEBUG 堆栈的当前顶部
+  if(L != NULL) {
+    printf("Lua State Created.\r\n");
   } else {
-    volatile int checkTemp = 10086; // 10086 为错误假值
+    printf("Lua State Create Failed!\r\n");
   }
+  lua_gc(L, LUA_GCSTOP); // 停止垃圾回收
+  luaL_openlibs(L); // 打开标准库
 
-  // luaL_openlibs(L); // 打开标准库
-  // luaopen_base(L);  // 打开基础库
-  // 自定义 C 函数库
-  static const struct luaL_Reg mylib[] =
-  {
-      {"led_on",lua_led_on},
-      {NULL,NULL}
-  };
-  // Lua 主循环
-  const char LUA_SCRIPT_GLOBAL_ON[] = "led_on()";
-  //    "while 1 do\n"
-  //    "  led_on()\n"
-  //    "end";
   // 开始 Lua 任务
-  luaL_setfuncs(L, mylib, 0);
-  luaL_dostring(L, LUA_SCRIPT_GLOBAL_ON);
+  luaL_dostring(L, "print('Naisu, Lua!')");
+
+  // 自定义 C 函数库
+  static const struct luaL_Reg func_lib[] = {
+      {"lua_tester", lua_tester},
+      {NULL, NULL}
+  };
+  luaL_newlib(L, func_lib); // 创建一个新的库
+  lua_setglobal(L, "testlib"); // 将库设置为全局变量
+
+  luaL_dostring(L, "print('Naisu, Lua!')");
+  luaL_dostring(L, "testlib.lua_tester()"); // 通过库调用函数
+
+
+
   HAL_GPIO_WritePin(LED_SYS_GPIO_Port, LED_SYS_Pin, GPIO_PIN_SET);
   /* Infinite loop */
   for(;;)
   {
-		// WinUSB_Receive_HS();
     HAL_GPIO_TogglePin(LED_SYS_GPIO_Port, LED_SYS_Pin);
-    osDelay(250); // LED 闪烁表明 Lua 异常退出了主循环
+    osDelay(250); // LED 闪烁表明运行到了此处
   }
   /* USER CODE END StartDefaultTask */
 }
@@ -400,8 +408,16 @@ void *rtos_alloc_for_lua(void *ud, void *ptr, size_t osize, size_t nsize) {
     if (nsize == 0) {
         vPortFree(ptr);
         return NULL;
-    } else {
+    } else if (ptr == NULL) {
         return pvPortMalloc(nsize);
+    } else {
+        void *newPtr = pvPortMalloc(nsize);
+        if (newPtr != NULL) {
+            size_t minSize = (osize < nsize) ? osize : nsize;
+            memcpy(newPtr, ptr, minSize);
+            vPortFree(ptr);
+        }
+        return newPtr;
     }
 }
 
