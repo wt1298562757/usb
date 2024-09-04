@@ -155,12 +155,6 @@ void WinUSB_Receive_HS()
 	
 }
 //------------------------------------------
-static int lua_led_on(lua_State *L)
-{
-    // HAL_GPIO_TogglePin(LED_SYS_GPIO_Port, LED_SYS_Pin);
-    HAL_GPIO_WritePin(LED_SYS_GPIO_Port, LED_SYS_Pin, GPIO_PIN_RESET);
-    return 1;
-}
 /* USER CODE END FunctionPrototypes */
 
 void StartDefaultTask(void *argument);
@@ -258,19 +252,56 @@ void MX_FREERTOS_Init(void) {
   * @retval None
   */
  
-static int lua_tester()
+static int lua_tester(lua_State* L)
 {
     printf("Lua tester runned!\r\n");
-    return 1;
+    return 0;
+}
+
+static int lua_delay(lua_State* L)
+{
+    // 确保栈上只有一个参数
+    int nargs = lua_gettop(L);
+    if (nargs != 1) {
+        lua_pushstring(L, "The number of arguments must be 1 in delay!");
+        lua_error(L);
+        return 0;
+    }
+
+    // 读取参数
+    lua_Integer ticks = luaL_checkinteger(L, 1);
+    if (ticks < 1 || ticks > 0xFFFFFFFF) {
+        lua_pushstring(L, "The delay time must be between 1 and 4294967295!");
+        lua_error(L);
+        return 0;
+    }
+
+    osDelay((uint32_t)ticks);
+
+    // 没有返回值，无需将结果压回栈中
+    // lua_pushnumber(L, sum);
+    // 返回值的数量
+    return 0;
+}
+
+static int lua_led_on(lua_State* L)
+{
+    HAL_GPIO_WritePin(LED_SYS_GPIO_Port, LED_SYS_Pin, GPIO_PIN_RESET);
+    return 0;
+}
+
+static int lua_led_off(lua_State* L)
+{
+    HAL_GPIO_WritePin(LED_SYS_GPIO_Port, LED_SYS_Pin, GPIO_PIN_SET);
+    return 0;
 }
 
 /* USER CODE END Header_StartDefaultTask */
 void StartDefaultTask(void *argument)
 {
   /* init code for USB_DEVICE */
-  // MX_USB_DEVICE_Init();
+  MX_USB_DEVICE_Init();
   /* USER CODE BEGIN StartDefaultTask */
-
 
 
   // 创建 Lua 线程
@@ -288,23 +319,30 @@ void StartDefaultTask(void *argument)
 
   // 自定义 C 函数库
   static const struct luaL_Reg func_lib[] = {
-      {"lua_tester", lua_tester},
+      {"test_print", lua_tester},
+      {"delay", lua_delay},
+      {"led_on", lua_led_on},
+      {"led_off", lua_led_off},
       {NULL, NULL}
   };
   luaL_newlib(L, func_lib); // 创建一个新的库
   lua_setglobal(L, "testlib"); // 将库设置为全局变量
+  luaL_dostring(L, "testlib.test_print()"); // 通过库调用函数
 
-  luaL_dostring(L, "print('Naisu, Lua!')");
-  luaL_dostring(L, "testlib.lua_tester()"); // 通过库调用函数
+  // Lua 循环体
+  luaL_dostring(L, "while true do \
+                    testlib.led_on() \
+                    testlib.delay(500) \
+                    testlib.led_off() \
+                    testlib.delay(500) \
+                    end");
 
 
-
-  HAL_GPIO_WritePin(LED_SYS_GPIO_Port, LED_SYS_Pin, GPIO_PIN_SET);
   /* Infinite loop */
   for(;;)
   {
     HAL_GPIO_TogglePin(LED_SYS_GPIO_Port, LED_SYS_Pin);
-    osDelay(250); // LED 闪烁表明运行到了此处
+    osDelay(200); // LED 闪烁表明运行到了此处
   }
   /* USER CODE END StartDefaultTask */
 }
