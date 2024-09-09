@@ -69,7 +69,7 @@ void MX_FREERTOS_Init(void);
 /* USER CODE BEGIN 0 */
 PUTCHAR_PROTOTYPE
 {
-	// 实际发送操作，这里可以改成自己真实需要操作的端口
+	// 实际发�?�操作，这里可以改成自己真实�?要操作的端口
   // HAL_UART_Transmit(&huart3, (uint8_t *)&ch, 1, 0xFFFF);
   SEGGER_RTT_PutChar(0, ch);
   return ch;

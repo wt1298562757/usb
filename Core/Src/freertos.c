@@ -35,9 +35,9 @@
 #include "tim.h"
 
 // #include "SEGGER_RTT.h"
-#include "lua.h"     // Lua数据类型与函数接口
+#include "lua.h"     // Lua数据类型与函数接�?
 #include "lauxlib.h" // Lua与C交互辅助函数接口
-#include "lualib.h"  // Lua标准库打开接口
+#include "lualib.h"  // Lua标准库打�?接口
 
 // #define LUA_LIB
 // #include "luaconf.h" // Lua配置文件
@@ -51,7 +51,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define MSG_BUFF_SIZE 2560	   // 上传给HOST的MSG数据缓冲�??
+#define MSG_BUFF_SIZE 2560	   // 上传给HOST的MSG数据缓冲�???
 #define MAX_MSG_LENTH 512
 /* USER CODE END PD */
 
@@ -112,6 +112,13 @@ const osThreadAttr_t LINK_USB_SEND_attributes = {
   .stack_size = 256 * 4,
   .priority = (osPriority_t) osPriorityNormal4,
 };
+/* Definitions for Preesure_Test */
+osThreadId_t Preesure_TestHandle;
+const osThreadAttr_t Preesure_Test_attributes = {
+  .name = "Preesure_Test",
+  .stack_size = 256 * 4,
+  .priority = (osPriority_t) osPriorityBelowNormal3,
+};
 /* Definitions for xQueueLinkUsbRecvCmd */
 osMessageQueueId_t xQueueLinkUsbRecvCmdHandle;
 const osMessageQueueAttr_t xQueueLinkUsbRecvCmd_attributes = {
@@ -160,6 +167,7 @@ void WinUSB_Receive_HS()
 void StartDefaultTask(void *argument);
 void vTaskLinkUsbCmdProcess(void *argument);
 void vTaskSendMsgToHost(void *argument);
+void Preesure_Test_Task(void *argument);
 
 extern void MX_USB_DEVICE_Init(void);
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
@@ -235,6 +243,9 @@ void MX_FREERTOS_Init(void) {
   /* creation of LINK_USB_SEND */
   LINK_USB_SENDHandle = osThreadNew(vTaskSendMsgToHost, NULL, &LINK_USB_SEND_attributes);
 
+  /* creation of Preesure_Test */
+  Preesure_TestHandle = osThreadNew(Preesure_Test_Task, NULL, &Preesure_Test_attributes);
+
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
   /* USER CODE END RTOS_THREADS */
@@ -278,7 +289,7 @@ static int lua_delay(lua_State* L)
 
     osDelay((uint32_t)ticks);
 
-    // 没有返回值，无需将结果压回栈中
+    // 没有返回值，无需将结果压回栈栈
     // lua_pushnumber(L, sum);
     // 返回值的数量
     return 0;
@@ -314,7 +325,7 @@ void StartDefaultTask(void *argument)
   lua_gc(L, LUA_GCSTOP); // 停止垃圾回收
   luaL_openlibs(L); // 打开标准库
 
-  // 开始 Lua 任务
+  //创建 Lua 任务
   luaL_dostring(L, "print('Naisu, Lua!')");
 
   // 自定义 C 函数库
@@ -331,10 +342,10 @@ void StartDefaultTask(void *argument)
 
   // Lua 循环体
   luaL_dostring(L, "while true do \
-                    testlib.led_on() \
-                    testlib.delay(500) \
-                    testlib.led_off() \
-                    testlib.delay(500) \
+                      testlib.led_on() \
+                      testlib.delay(500) \
+                      testlib.led_off() \
+                      testlib.delay(500) \
                     end");
 
 
@@ -420,7 +431,9 @@ void vTaskSendMsgToHost(void *argument)
 			   
 			   //send
 			//    DCD_EP_Tx(&g_USB_link_dev,FS_LINK_IN_EP, (uint8_t*)(pTemp), sendLen);		  
-			   	while(CDC_Transmit_HS((uint8_t*)(pTemp), sendLen, FS_LINK_IN_EP) != USBD_OK); 	
+			   	while(CDC_Transmit_HS((uint8_t*)(pTemp), sendLen, FS_LINK_IN_EP) != USBD_OK){
+            osDelay(10);
+          }; 	
 			   
 			  // Report_MSG("MsgSendBuff Toggled.");
 			  // 	GPIO_Toggle(SW_LED1_R) 	;
@@ -437,6 +450,65 @@ void vTaskSendMsgToHost(void *argument)
      vTaskDelayUntil(&xLastWakeTime,xPeriod);
   }
   /* USER CODE END vTaskSendMsgToHost */
+}
+
+/* USER CODE BEGIN Header_Preesure_Test_Task */
+/**
+* @brief Function implementing the Preesure_Test thread.
+* @param argument: Not used
+* @retval None
+*/
+
+static int lua_Pressure_test(lua_State* L)
+{
+    Report_MSG("For Presure MSG1");
+    Report_MSG("For Presure MSG2");
+    Report_MSG("For Presure MSG3");
+    Report_MSG("For Presure MSG4");
+    Report_MSG("For Presure MSG5");
+    Report_MSG("For Presure MSG6");
+    Report_MSG("For Presure MSG7");
+    Report_MSG("For Presure MSG8");
+    Report_MSG("For Presure MSG9");
+    Report_MSG("For Presure MSG10");
+    return 0;
+}
+/* USER CODE END Header_Preesure_Test_Task */
+void Preesure_Test_Task(void *argument)
+{
+  /* USER CODE BEGIN Preesure_Test_Task */
+  // 创建 Lua 线程
+  lua_State *L = lua_newstate(rtos_alloc_for_lua, NULL);
+  if(L != NULL) {
+    printf("Lua State Created.\r\n");
+  } else {
+    printf("Lua State Create Failed!\r\n");
+  }
+  lua_gc(L, LUA_GCSTOP); // 停止垃圾回收
+  luaL_openlibs(L); // 打开标准库
+
+  //创建 Lua 任务
+  luaL_dostring(L, "print('Naisu, Lua!')");
+
+  // 自定义 C 函数库
+  static const struct luaL_Reg pressure_func_lib[] = {
+      {"Pressure_test", lua_Pressure_test},
+      {NULL, NULL}
+  };
+  luaL_newlib(L, pressure_func_lib); // 创建一个新的库
+  lua_setglobal(L, "pressure_testlib"); // 将库设置为全局变量
+  // Lua 循环体
+  luaL_dostring(L, "while true do \
+                      testlib.Pressure_test \
+                      testlib.delay(10) \
+                    end");
+
+  /* Infinite loop */
+  for(;;)
+  {
+    osDelay(100);
+  }
+  /* USER CODE END Preesure_Test_Task */
 }
 
 /* Private application code --------------------------------------------------*/
@@ -477,7 +549,7 @@ bool AddHostCmdtoQueue(uint8_t* pRecvBuff, uint32_t count)
 			break;
 		}
 
-		//到此，数据有效，将向xQueueLinkUsbRecvCmd发�?�一条消�??
+		//到此，数据有效，将向xQueueLinkUsbRecvCmd发�?�一条消�???
 		LinkCmd.cmd =  rxBuffPtr->cmd;
 		LinkCmd.target = rxBuffPtr->target;
 		LinkCmd.para = 	rxBuffPtr->para;
