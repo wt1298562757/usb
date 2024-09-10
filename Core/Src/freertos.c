@@ -35,9 +35,9 @@
 #include "tim.h"
 
 // #include "SEGGER_RTT.h"
-#include "lua.h"     // Lua数据类型与函数接�?
+#include "lua.h"     // Lua数据类型与函数接�??
 #include "lauxlib.h" // Lua与C交互辅助函数接口
-#include "lualib.h"  // Lua标准库打�?接口
+#include "lualib.h"  // Lua标准库打�??接口
 
 // #define LUA_LIB
 // #include "luaconf.h" // Lua配置文件
@@ -51,7 +51,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define MSG_BUFF_SIZE 2560	   // 上传给HOST的MSG数据缓冲�???
+#define MSG_BUFF_SIZE 2560	   // 上传给HOST的MSG数据缓冲�????
 #define MAX_MSG_LENTH 512
 /* USER CODE END PD */
 
@@ -95,7 +95,7 @@ char charBuf[MAX_MSG_LENTH];
 osThreadId_t defaultTaskHandle;
 const osThreadAttr_t defaultTask_attributes = {
   .name = "defaultTask",
-  .stack_size = 512 * 4,
+  .stack_size = 256 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
 /* Definitions for LINK_USB_CMD */
@@ -116,8 +116,8 @@ const osThreadAttr_t LINK_USB_SEND_attributes = {
 osThreadId_t Preesure_TestHandle;
 const osThreadAttr_t Preesure_Test_attributes = {
   .name = "Preesure_Test",
-  .stack_size = 256 * 4,
-  .priority = (osPriority_t) osPriorityBelowNormal3,
+  .stack_size = 512 * 4,
+  .priority = (osPriority_t) osPriorityNormal1,
 };
 /* Definitions for xQueueLinkUsbRecvCmd */
 osMessageQueueId_t xQueueLinkUsbRecvCmdHandle;
@@ -271,7 +271,7 @@ static int lua_tester(lua_State* L)
 
 static int lua_delay(lua_State* L)
 {
-    // 确保栈上只有一个参数
+    // 确保栈上只有�?个参�?
     int nargs = lua_gettop(L);
     if (nargs != 1) {
         lua_pushstring(L, "The number of arguments must be 1 in delay!");
@@ -289,7 +289,7 @@ static int lua_delay(lua_State* L)
 
     osDelay((uint32_t)ticks);
 
-    // 没有返回值，无需将结果压回栈栈
+    // 没有返回值，无需将结果压回栈�?
     // lua_pushnumber(L, sum);
     // 返回值的数量
     return 0;
@@ -314,7 +314,7 @@ void StartDefaultTask(void *argument)
   MX_USB_DEVICE_Init();
   /* USER CODE BEGIN StartDefaultTask */
 
-
+  /*
   // 创建 Lua 线程
   lua_State *L = lua_newstate(rtos_alloc_for_lua, NULL);
   if(L != NULL) {
@@ -323,12 +323,12 @@ void StartDefaultTask(void *argument)
     printf("Lua State Create Failed!\r\n");
   }
   lua_gc(L, LUA_GCSTOP); // 停止垃圾回收
-  luaL_openlibs(L); // 打开标准库
+  luaL_openlibs(L); // 打开标准�?
 
-  //创建 Lua 任务
+  // 创建 Lua 任务
   luaL_dostring(L, "print('Naisu, Lua!')");
 
-  // 自定义 C 函数库
+  // 自定�? C 函数�?
   static const struct luaL_Reg func_lib[] = {
       {"test_print", lua_tester},
       {"delay", lua_delay},
@@ -336,11 +336,11 @@ void StartDefaultTask(void *argument)
       {"led_off", lua_led_off},
       {NULL, NULL}
   };
-  luaL_newlib(L, func_lib); // 创建一个新的库
-  lua_setglobal(L, "testlib"); // 将库设置为全局变量
-  luaL_dostring(L, "testlib.test_print()"); // 通过库调用函数
+  luaL_newlib(L, func_lib); // 创建�?个新的库
+  lua_setglobal(L, "testlib"); // 将库设置为全�?变量
+  luaL_dostring(L, "testlib.test_print()"); // 通过库调用函�?
 
-  // Lua 循环体
+  // Lua 循环�?
   luaL_dostring(L, "while true do \
                       testlib.led_on() \
                       testlib.delay(500) \
@@ -348,11 +348,11 @@ void StartDefaultTask(void *argument)
                       testlib.delay(500) \
                     end");
 
-
+  */
   /* Infinite loop */
   for(;;)
   {
-    HAL_GPIO_TogglePin(LED_SYS_GPIO_Port, LED_SYS_Pin);
+    // HAL_GPIO_TogglePin(LED_SYS_GPIO_Port, LED_SYS_Pin);
     osDelay(200); // LED 闪烁表明运行到了此处
   }
   /* USER CODE END StartDefaultTask */
@@ -374,7 +374,7 @@ void vTaskLinkUsbCmdProcess(void *argument)
   {
     if(osMessageQueueGet(xQueueLinkUsbRecvCmdHandle,&RecvCmd,NULL,osWaitForever)  == osOK)
 	 {
-	   //处理收到的有效消息
+	   //处理收到的有效消�?
 		Report_MSG(">>>>>>>>>>>>>>>>>>>  for debug  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 	  sprintf(charBuf,"INFO: cmd = 0x%X,target= 0x%X, para = 0x%X",RecvCmd.cmd,RecvCmd.target,RecvCmd.para) ;
     Report_MSG(charBuf);
@@ -414,7 +414,7 @@ void vTaskSendMsgToHost(void *argument)
  {
    		//sprintf(charBuf,"SendMsgTask Running ,T = %d",xTaskGetTickCount()) ;
 	   // Report_MSG(charBuf)	 ;
-   if( MsgSendBuffOffset > 0 )	//如果当前指针不为零，就发送
+   if( MsgSendBuffOffset > 0 )	//如果当前指针不为零，就发�?
    {
 		// if(DCD_GetEPStatus(&g_USB_link_dev,FS_LINK_IN_EP) == USB_OTG_EP_TX_VALID )
 
@@ -430,9 +430,19 @@ void vTaskSendMsgToHost(void *argument)
 			   osMutexRelease(xMutexMsgBuffHandle);
 			   
 			   //send
+         // send
+        uint32_t timeout = 1000; // 设置超时时间（以毫秒为单位）
+        uint32_t startTime = osKernelSysTick(); // 获取当前系统时钟
 			//    DCD_EP_Tx(&g_USB_link_dev,FS_LINK_IN_EP, (uint8_t*)(pTemp), sendLen);		  
 			   	while(CDC_Transmit_HS((uint8_t*)(pTemp), sendLen, FS_LINK_IN_EP) != USBD_OK){
-            osDelay(10);
+             // 检查是否超时
+            if ((osKernelSysTick() - startTime) >= timeout)
+            {
+                // 超时，抛弃当前数据
+              Report_MSG("ERROR: Transmission Timeout! Data discarded.");
+              break;
+            }
+            //osDelay(10);
           }; 	
 			   
 			  // Report_MSG("MsgSendBuff Toggled.");
@@ -458,9 +468,13 @@ void vTaskSendMsgToHost(void *argument)
 * @param argument: Not used
 * @retval None
 */
-
+int epoch = 0;
 static int lua_Pressure_test(lua_State* L)
 {
+    HAL_GPIO_TogglePin(LED_SYS_GPIO_Port, LED_SYS_Pin);
+    char pressure_buf [100];
+    sprintf(pressure_buf,"Pressure test epoch: %d",epoch++) ;
+    Report_MSG(pressure_buf);
     Report_MSG("For Presure MSG1");
     Report_MSG("For Presure MSG2");
     Report_MSG("For Presure MSG3");
@@ -477,6 +491,7 @@ static int lua_Pressure_test(lua_State* L)
 void Preesure_Test_Task(void *argument)
 {
   /* USER CODE BEGIN Preesure_Test_Task */
+  // /*
   // 创建 Lua 线程
   lua_State *L = lua_newstate(rtos_alloc_for_lua, NULL);
   if(L != NULL) {
@@ -485,24 +500,25 @@ void Preesure_Test_Task(void *argument)
     printf("Lua State Create Failed!\r\n");
   }
   lua_gc(L, LUA_GCSTOP); // 停止垃圾回收
-  luaL_openlibs(L); // 打开标准库
+  luaL_openlibs(L); // 打开标准�?
 
   //创建 Lua 任务
   luaL_dostring(L, "print('Naisu, Lua!')");
 
-  // 自定义 C 函数库
+  // 自定�? C 函数�?
   static const struct luaL_Reg pressure_func_lib[] = {
-      {"Pressure_test", lua_Pressure_test},
+      {"Pressure_test_10", lua_Pressure_test},
+      {"delay", lua_delay},
       {NULL, NULL}
   };
-  luaL_newlib(L, pressure_func_lib); // 创建一个新的库
-  lua_setglobal(L, "pressure_testlib"); // 将库设置为全局变量
-  // Lua 循环体
+  luaL_newlib(L, pressure_func_lib); // 创建�?个新的库
+  lua_setglobal(L, "pressure_testlib"); // 将库设置为全�?变量
+  // Lua 循环�?
   luaL_dostring(L, "while true do \
-                      testlib.Pressure_test \
-                      testlib.delay(10) \
+                      pressure_testlib.Pressure_test_10() \
+                      pressure_testlib.delay(500) \
                     end");
-
+  // */
   /* Infinite loop */
   for(;;)
   {
@@ -549,7 +565,7 @@ bool AddHostCmdtoQueue(uint8_t* pRecvBuff, uint32_t count)
 			break;
 		}
 
-		//到此，数据有效，将向xQueueLinkUsbRecvCmd发�?�一条消�???
+		//到此，数据有效，将向xQueueLinkUsbRecvCmd发�?�一条消�????
 		LinkCmd.cmd =  rxBuffPtr->cmd;
 		LinkCmd.target = rxBuffPtr->target;
 		LinkCmd.para = 	rxBuffPtr->para;
