@@ -10,7 +10,15 @@ typedef struct _FS_LINK_CMD_FMT{
  	uint8_t cmd;
 	uint8_t	target;
 	uint16_t para;
+	uint16_t DataLength;
+	char* Data;
 }FS_LINK_CMD_FMT ;
+
+
+typedef struct RUN_SCRIPT_CMD_FMT{
+	uint16_t DataLength;
+	char* Data;
+}RUN_SCRIPT_CMD_FMT ;
 
 typedef struct _DOWN_FMT{
 	uint8_t startFlag;
@@ -19,7 +27,8 @@ typedef struct _DOWN_FMT{
 	uint8_t	target;
 	uint16_t para;
 	uint8_t handleFlag;
-	uint8_t endFlag;
+	uint16_t DataLength;
+	char* Data;
 }DOWN_FMT;
 
 typedef struct _UP_FMT{

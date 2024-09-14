@@ -88,6 +88,13 @@ uint32_t  MsgSendBuffOffset = 0;
 
 static  uint8_t USB_TX_pktSn =0;
 char charBuf[MAX_MSG_LENTH];
+
+
+static RUN_SCRIPT_CMD_FMT RunScriptCmd;
+xTaskHandle vHandleTaskRunOneScript;
+#define SCRIPT_RUNNER_PRIO   (osPriorityNormal1)
+lua_State *L;
+uint32_t LED_DELAY = 500;
 //-----------------------------------------------
 
 /* USER CODE END Variables */
@@ -102,7 +109,7 @@ const osThreadAttr_t defaultTask_attributes = {
 osThreadId_t LINK_USB_CMDHandle;
 const osThreadAttr_t LINK_USB_CMD_attributes = {
   .name = "LINK_USB_CMD",
-  .stack_size = 256 * 4,
+  .stack_size = 512 * 4,
   .priority = (osPriority_t) osPriorityNormal2,
 };
 /* Definitions for LINK_USB_SEND */
@@ -364,11 +371,76 @@ void StartDefaultTask(void *argument)
 * @param argument: Not used
 * @retval None
 */
+static int lua_change_led_delay(lua_State* L)
+{
+    // 确保栈上只有�?个参�?
+    int nargs = lua_gettop(L);
+    if (nargs != 1) {
+        lua_pushstring(L, "The number of arguments must be 1 in change led delay!");
+        lua_error(L);
+        return 0;
+    }
+
+    // 读取参数
+    lua_Integer ticks = luaL_checkinteger(L, 1);
+    if (ticks < 1 || ticks > 0xFFFFFFFF) {
+        lua_pushstring(L, "The delay time must be between 1 and 4294967295!");
+        lua_error(L);
+        return 0;
+    }
+
+    LED_DELAY = ticks;
+
+    // 没有返回值，无需将结果压回栈�?
+    // lua_pushnumber(L, sum);
+    // 返回值的数量
+    return 0;
+}
+
+void Lua_script_init(){
+   // 创建 Lua 线程
+  L = lua_newstate(rtos_alloc_for_lua, NULL);
+  if(L != NULL) {
+    printf("Lua State Created.\r\n");
+  } else {
+    printf("Lua State Create Failed!\r\n");
+  }
+  lua_gc(L, LUA_GCSTOP); // 停止垃圾回收
+  luaL_openlibs(L); // 打开标准�?
+
+  //创建 Lua 任务
+  luaL_dostring(L, "print('Naisu, Lua!')");
+
+  // 自定�? C 函数�?
+  static const struct luaL_Reg script_test_func_lib[] = {
+      {"change_led_delay", lua_change_led_delay},
+      {"delay", lua_delay},
+      {NULL, NULL}
+  };
+  luaL_newlib(L, script_test_func_lib); // 创建�?个新的库
+  lua_setglobal(L, "Script_testlib"); // 将库设置为全�?变量
+}
+
+void vTaskRunOneScript(void *pvParameters)
+{
+ 	RUN_SCRIPT_CMD_FMT* CurrentCmd; 
+	CurrentCmd = (RUN_SCRIPT_CMD_FMT*)pvParameters;
+  
+  // Lua 循环�?
+  int DataLength = CurrentCmd->DataLength;
+  char* Data =  CurrentCmd->Data;
+
+  luaL_dostring(L, Data);
+  /* Infinite loop */
+  vTaskDelete(NULL);
+  
+}
 /* USER CODE END Header_vTaskLinkUsbCmdProcess */
 void vTaskLinkUsbCmdProcess(void *argument)
 {
   /* USER CODE BEGIN vTaskLinkUsbCmdProcess */
   FS_LINK_CMD_FMT RecvCmd;
+  Lua_script_init();
   /* Infinite loop */
   for(;;)
   {
@@ -382,7 +454,13 @@ void vTaskLinkUsbCmdProcess(void *argument)
 		//	GetRunTimeStats();  //run time stat only 须使能TIM3
 	   switch(RecvCmd.cmd)
 	   {
-        
+        case 0x30:
+          if(RecvCmd.DataLength != 0){
+            RunScriptCmd.DataLength = RecvCmd.DataLength;
+            RunScriptCmd.Data = RecvCmd.Data;
+            xTaskCreate(vTaskRunOneScript,"Run One Script",256,&RunScriptCmd,SCRIPT_RUNNER_PRIO,&vHandleTaskRunOneScript);
+          }
+        break;
      }
     }
     osDelay(1);
@@ -491,7 +569,7 @@ static int lua_Pressure_test(lua_State* L)
 void Preesure_Test_Task(void *argument)
 {
   /* USER CODE BEGIN Preesure_Test_Task */
-  // /*
+  /*
   // 创建 Lua 线程
   lua_State *L = lua_newstate(rtos_alloc_for_lua, NULL);
   if(L != NULL) {
@@ -518,11 +596,12 @@ void Preesure_Test_Task(void *argument)
                       pressure_testlib.Pressure_test_10() \
                       pressure_testlib.delay(100) \
                     end");
-  // */
+  */
   /* Infinite loop */
   for(;;)
   {
-    osDelay(100);
+    HAL_GPIO_TogglePin(LED_SYS_GPIO_Port, LED_SYS_Pin);
+    osDelay(LED_DELAY);
   }
   /* USER CODE END Preesure_Test_Task */
 }
@@ -554,6 +633,7 @@ bool AddHostCmdtoQueue(uint8_t* pRecvBuff, uint32_t count)
 	DOWN_FMT *rxBuffPtr = (DOWN_FMT*)pRecvBuff;
 	FS_LINK_CMD_FMT LinkCmd;
 
+
 	do{
 		if(count != PC_DOWN_CMD_SIZE)
 		{
@@ -569,6 +649,8 @@ bool AddHostCmdtoQueue(uint8_t* pRecvBuff, uint32_t count)
 		LinkCmd.cmd =  rxBuffPtr->cmd;
 		LinkCmd.target = rxBuffPtr->target;
 		LinkCmd.para = 	rxBuffPtr->para;
+    LinkCmd.DataLength = rxBuffPtr->DataLength;
+    LinkCmd.Data = rxBuffPtr->Data;
 
 		if(osMessageQueuePut(xQueueLinkUsbRecvCmdHandle,&LinkCmd,0,0) != osOK)
 		{
