@@ -402,7 +402,7 @@ void vTaskSendMsgToHost(void *argument)
   /* USER CODE BEGIN vTaskSendMsgToHost */
   /* Infinite loop */
   portTickType xLastWakeTime;
-	const portTickType xPeriod = (180 * portTICK_RATE_MS);
+	const portTickType xPeriod = (100 * portTICK_RATE_MS);
 	uint32_t sendLen;// = MsgSendBuffOffset ;
     uint8_t* pTemp;//= pCurBuffer;
     // UP_FMT* pCmd = (UP_FMT*)(pCurBuffer );
@@ -516,7 +516,7 @@ void Preesure_Test_Task(void *argument)
   // Lua 循环�?
   luaL_dostring(L, "while true do \
                       pressure_testlib.Pressure_test_10() \
-                      pressure_testlib.delay(500) \
+                      pressure_testlib.delay(100) \
                     end");
   // */
   /* Infinite loop */
