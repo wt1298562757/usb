@@ -34,7 +34,7 @@
 //----------------------------------------------------
 #include "tim.h"
 
-// #include "SEGGER_RTT.h"
+#include "SEGGER_RTT.h"
 #include "lua.h"     // Lua数据类型与函数接�??
 #include "lauxlib.h" // Lua与C交互辅助函数接口
 #include "lualib.h"  // Lua标准库打�??接口
@@ -59,6 +59,7 @@
 /* USER CODE BEGIN PM */
 void *rtos_alloc_for_lua(void *ud, void *ptr, size_t osize, size_t nsize);
 void Report_MSG(char *p);
+bool AddHostCmdtoQueue(uint8_t* pRecvBuff, uint32_t count); 
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
@@ -80,6 +81,7 @@ volatile int8_t usb_ep3_txne = RESET;
 volatile int8_t usb_ep4_txne = RESET;
 
 extern USBD_HandleTypeDef hUsbDeviceHS;
+extern uint8_t UserRxBufferHS[APP_RX_DATA_SIZE];
 
 uint8_t MsgSendBuffA[MSG_BUFF_SIZE+28];
 uint8_t MsgSendBuffB[MSG_BUFF_SIZE+28];
@@ -123,8 +125,15 @@ const osThreadAttr_t LINK_USB_SEND_attributes = {
 osThreadId_t Preesure_TestHandle;
 const osThreadAttr_t Preesure_Test_attributes = {
   .name = "Preesure_Test",
-  .stack_size = 512 * 4,
+  .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityNormal1,
+};
+/* Definitions for cmd_handle */
+osThreadId_t cmd_handleHandle;
+const osThreadAttr_t cmd_handle_attributes = {
+  .name = "cmd_handle",
+  .stack_size = 384 * 4,
+  .priority = (osPriority_t) osPriorityHigh2,
 };
 /* Definitions for xQueueLinkUsbRecvCmd */
 osMessageQueueId_t xQueueLinkUsbRecvCmdHandle;
@@ -135,6 +144,11 @@ const osMessageQueueAttr_t xQueueLinkUsbRecvCmd_attributes = {
 osMutexId_t xMutexMsgBuffHandle;
 const osMutexAttr_t xMutexMsgBuff_attributes = {
   .name = "xMutexMsgBuff"
+};
+/* Definitions for cmdToHandle */
+osSemaphoreId_t cmdToHandleHandle;
+const osSemaphoreAttr_t cmdToHandle_attributes = {
+  .name = "cmdToHandle"
 };
 
 /* Private function prototypes -----------------------------------------------*/
@@ -175,6 +189,7 @@ void StartDefaultTask(void *argument);
 void vTaskLinkUsbCmdProcess(void *argument);
 void vTaskSendMsgToHost(void *argument);
 void Preesure_Test_Task(void *argument);
+void cmdHandleTask(void *argument);
 
 extern void MX_USB_DEVICE_Init(void);
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
@@ -224,6 +239,10 @@ void MX_FREERTOS_Init(void) {
   /* add mutexes, ... */
   /* USER CODE END RTOS_MUTEX */
 
+  /* Create the semaphores(s) */
+  /* creation of cmdToHandle */
+  cmdToHandleHandle = osSemaphoreNew(1, 1, &cmdToHandle_attributes);
+
   /* USER CODE BEGIN RTOS_SEMAPHORES */
   /* add semaphores, ... */
   /* USER CODE END RTOS_SEMAPHORES */
@@ -252,6 +271,9 @@ void MX_FREERTOS_Init(void) {
 
   /* creation of Preesure_Test */
   Preesure_TestHandle = osThreadNew(Preesure_Test_Task, NULL, &Preesure_Test_attributes);
+
+  /* creation of cmd_handle */
+  cmd_handleHandle = osThreadNew(cmdHandleTask, NULL, &cmd_handle_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -419,6 +441,8 @@ void Lua_script_init(){
   };
   luaL_newlib(L, script_test_func_lib); // 创建�?个新的库
   lua_setglobal(L, "Script_testlib"); // 将库设置为全�?变量
+
+  // luaL_dostring(L, "Script_testlib.change_led_delay(1000)");
 }
 
 void vTaskRunOneScript(void *pvParameters)
@@ -432,8 +456,8 @@ void vTaskRunOneScript(void *pvParameters)
 
   luaL_dostring(L, Data);
   /* Infinite loop */
+  vPortFree(RunScriptCmd.Data);
   vTaskDelete(NULL);
-  
 }
 /* USER CODE END Header_vTaskLinkUsbCmdProcess */
 void vTaskLinkUsbCmdProcess(void *argument)
@@ -458,7 +482,7 @@ void vTaskLinkUsbCmdProcess(void *argument)
           if(RecvCmd.DataLength != 0){
             RunScriptCmd.DataLength = RecvCmd.DataLength;
             RunScriptCmd.Data = RecvCmd.Data;
-            xTaskCreate(vTaskRunOneScript,"Run One Script",256,&RunScriptCmd,SCRIPT_RUNNER_PRIO,&vHandleTaskRunOneScript);
+            xTaskCreate(vTaskRunOneScript,"Run One Script",512,&RunScriptCmd,SCRIPT_RUNNER_PRIO,&vHandleTaskRunOneScript);
           }
         break;
      }
@@ -606,6 +630,28 @@ void Preesure_Test_Task(void *argument)
   /* USER CODE END Preesure_Test_Task */
 }
 
+/* USER CODE BEGIN Header_cmdHandleTask */
+/**
+* @brief Function implementing the cmd_handle thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_cmdHandleTask */
+void cmdHandleTask(void *argument)
+{
+  /* USER CODE BEGIN cmdHandleTask */
+  osSemaphoreAcquire(cmdToHandleHandle, osWaitForever);
+  /* Infinite loop */
+  for(;;)
+  {
+    osSemaphoreAcquire(cmdToHandleHandle, osWaitForever);
+    AddHostCmdtoQueue(UserRxBufferHS, 0);
+
+    osDelay(1);
+  }
+  /* USER CODE END cmdHandleTask */
+}
+
 /* Private application code --------------------------------------------------*/
 /* USER CODE BEGIN Application */
 void *rtos_alloc_for_lua(void *ud, void *ptr, size_t osize, size_t nsize) {
@@ -630,14 +676,25 @@ bool AddHostCmdtoQueue(uint8_t* pRecvBuff, uint32_t count)
 {
 	bool success = false;
 
-	DOWN_FMT *rxBuffPtr = (DOWN_FMT*)pRecvBuff;
+  DOWN_FMT rxBuffStruct;
+	DOWN_FMT *rxBuffPtr = &rxBuffStruct;
 	FS_LINK_CMD_FMT LinkCmd;
 
+  memcpy(rxBuffPtr, pRecvBuff, 7);
+  memcpy(((uint8_t *)rxBuffPtr)+8, pRecvBuff+7, 2);
+  rxBuffPtr->Data = (char *)pvPortMalloc((rxBuffPtr->DataLength) + 1);
+  if (rxBuffPtr->Data == NULL)
+  {
+    SEGGER_RTT_TerminalOut(0, RTT_CTRL_TEXT_BRIGHT_RED "Malloc fail for LUA script!\r\n");
+    return false;
+  }
+  memcpy(rxBuffPtr->Data, pRecvBuff+9, rxBuffPtr->DataLength);
+  rxBuffPtr->Data[rxBuffPtr->DataLength] = '\0';
 
 	do{
-		if(count != PC_DOWN_CMD_SIZE)
+		// if(count != PC_DOWN_CMD_SIZE)
 		{
-			break;
+			// break;
 		}
 
 		if(rxBuffPtr->startFlag != DOWN_START_FLAG ) 
