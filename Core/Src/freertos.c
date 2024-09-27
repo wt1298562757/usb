@@ -59,6 +59,7 @@
 /* USER CODE BEGIN PM */
 void *rtos_alloc_for_lua(void *ud, void *ptr, size_t osize, size_t nsize);
 void Report_MSG(char *p);
+void Report_Test_Script_State(char *p);
 bool AddHostCmdtoQueue(uint8_t* pRecvBuff, uint32_t count); 
 /* USER CODE END PM */
 
@@ -90,6 +91,7 @@ uint32_t  MsgSendBuffOffset = 0;
 
 static  uint8_t USB_TX_pktSn =0;
 char charBuf[MAX_MSG_LENTH];
+uint8_t Test_Script_State_Content[2] = {0x00,0x00};
 
 
 static RUN_SCRIPT_CMD_FMT RunScriptCmd;
@@ -457,6 +459,10 @@ void vTaskRunOneScript(void *pvParameters)
   luaL_dostring(L, Data);
   /* Infinite loop */
   vPortFree(RunScriptCmd.Data);
+  RunScriptCmd.Data = NULL;
+  Test_Script_State_Content[0] = 0x04;
+  Report_Test_Script_State((char*)Test_Script_State_Content);
+  Test_Script_State_Content[0] = 0x00;
   vTaskDelete(NULL);
 }
 /* USER CODE END Header_vTaskLinkUsbCmdProcess */
@@ -464,6 +470,7 @@ void vTaskLinkUsbCmdProcess(void *argument)
 {
   /* USER CODE BEGIN vTaskLinkUsbCmdProcess */
   FS_LINK_CMD_FMT RecvCmd;
+  static uint8_t TestRunScriptTarget;
   Lua_script_init();
   /* Infinite loop */
   for(;;)
@@ -480,11 +487,48 @@ void vTaskLinkUsbCmdProcess(void *argument)
 	   {
         case 0x30:
           if(RecvCmd.DataLength != 0){
+            RunScriptCmd.target = RecvCmd.target;
             RunScriptCmd.DataLength = RecvCmd.DataLength;
             RunScriptCmd.Data = RecvCmd.Data;
-            xTaskCreate(vTaskRunOneScript,"Run One Script",512,&RunScriptCmd,SCRIPT_RUNNER_PRIO,&vHandleTaskRunOneScript);
+            //xTaskCreate(vTaskRunOneScript,"Run One Script",512,&RunScriptCmd,SCRIPT_RUNNER_PRIO,&vHandleTaskRunOneScript);
+          }
+          if(RunScriptCmd.DataLength == strlen(RunScriptCmd.Data)){
+            sprintf(charBuf,"Script No. 0x%x Received, Script Length  = %d bytes.",RunScriptCmd.target,RunScriptCmd.DataLength);
+            Report_MSG(charBuf);
+            Test_Script_State_Content[0] = 0x01;
+            Report_Test_Script_State((char*)Test_Script_State_Content);
+            Test_Script_State_Content[0] = 0x00;
+          }
+          else{
+            Test_Script_State_Content[0] = 0x02;
+            Report_Test_Script_State((char*)Test_Script_State_Content);
+            Test_Script_State_Content[0] = 0x00;
           }
         break;
+        case 0x33:
+          TestRunScriptTarget = RecvCmd.target;
+          if(TestRunScriptTarget == RunScriptCmd.target){
+            xTaskCreate(vTaskRunOneScript,"Run One Script",512,&RunScriptCmd,SCRIPT_RUNNER_PRIO,&vHandleTaskRunOneScript);
+            sprintf(charBuf,"Start running test Script No. 0x%x.",RunScriptCmd.target);
+            Report_MSG(charBuf);
+            Test_Script_State_Content[0] = 0x03;
+            Report_Test_Script_State((char*)Test_Script_State_Content);
+            Test_Script_State_Content[0] = 0x00;
+          }
+          else{
+            sprintf(charBuf,"Test Script No. 0x%x to run doesn't match local storage No. 0x%x.", TestRunScriptTarget, RunScriptCmd.target);
+            Report_MSG(charBuf);
+          }
+          break;
+          case 0x34:
+            vTaskDelete(vHandleTaskRunOneScript);
+            vPortFree(RunScriptCmd.Data);
+            RunScriptCmd.Data = NULL;
+            Test_Script_State_Content[0] = 0x05;
+            Report_Test_Script_State((char*)Test_Script_State_Content);
+            Test_Script_State_Content[0] = 0x00;
+          break;
+
      }
     }
     osDelay(1);
@@ -758,6 +802,11 @@ static void AddMsgToBuff(uint8_t infoCategory, uint8_t src, uint8_t msgLen,  uin
 void Report_MSG(char *p)
 {
 	AddMsgToBuff(0x00,0,strlen(p)+ 1,(uint8_t*)p);
+} 
+
+void Report_Test_Script_State(char *p)
+{
+	AddMsgToBuff(0x07,0,strlen(p)+ 1,(uint8_t*)p);
 } 
 /* USER CODE END Application */
 

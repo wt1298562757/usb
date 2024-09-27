@@ -16,6 +16,7 @@ typedef struct _FS_LINK_CMD_FMT{
 
 
 typedef struct RUN_SCRIPT_CMD_FMT{
+	uint8_t	target;
 	uint16_t DataLength;
 	char* Data;
 }RUN_SCRIPT_CMD_FMT ;

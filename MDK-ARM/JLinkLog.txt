@@ -1,0 +1,59 @@
+T21F8 069:455.758   SEGGER J-Link V6.80 Log File
+T21F8 069:455.833   DLL Compiled: May 25 2020 17:04:25
+T21F8 069:455.843   Logging started @ 2024-09-18 01:29
+T21F8 069:455.856 JLINK_SetWarnOutHandler(...)
+T21F8 069:455.880 - 0.029ms
+T21F8 069:455.892 JLINK_OpenEx(...)
+T21F8 069:457.119   Firmware: J-Link V9 compiled May  7 2021 16:26:12
+T21F8 069:457.237   Decompressing FW timestamp took 94 us
+T21F8 069:463.219   Hardware: V9.30
+T21F8 069:463.517   S/N: 68372199
+T21F8 069:463.612   OEM: SEGGER
+T21F8 069:463.626   Feature(s): None
+T21F8 069:464.459   TELNET listener socket opened on port 19021
+T21F8 069:467.754   WEBSRV Starting webserver
+T21F8 069:467.900   WEBSRV Webserver running on local port 19080
+T21F8 069:467.918 - 12.031ms returns "O.K."
+T21F8 069:467.939 JLINK_GetEmuCaps()
+T21F8 069:467.950 - 0.015ms returns 0xB9FF7BBF
+T21F8 069:467.963 JLINK_TIF_GetAvailable(...)
+T21F8 069:468.088 - 0.132ms
+T21F8 069:468.105 JLINK_SetErrorOutHandler(...)
+T21F8 069:468.115 - 0.014ms
+T21F8 069:468.329 JLINK_ExecCommand("ProjectFile = "E:\winusb\winusb\f429\TAIER_usb_hs\MDK-ARM\JLinkSettings.ini"", ...). 
+T21F8 069:469.422 - 1.102ms returns 0x00
+T21F8 069:471.113 JLINK_ExecCommand("Device = STM32F429IGTx", ...). 
+T21F8 069:472.991   Device "STM32F429IG" selected.
+T21F8 069:473.319 - 2.196ms returns 0x00
+T21F8 069:473.335 JLINK_ExecCommand("DisableConnectionTimeout", ...). 
+T21F8 069:473.348 - 0.007ms returns 0x01
+T21F8 069:473.362 JLINK_GetHardwareVersion()
+T21F8 069:473.371 - 0.013ms returns 0x16B48
+T21F8 069:473.383 JLINK_GetDLLVersion()  returns 68000
+T21F8 069:473.395 JLINK_GetFirmwareString(...)
+T21F8 069:473.405 - 0.013ms
+T21F8 069:478.468 JLINK_GetDLLVersion()  returns 68000
+T21F8 069:478.564 JLINK_GetCompileDateTime()
+T21F8 069:478.574 - 0.014ms
+T21F8 069:480.730 JLINK_GetFirmwareString(...)
+T21F8 069:480.777 - 0.050ms
+T21F8 069:482.784 JLINK_GetHardwareVersion()
+T21F8 069:482.817 - 0.037ms returns 0x16B48
+T21F8 069:487.169 JLINK_TIF_Select(JLINKARM_TIF_SWD)
+T21F8 069:487.847 - 0.688ms returns 0x00
+T21F8 069:487.870 JLINK_SetSpeed(5000)
+T21F8 069:488.011 - 0.150ms
+T21F8 069:488.031 JLINK_GetId()
+T21F8 070:113.421   STM32 (connect): Can not attach to CPU. Trying connect under reset.
+T21F8 070:267.813   
+  ***** Error: 
+T21F8 070:267.858   STM32: Connecting to CPU via connect under reset failed.
+T21F8 070:495.850   STM32 (connect): Can not attach to CPU. Trying connect under reset.
+T21F8 070:651.310   
+  ***** Error: 
+T21F8 070:651.343   STM32: Connecting to CPU via connect under reset failed.
+T21F8 070:701.687 - 1213.672ms   returns 0x00000000
+T21F8 072:206.951 JLINK_Close()
+T21F8 072:216.420 - 9.504ms
+T21F8 072:216.461   
+T21F8 072:216.471   Closed
